@@ -9,7 +9,6 @@ import 'package:flutter_templete/core/services/cart_services.dart';
 import 'package:flutter_templete/core/services/connectivity_service.dart';
 import 'package:flutter_templete/core/services/location_service.dart';
 import 'package:flutter_templete/core/services/notification_service.dart';
-import 'package:flutter_templete/firebase_options.dart';
 import 'package:get/get.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,14 +27,14 @@ Future<void> main() async {
   Get.put(ConnectivityService());
   Get.put(MyAppController());
   Get.put(LocationService());
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    Get.put(NotificationService());
-  } catch (e) {
-    print(e);
-  }
+  // try {
+  //   await Firebase.initializeApp(
+  //     options: DefaultFirebaseOptions.currentPlatform,
+  //   );
+  //   Get.put(NotificationService());
+  // } catch (e) {
+  //   print(e);
+  // }
 
   runApp(MyApp());
 }
