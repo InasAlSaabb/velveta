@@ -1,4 +1,1 @@
-enum OperationType{
-  NONE,
-
-}
+enum OperationType { NONE, PRODUCTS, ADDRESS, GATEGORY }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_templete/main.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 
@@ -13,6 +12,8 @@ class CustomButton extends StatelessWidget {
     this.borderColor,
     required this.onPressed,
     this.ImageName,
+    this.width,
+    this.hieght,
   });
 
   final String text;
@@ -21,6 +22,8 @@ class CustomButton extends StatelessWidget {
   final Color? textColor;
   final Color? backgroundColor;
   final Function? onPressed;
+  final double? width;
+  final double? hieght;
 
   @override
   Widget build(BuildContext context) {
@@ -28,39 +31,21 @@ class CustomButton extends StatelessWidget {
       onPressed: () {
         if (onPressed != null) onPressed!();
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (ImageName != null) ...[
-            SvgPicture.asset('images/$ImageName.svg'),
-            // (screenWidth(2)).pw,
-          ],
-          SizedBox(
-            width: (screenWidth(20)),
-          ),
-          Text(
-            text,
-            style: TextStyle(
-              color: textColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(color: textColor, fontSize: 16),
+        ),
       ),
       style: ElevatedButton.styleFrom(
         side: borderColor != null
             ? BorderSide(
-                width: 1.0,
+                width: 2.0,
                 color: borderColor!,
               )
             : null,
-        backgroundColor: backgroundColor ?? AppColors.mainOrangeColor,
-        shape: StadiumBorder(),
-        fixedSize: Size(
-          screenWidth(1.1),
-          screenHieght(12),
-          // size.height * 0.08,
-        ),
+        backgroundColor: backgroundColor ?? AppColors.secondarytextBlackVColor,
+        fixedSize: Size(width ?? screenWidth(1.1), hieght ?? screenHieght(15)),
       ),
     );
   }

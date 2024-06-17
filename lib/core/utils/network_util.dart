@@ -6,7 +6,7 @@ import 'package:flutter_templete/core/enums/request_type.dart';
 import 'package:http/http.dart' as http;
 
 class NetworkUtil {
-  static String baseUrl = 'training.owner-tech.com';
+  static String baseUrl = 'velveta.org';
   static var client = http.Client();
   static Future<dynamic> sendRequest({
     required RequestType type,
@@ -27,7 +27,7 @@ class NetworkUtil {
 
       //!--- Required convert api response to Map ----
 
-      Map<String, dynamic> jsonResponse = {};
+      dynamic jsonResponse = {};
 
       //*--- Make call correct request type ------
 
@@ -65,7 +65,7 @@ class NetworkUtil {
               ? {'title': Utf8Codec().decode(response.bodyBytes)}
               : result); //string json
 
-      jsonResponse.putIfAbsent('statusCode', () => statusCode);
+      jsonResponse.putIfAbsent('status', () => statusCode);
 
       return jsonResponse;
     } catch (e) {

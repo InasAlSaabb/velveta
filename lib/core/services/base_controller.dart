@@ -3,6 +3,7 @@ import 'package:flutter_templete/core/enums/operation_type.dart';
 import 'package:flutter_templete/core/enums/request_status.dart';
 import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
+
 import 'package:get/get.dart';
 
 class BaseController extends GetxController {
@@ -21,6 +22,13 @@ class BaseController extends GetxController {
   //     requestStatus == RequestStatus.LOADING &&
   //     operationTypeList.contains(OperationType.CATEGORY);
 
+  bool get isProductsLoading =>
+      requestStatus == RequestStatus.LOADING &&
+      operationTypeList.contains(OperationType.PRODUCTS);
+  bool get isCatLoading =>
+      requestStatus == RequestStatus.LOADING &&
+      operationTypeList.contains(OperationType.GATEGORY);
+
   // bool get isMealLoading =>
   //     requestStatus == RequestStatus.LOADING &&
   //     operationTypeList.contains(OperationType.MEAL);
@@ -33,37 +41,26 @@ class BaseController extends GetxController {
     required Future function,
     // OperationType? type = OperationType.NONE
   }) async {
-    checkConnection(() async {
-      await function;
-    });
+    await function;
   }
 
-  Future runLoadingFutureFunction({
-    required Future function,
-    OperationType? operationType = OperationType.NONE,
-  }) async {
+  Future runLoadingFutureFunction(
+      {required Future function,
+      OperationType? type = OperationType.NONE}) async {
     checkConnection(() async {
-      setRequestStatus = RequestStatus.LOADING;
-      // setOperationType = type!;
-      operationTypeList.add(operationType!);
-
-      await function; //to replay
-      setRequestStatus = RequestStatus.DEFAULT;
-      // setOperationType = OperationType.NONE;
-      operationTypeList.remove(operationType);
+      requestStatus.value = RequestStatus.LOADING;
+      operationType.value = type!;
+      await function;
+      requestStatus.value = RequestStatus.DEFAULT;
+      operationType.value = OperationType.NONE;
     });
   }
 
   Future runFullLoadingFutureFunction(
       {required Future function,
       OperationType? type = OperationType.NONE}) async {
-    // setRequestStatus = RequestStatus.LOADING;
-    // setOperationType = type!;
-    checkConnection(() async {
-      customLoader();
-      await function; //to replay
-      BotToast.closeAllLoading();
-    });
+    customLoader();
+    await function;
+    BotToast.closeAllLoading();
   }
 }
-//2 fun

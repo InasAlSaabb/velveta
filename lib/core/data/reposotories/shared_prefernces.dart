@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_templete/app/app_config.dart';
+import 'package:flutter_templete/core/data/models/address_get_model.dart';
 import 'package:flutter_templete/core/data/models/apis/token_info.dart';
 import 'package:flutter_templete/core/data/models/cart_model.dart';
 import 'package:flutter_templete/core/enums/data_type.dart';
@@ -13,10 +14,58 @@ class SharedPrefrenceRepostory {
   String PREF_FIRST_LUNCH = 'first_lunch';
   String PREF_FIRST_LOGIN = 'first_login';
   String PREF_TOKEN = 'token';
+  String PREF_TOKENN = 'tokenn';
   String PREF_APP_LANG = 'app_lang';
   String PREF_CART_LIST = 'cart_list';
   String PREF_SUB_STATUS = 'sub_status';
+  String PREF_ADD_LIST = 'address_list';
+  static String PREF_USER_INFO = 'user_info';
+  AddressGetModel? selectedAddress;
+
+  AddressGetModel? get selectedAddressg => selectedAddress;
+
+  set selectedAddresss(AddressGetModel? value) {
+    selectedAddress = value;
+    // Save the selected address to shared preferences here
+    saveSelectedAddress(value);
+  }
+
+  void saveSelectedAddress(AddressGetModel? address) {
+    // Code to save the selected address to shared preferences
+  }
+  // SaveUser(UserModel usermodel) {
+  //   setPreference(
+  //       value: json.encode(usermodel),
+  //       dataType: DataType.STRING,
+  //       key: PREF_USER_INFO);
+  // }
+
+  // UserModel GetUser() {
+  //   return UserModel.fromJson(json.decode(getPreferenc(
+  //     key: PREF_USER_INFO,
+  //   )));
+  // }
+//   Future<void> storeToken(String token) async {
+//   final SharedPreferences prefs = await SharedPreferences.getInstance();
+//   await prefs.setString('auth_token', token);
+// }
+
   //list
+  void setAddressList(List<AddressGetModel> list) {
+    setPreference(
+      dataType: DataType.STRING,
+      key: PREF_ADD_LIST,
+      value: AddressGetModel.encode(list),
+    );
+  }
+
+  List<AddressGetModel> getAddressList() {
+    if (globalSharedPreference.containsKey(PREF_ADD_LIST)) {
+      return AddressGetModel.decode(getPreferenc(key: PREF_ADD_LIST));
+    } else {
+      return [];
+    }
+  }
 
   void setTokenInfo(TokenInfo value) {
     setPreference(
@@ -35,6 +84,18 @@ class SharedPrefrenceRepostory {
         //formatted json
         jsonDecode(getPreferenc(key: PREF_TOKEN)),
       );
+    } else {
+      return null; //key not found
+    }
+  }
+
+  void setToken(int value) {
+    setPreference(dataType: DataType.INT, key: PREF_TOKENN, value: value);
+  }
+
+  int? getToken() {
+    if (globalSharedPreference.containsKey(PREF_TOKENN)) {
+      return getPreferenc(key: PREF_TOKENN);
     } else {
       return null; //key not found
     }

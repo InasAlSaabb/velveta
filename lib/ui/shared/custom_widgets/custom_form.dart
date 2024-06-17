@@ -16,6 +16,8 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIconColor,
     this.maxHeight,
     this.maxWidth,
+    this.suffixIcon,
+    this.suffixiconcolor,
   });
 
   final String hintText;
@@ -26,7 +28,10 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final String? Function(String?)? validator;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final Color? prefixIconColor;
+  final Color? suffixiconcolor;
+
   final double? maxHeight;
   final double? maxWidth;
 
@@ -42,8 +47,10 @@ class CustomTextFormField extends StatelessWidget {
       textAlign: TextAlign.start,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        suffixIconColor: suffixiconcolor,
         prefixIconColor: prefixIconColor,
-        contentPadding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
+        contentPadding: EdgeInsets.symmetric(horizontal: screenWidth(40)),
         constraints: BoxConstraints(
           maxHeight: maxHeight ?? screenHieght(15),
           maxWidth: maxWidth ?? screenWidth(1.1),
@@ -52,15 +59,15 @@ class CustomTextFormField extends StatelessWidget {
           borderSide: BorderSide(
             color: AppColors.transparentColor,
           ),
-          borderRadius: BorderRadius.circular(30),
+          // borderRadius: BorderRadius.circular(30),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
+          // borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(strokeAlign: 2),
         ),
         filled: true,
         hintStyle: TextStyle(
-          color: hintTextColor,
+          color: hintTextColor ?? AppColors.secondaryGreyhintVColor,
         ),
         hintText: hintText,
         fillColor: fillColor,

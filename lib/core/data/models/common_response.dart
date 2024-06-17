@@ -1,12 +1,17 @@
 class CommonResponse<T> {
   int? statusCode; //ok
   T? data;
+  T? data2;
+  T? data3;
+
   String? message; //error
 //objject
   CommonResponse.fromJson(dynamic json) {
-    this.statusCode = json['statusCode'];
+    this.statusCode = json['status'];
     if (statusCode.toString().startsWith('2')) {
-      this.data = json['response'];
+      this.data = json['response']['data'];
+      this.data2 = json['response'];
+      this.data3 = json['data'];
 
       // this.staus==true
     } else {

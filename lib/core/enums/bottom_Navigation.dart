@@ -1,7 +1,1 @@
-enum BottomNavigationEnum {
-  MENU,
-  OFFERS,
-  HOME,
-  PROFILE,
-  MORE
-}
+enum BottomNavigationEnum { HOME, FAVORITE, CART, PROFILE }

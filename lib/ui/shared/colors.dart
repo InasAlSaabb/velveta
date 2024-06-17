@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static Color mainBlackVColor = Color.fromRGBO(0, 0, 0, 1);
+  static Color mainWhiteVColor = Color.fromRGBO(255, 255, 255, 1);
+  static Color secondarytextBlackVColor = Color.fromRGBO(13, 13, 13, 1);
+  static Color secondaryGreyhintVColor = Color.fromRGBO(125, 125, 125, 1);
+  static Color secondary2GreyVColor = Color.fromRGBO(105, 105, 105, 1);
+  static Color mainbackgroundandborderGreyVColor =
+      Color.fromRGBO(215, 215, 215, 1);
+  static Color secondaryiconGreyhintVColor = Color.fromRGBO(163, 163, 163, 1);
+
   static Color mainOrangeColor = Color.fromRGBO(252, 96, 17, 1);
   static Color mainWhiteColor = Color.fromRGBO(255, 255, 255, 1);
   static Color transparentColor = Color.fromRGBO(255, 255, 255, 0);
@@ -17,7 +26,7 @@ class AppColors {
   static Color mainRedColor = Color.fromRGBO(221, 75, 57, 1);
   // static Color mainWhiteColor = Color.fromRGBO(255, 255, 255, 1);
   static Color mainGreenColor = Color.fromRGBO(45, 221, 10, 1);
-  static Color transparentWhiteColor = Color.fromRGBO(255, 255, 255, 0.23);
+  static Color transparentWhiteColor = Color.fromRGBO(255, 255, 255, 0.1);
   // static Color transparentColor = Color.fromRGBO(255, 255, 255, 0);
   static Color mainGreyColor = Color.fromRGBO(74, 75, 77, 1);
   static Color secondaryGreyColor = Color.fromRGBO(124, 125, 126, 1);
