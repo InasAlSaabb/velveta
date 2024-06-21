@@ -26,10 +26,12 @@ class _CustomCatState extends State<CustomCat> {
             InkWell(
               onTap: () {
                 controller.selectedIndex.value = widget.index;
-                // controller.getProductsById(
-                //     id: controller.getProductsById(
-                //         id: controller.selectedIndex.value));
-                controller.getAllproducts();
+
+                controller.selectedIndex.value != 2
+                    ? controller.getProductsByCatId(
+                        id: controller.selectedIndex.value + 1)
+                    : controller.getProductsByCatIdth(
+                        id: controller.selectedIndex.value + 1);
               },
               child: Container(
                 height: 50,

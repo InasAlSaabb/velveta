@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static Color mainBlackVColor = Color.fromRGBO(0, 0, 0, 1);
   static Color mainWhiteVColor = Color.fromRGBO(255, 255, 255, 1);
-  static Color secondarytextBlackVColor = Color.fromRGBO(13, 13, 13, 1);
+  static Color secondarytextcBlackVColor = Color.fromRGBO(13, 13, 13, 1);
   static Color secondaryGreyhintVColor = Color.fromRGBO(125, 125, 125, 1);
   static Color secondary2GreyVColor = Color.fromRGBO(105, 105, 105, 1);
   static Color mainbackgroundandborderGreyVColor =

@@ -25,9 +25,15 @@ class BaseController extends GetxController {
   bool get isProductsLoading =>
       requestStatus == RequestStatus.LOADING &&
       operationTypeList.contains(OperationType.PRODUCTS);
+  bool get isSliderLoading =>
+      requestStatus == RequestStatus.LOADING &&
+      operationTypeList.contains(OperationType.SLIDER);
   bool get isCatLoading =>
       requestStatus == RequestStatus.LOADING &&
       operationTypeList.contains(OperationType.GATEGORY);
+  bool get isCatLoadingth =>
+      requestStatus == RequestStatus.LOADING &&
+      operationTypeList.contains(OperationType.CATIDTH);
 
   // bool get isMealLoading =>
   //     requestStatus == RequestStatus.LOADING &&

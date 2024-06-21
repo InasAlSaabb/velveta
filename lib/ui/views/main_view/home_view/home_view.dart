@@ -35,7 +35,7 @@ class _HomeViewState extends State<HomeView> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
-          padding: EdgeInsetsDirectional.symmetric(horizontal: screenWidth(20)),
+          padding: EdgeInsetsDirectional.symmetric(horizontal: screenWidth(40)),
           child: ListView(
             children: [
               SizedBox(
@@ -101,7 +101,7 @@ class _HomeViewState extends State<HomeView> {
                         color: AppColors.mainBlueColor,
                       )
                     : SizedBox(
-                        child: controller.sliderList.isEmpty
+                        child: controller.sliderrlist.isEmpty
                             ? Text(tr("key_no_product"))
                             // : ListView.builder(
                             //     physics: BouncingScrollPhysics(),
@@ -128,8 +128,8 @@ class _HomeViewState extends State<HomeView> {
                             //       );
                             //     })
                             : CustomSlider(
-                                items: controller.sliderList,
-                                imageHeight: screenHieght(3),
+                                items: controller.sliderrlist,
+                                imageHeight: screenHieght(4),
                               ),
                       );
               }),
@@ -151,74 +151,103 @@ class _HomeViewState extends State<HomeView> {
                               shrinkWrap: true,
                               itemCount: controller.categorylistt.length,
                               itemBuilder: (BuildContext context, int index) {
+                                controller.selectedIndex.value = index;
+
                                 int i = index;
                                 String categoryy =
                                     controller.categorylistt[index].name ?? "";
                                 controller.selectedcategory = controller
                                     .categorylistt[index].id
                                     .toString();
-                                return
-                                    // InkWell(
-                                    //   onTap: () {
-                                    //     controller.getProductsById(
-                                    //         id: controller
-                                    //             .categorylistt[index].id!);
-                                    //   },
-                                    //   InkWell(
-                                    // onTap: () {
-                                    //   controller.getProductsById(id: index);
-                                    // },
-                                    // child:
-                                    CustomCat(
-                                        categoryName: categoryy, index: i);
-                                // );
+                                return CustomCat(
+                                    categoryName: categoryy, index: i);
                               }));
                 }),
               ),
               SizedBox(
                 height: screenHieght(20),
               ),
-              // Obx(() {
-              //   return controller.isCatLoading
-              //       ? SpinKitCircle(
-              //           color: AppColors.mainBlueColor,
-              //         )
-              //       : SizedBox(
-              //           child: controller.Productbyidlist.isEmpty
-              //               ? Text(tr("key_no_product"))
-              //               : ListView.builder(
-              //                   physics: BouncingScrollPhysics(),
-              //                   shrinkWrap: true,
-              //                   itemCount: controller.Productbyidlist.length,
-              //                   itemBuilder: (BuildContext context, int index) {
-              //                     return Padding(
-              //                       padding: const EdgeInsets.all(8.0),
-              //                       child: Column(
-              //                         children: [
-              //                           InkWell(
-              //                             onTap: () {
-              //                               Get.off(ProductView(
-              //                                 model: controller
-              //                                     .Productbyidlist[index],
-              //                               ));
-              //                             },
-              //                             child: CustomProduct(
-              //                               imageurl: controller
-              //                                       .Productbyidlist[index]
-              //                                       .images ??
-              //                                   "",
-              //                               productdetail: controller
-              //                                   .Productbyidlist[index]
-              //                                   .description,
-              //                               productname: controller
-              //                                   .Productbyidlist[index].name,
-              //                             ),
-              //                           ),
-              //                         ],
-              //                       ),
-              //                     );
-              //                   }));
-              // }),
+              Obx(() {
+                return controller.isCatLoading
+                    ? SpinKitCircle(
+                        color: AppColors.mainBlueColor,
+                      )
+                    : SizedBox(
+                        child: controller.Productbyidlist.isEmpty
+                            ? Text(tr("key_no_product"))
+                            : ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: controller.Productbyidlist.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              Get.off(ProductView(
+                                                model: controller
+                                                    .Productbyidlist[index],
+                                              ));
+                                            },
+                                            child: CustomProduct(
+                                              imageurl: controller
+                                                      .Productbyidlist[index]
+                                                      .mainImage ??
+                                                  "",
+                                              productdetail: controller
+                                                  .Productbyidlist[index]
+                                                  .description,
+                                              productname: controller
+                                                  .Productbyidlist[index].name,
+                                            )),
+                                      ],
+                                    ),
+                                  );
+                                }));
+              }),
+              Obx(() {
+                return controller.isLoading
+                    ? SpinKitCircle(
+                        color: AppColors.mainBlueColor,
+                      )
+                    : SizedBox(
+                        child: controller.third.isEmpty
+                            ? Text(tr("key_no_product"))
+                            : ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: controller.third.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CachedNetworkImage(
+                                        width: screenWidth(1),
+                                        height: screenHieght(4),
+                                        imageUrl: controller.third[index]),
+                                  );
+                                }));
+              }),
+              Obx(() {
+                return SizedBox(
+                    child: controller.sliderrlist.isEmpty
+                        ? Text(tr("key_no_product"))
+                        : ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.sliderrlist.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CachedNetworkImage(
+                                    width: screenWidth(1),
+                                    height: screenHieght(4),
+                                    imageUrl:
+                                        controller.sliderrlist[index].image!),
+                              );
+                            }));
+              }),
             ],
           ),
         ),

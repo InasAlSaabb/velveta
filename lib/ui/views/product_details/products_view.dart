@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/data/models/category_model.dart';
 import 'package:flutter_templete/core/data/models/product_id_model.dart';
+import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_circle.dart';
@@ -17,7 +18,7 @@ import 'package:readmore/readmore.dart';
 
 class ProductView extends StatefulWidget {
   const ProductView({super.key, this.model});
-  final ProductIdModel? model;
+  final ProductsByIDModel? model;
 
   @override
   State<ProductView> createState() => _ProductViewState();
@@ -44,7 +45,7 @@ class _ProductViewState extends State<ProductView> {
                   CachedNetworkImage(
                     width: screenWidth(1),
                     height: screenHieght(3),
-                    imageUrl: widget.model!.images ?? "",
+                    imageUrl: widget.model!.mainImage ?? "",
                   ),
                   Positioned(
                     top: 2,

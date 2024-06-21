@@ -3,12 +3,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templete/core/data/models/category_model.dart';
 import 'package:flutter_templete/core/data/models/slider_model.dart';
+import 'package:flutter_templete/core/data/models/sliderr_model.dart';
 import 'package:get/get.dart';
 import '../colors.dart';
 import '../utils.dart';
 
 class CustomSlider extends StatefulWidget {
-  final List<CategoryModel> items;
+  final List<SliderrModel> items;
   final double? imageHeight;
   final Function? onTap;
 

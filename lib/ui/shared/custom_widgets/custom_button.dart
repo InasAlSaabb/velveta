@@ -44,7 +44,7 @@ class CustomButton extends StatelessWidget {
                 color: borderColor!,
               )
             : null,
-        backgroundColor: backgroundColor ?? AppColors.secondarytextBlackVColor,
+        backgroundColor: backgroundColor ?? AppColors.secondarytextcBlackVColor,
         fixedSize: Size(width ?? screenWidth(1.1), hieght ?? screenHieght(15)),
       ),
     );

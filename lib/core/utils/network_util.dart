@@ -19,7 +19,7 @@ class NetworkUtil {
       //!--- Required for request ----
       //*--- Make full api url ------
       var uri = Uri.https(baseUrl, url, params);
-
+      print(uri);
       //?--- To Save api response ----
       late http.Response response;
       //?--- To Save api status code ----
@@ -72,6 +72,7 @@ class NetworkUtil {
       print(e);
     }
   }
+  // /en/api/products/getById?product_id=1
 
   static Future<dynamic> SendMultipartRequest({
     required String url,
