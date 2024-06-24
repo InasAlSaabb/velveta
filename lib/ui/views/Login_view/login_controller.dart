@@ -53,7 +53,7 @@ class LoginController extends BaseController {
                   message: "Succed",
                 );
 
-                Get.to(HomeView());
+                Get.to(MainView());
               },
             ),
           ),

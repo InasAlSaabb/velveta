@@ -156,11 +156,11 @@ class _HomeViewState extends State<HomeView> {
                                 int i = index;
                                 String categoryy =
                                     controller.categorylistt[index].name ?? "";
-                                controller.selectedcategory = controller
-                                    .categorylistt[index].id
-                                    .toString();
+                                // controller.selectedcategory = controller
+                                //     .categorylistt[index].name
+                                //     .toString();
                                 return CustomCat(
-                                    categoryName: categoryy, index: i);
+                                    categoryName: categoryy, index: index);
                               }));
                 }),
               ),
@@ -173,9 +173,11 @@ class _HomeViewState extends State<HomeView> {
                         color: AppColors.mainBlueColor,
                       )
                     : SizedBox(
-                        child: controller.Productbyidlist.isEmpty
-                            ? Text(tr("key_no_product"))
-                            : ListView.builder(
+                        child: controller.Productbyidlist.isNotEmpty
+                            ?
+                            // ? Text(tr("key_no_product"))
+                            // :
+                            ListView.builder(
                                 physics: BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: controller.Productbyidlist.length,
@@ -205,7 +207,8 @@ class _HomeViewState extends State<HomeView> {
                                       ],
                                     ),
                                   );
-                                }));
+                                })
+                            : Text(""));
               }),
               Obx(() {
                 return controller.isLoading
@@ -213,41 +216,63 @@ class _HomeViewState extends State<HomeView> {
                         color: AppColors.mainBlueColor,
                       )
                     : SizedBox(
-                        child: controller.third.isEmpty
-                            ? Text(tr("key_no_product"))
-                            : ListView.builder(
+                        child: controller.third.isNotEmpty
+                            ?
+                            // ? Text(tr("key_no_productTH"))
+                            // :
+                            ListView.builder(
                                 physics: BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: controller.third.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CachedNetworkImage(
-                                        width: screenWidth(1),
-                                        height: screenHieght(4),
-                                        imageUrl: controller.third[index]),
+                                  return Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: screenWidth(10)),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              "To Make Your Customer Order ",
+                                              style: TextStyle(fontSize: 25),
+                                            ),
+                                            SizedBox(
+                                              height: screenHieght(80),
+                                            ),
+                                            CustomButton(
+                                                text: "Call Us",
+                                                onPressed: () {}),
+                                          ],
+                                        ),
+                                      ),
+                                      CachedNetworkImage(
+                                          width: screenWidth(2),
+                                          height: screenHieght(3),
+                                          imageUrl: controller.third[index]),
+                                    ],
                                   );
-                                }));
+                                })
+                            : Text(""));
               }),
-              Obx(() {
-                return SizedBox(
-                    child: controller.sliderrlist.isEmpty
-                        ? Text(tr("key_no_product"))
-                        : ListView.builder(
-                            physics: BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: controller.sliderrlist.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CachedNetworkImage(
-                                    width: screenWidth(1),
-                                    height: screenHieght(4),
-                                    imageUrl:
-                                        controller.sliderrlist[index].image!),
-                              );
-                            }));
-              }),
+              // Obx(() {
+              //   return SizedBox(
+              //       child: controller.sliderrlist.isEmpty
+              //           ? Text(tr("key_no_product"))
+              //           : ListView.builder(
+              //               physics: BouncingScrollPhysics(),
+              //               shrinkWrap: true,
+              //               itemCount: controller.sliderrlist.length,
+              //               itemBuilder: (BuildContext context, int index) {
+              //                 return Padding(
+              //                   padding: const EdgeInsets.all(8.0),
+              //                   child: CachedNetworkImage(
+              //                       width: screenWidth(1),
+              //                       height: screenHieght(4),
+              //                       imageUrl:
+              //                           controller.sliderrlist[index].image!),
+              //                 );
+              //               }));
+              // }),
             ],
           ),
         ),

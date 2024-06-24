@@ -25,6 +25,7 @@ class _CustomCatState extends State<CustomCat> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             InkWell(
               onTap: () {
+                controller.selectedIndexx.value = widget.index;
                 controller.selectedIndex.value = widget.index;
 
                 controller.selectedIndex.value != 2
@@ -39,7 +40,7 @@ class _CustomCatState extends State<CustomCat> {
                 decoration: BoxDecoration(
                     border: Border.all(width: 2, color: AppColors.mainGrey),
                     shape: BoxShape.rectangle,
-                    color: controller.selectedIndex.value == widget.index
+                    color: controller.selectedIndexx.value == widget.index
                         ? Colors.black
                         : AppColors.mainWhiteColor,
                     borderRadius: BorderRadius.circular(5)),
@@ -48,7 +49,7 @@ class _CustomCatState extends State<CustomCat> {
                     widget.categoryName,
                     style: TextStyle(
                       fontSize: 20,
-                      color: controller.selectedIndex.value == widget.index
+                      color: controller.selectedIndexx.value == widget.index
                           ? AppColors.mainWhiteColor
                           : AppColors.mainblack,
                     ),

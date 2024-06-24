@@ -30,7 +30,7 @@ class HomeController extends BaseController {
   RxList<ProductsByIDModel> Productbyidlist = <ProductsByIDModel>[].obs;
   RxList<String> third = <String>[].obs;
   RxInt cartCount = 0.obs;
-  String selectedcategory = "Lux";
+  // String selectedcategory = "Lux";
   RxInt selectedIndex = 0.obs;
   RxInt selectedIndexx = 0.obs;
 
@@ -103,6 +103,7 @@ class HomeController extends BaseController {
               );
             },
             (r) {
+              third.clear();
               Productbyidlist.clear();
               Productbyidlist.value = r;
 
@@ -129,6 +130,7 @@ class HomeController extends BaseController {
               );
             },
             (r) {
+              Productbyidlist.clear();
               third.value = r;
               CustomToast.showMessage(
                 message: "succed",
