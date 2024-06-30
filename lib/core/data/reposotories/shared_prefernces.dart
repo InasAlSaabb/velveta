@@ -20,6 +20,7 @@ class SharedPrefrenceRepostory {
   String PREF_SUB_STATUS = 'sub_status';
   String PREF_ADD_LIST = 'address_list';
   static String PREF_USER_INFO = 'user_info';
+  String PREF_USER_NAME = 'user_name';
   AddressGetModel? selectedAddress;
 
   AddressGetModel? get selectedAddressg => selectedAddress;
@@ -96,6 +97,18 @@ class SharedPrefrenceRepostory {
   int? getToken() {
     if (globalSharedPreference.containsKey(PREF_TOKENN)) {
       return getPreferenc(key: PREF_TOKENN);
+    } else {
+      return null; //key not found
+    }
+  }
+
+  void setName(String value) {
+    setPreference(dataType: DataType.STRING, key: PREF_USER_NAME, value: value);
+  }
+
+  String? getName() {
+    if (globalSharedPreference.containsKey(PREF_USER_NAME)) {
+      return getPreferenc(key: PREF_USER_NAME);
     } else {
       return null; //key not found
     }

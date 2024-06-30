@@ -66,12 +66,15 @@ class _CustomSliderState extends State<CustomSlider> {
             );
           }).toList(),
           options: CarouselOptions(
+            viewportFraction: 1.0,
+            enlargeCenterPage: false,
+            // aspectRatio: 3.0,
+            // enlargeCenterPage: true,
             height: widget.imageHeight ?? screenWidth(2.7),
             reverse: true,
             autoPlay: false,
-            enlargeCenterPage: true,
             autoPlayCurve: Curves.fastOutSlowIn,
-            enableInfiniteScroll: true,
+            enableInfiniteScroll: false,
             autoPlayAnimationDuration: Duration(milliseconds: 500),
             onPageChanged: (index, reason) {
               currentIndex.value = index;
@@ -86,17 +89,35 @@ class _CustomSliderState extends State<CustomSlider> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  previousSlide();
-                },
+              Container(
+                width: screenWidth(16),
+                height: screenHieght(16),
+                color: Colors.black26,
+                child: Center(
+                  child: IconButton(
+                    iconSize: screenWidth(24),
+                    color: Colors.white,
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      previousSlide();
+                    },
+                  ),
+                ),
               ),
-              IconButton(
-                  icon: Icon(Icons.arrow_forward),
-                  onPressed: () {
-                    nextSlide();
-                  }),
+              Container(
+                width: screenWidth(16),
+                height: screenHieght(16),
+                color: Colors.black26,
+                child: Center(
+                  child: IconButton(
+                      iconSize: screenWidth(24),
+                      color: Colors.white,
+                      icon: Icon(Icons.arrow_forward_ios),
+                      onPressed: () {
+                        nextSlide();
+                      }),
+                ),
+              ),
             ],
           ),
         ),
@@ -105,14 +126,14 @@ class _CustomSliderState extends State<CustomSlider> {
             print(currentIndex);
             return Positioned(
               bottom: screenHieght(150),
-              left: screenWidth(5.5),
+              left: screenWidth(3),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: widget.items.map((item) {
                   int index = widget.items.indexOf(item);
                   return Container(
                     width: screenWidth(7),
-                    height: screenWidth(70),
+                    height: screenWidth(200),
                     margin: EdgeInsets.symmetric(horizontal: screenWidth(65)),
                     decoration: BoxDecoration(
                       color: currentIndex.value == index
@@ -121,7 +142,7 @@ class _CustomSliderState extends State<CustomSlider> {
                       border: Border.all(
                         color: currentIndex.value == index
                             ? AppColors.mainWhiteColor
-                            : AppColors.mainGrey,
+                            : Colors.grey,
                       ),
                     ),
                   );

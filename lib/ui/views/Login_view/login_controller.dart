@@ -52,7 +52,7 @@ class LoginController extends BaseController {
                   messageType: MessageType.SUCCESS,
                   message: "Succed",
                 );
-
+                storage.setName(emailController.text);
                 Get.to(MainView());
               },
             ),

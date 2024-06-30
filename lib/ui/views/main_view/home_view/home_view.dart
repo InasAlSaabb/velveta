@@ -1,11 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/data/models/address_get_model.dart';
-import 'package:flutter_templete/core/enums/operation_type.dart';
-import 'package:flutter_templete/core/enums/request_status.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
 import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/main.dart';
@@ -55,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
                             fontFamily: 'Welcome'),
                       ),
                       Text(
-                        "User name",
+                        '  ${storage.getName() ?? "User name"}   ',
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
@@ -103,30 +100,6 @@ class _HomeViewState extends State<HomeView> {
                     : SizedBox(
                         child: controller.sliderrlist.isEmpty
                             ? Text(tr("key_no_product"))
-                            // : ListView.builder(
-                            //     physics: BouncingScrollPhysics(),
-                            //     shrinkWrap: true,
-                            //     itemCount: controller.sliderList.length,
-                            //     itemBuilder: (BuildContext context, int index) {
-                            //       return Padding(
-                            //         padding: const EdgeInsets.all(8.0),
-                            //         child: InkWell(
-                            //           onTap: () {
-                            //             // Get.to(
-                            //             //   () => ProductDetailsView(
-                            //             //     model: controller.productsList[index],
-                            //             //   ),
-                            //             // );
-                            //           },
-                            //           child: Column(
-                            //             children: [
-                            //               CustomSlider(
-                            //                   items: controller.sliderList),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       );
-                            //     })
                             : CustomSlider(
                                 items: controller.sliderrlist,
                                 imageHeight: screenHieght(4),
@@ -138,7 +111,7 @@ class _HomeViewState extends State<HomeView> {
                 "Categories",
                 style: TextStyle(fontSize: 25, fontFamily: 'WElcome'),
               ),
-              screenHieght(40).ph,
+              screenHieght(60).ph,
               SizedBox(
                 height: 50,
                 child: Obx(() {
@@ -153,19 +126,15 @@ class _HomeViewState extends State<HomeView> {
                               itemBuilder: (BuildContext context, int index) {
                                 controller.selectedIndex.value = index;
 
-                                int i = index;
                                 String categoryy =
                                     controller.categorylistt[index].name ?? "";
-                                // controller.selectedcategory = controller
-                                //     .categorylistt[index].name
-                                //     .toString();
                                 return CustomCat(
                                     categoryName: categoryy, index: index);
                               }));
                 }),
               ),
               SizedBox(
-                height: screenHieght(20),
+                height: screenHieght(60),
               ),
               Obx(() {
                 return controller.isCatLoading
