@@ -72,7 +72,6 @@ class NetworkUtil {
       print(e);
     }
   }
-  // /en/api/products/getById?product_id=1
 
   static Future<dynamic> SendMultipartRequest({
     required String url,

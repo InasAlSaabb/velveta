@@ -59,11 +59,6 @@ class _AddAdressViewState extends State<AddAdressView> {
               controller: controller.addressline,
               fillColor: Colors.white,
               hintTextColor: AppColors.secondaryGreyhintVColor),
-          Text(
-            'Enter Address Line 2',
-            style:
-                TextStyle(fontSize: 15, decoration: TextDecoration.underline),
-          ),
           Padding(
             padding: EdgeInsets.only(
                 top: screenHieght(25), bottom: screenHieght(100)),

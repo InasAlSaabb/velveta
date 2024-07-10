@@ -4,33 +4,36 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_circle.dart';
-import 'package:flutter_templete/ui/shared/custom_widgets/custom_item.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_switch.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 import 'package:flutter_templete/ui/views/cart_view/cart_view.dart';
+import 'package:flutter_templete/ui/views/main_view/home_view/home_controller.dart';
 import 'package:flutter_templete/ui/views/product_details/product_controller.dart';
+import 'package:flutter_templete/ui/views/product_view2/product_vi2_controller.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 
-class ProductView extends StatefulWidget {
-  const ProductView({super.key, this.id});
+class ProductView2 extends StatefulWidget {
+  const ProductView2({super.key, this.id});
   final int? id;
 
   @override
-  State<ProductView> createState() => _ProductViewState();
+  State<ProductView2> createState() => _ProductView2State();
 }
 
-class _ProductViewState extends State<ProductView> {
-  late ProductController controller;
+class _ProductView2State extends State<ProductView2> {
+  HomeController cc = Get.put(HomeController());
+  late ProductView2Controller controller;
   @override
   void initState() {
-    controller = Get.put(ProductController(
+    controller = Get.put(ProductView2Controller(
       id: widget.id,
     ));
     super.initState();
   }
 
   bool isFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,7 +54,7 @@ class _ProductViewState extends State<ProductView> {
                                 fit: BoxFit.fill,
                                 width: screenWidth(1),
                                 height: screenHieght(3),
-                                imageUrl: controller.selecteedym.value),
+                                imageUrl: controller.selecteeedym.value),
                             Obx(() {
                               return Positioned(
                                 top: screenHieght(3.4),
@@ -62,21 +65,21 @@ class _ProductViewState extends State<ProductView> {
                                   child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
-                                      itemCount: controller.Productfeaturelist
+                                      itemCount: controller.Productfeatureelist
                                           .value.images!.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return InkWell(
                                           onTap: () {
-                                            controller.selecteedym.value =
-                                                controller.Productfeaturelist
+                                            controller.selecteeedym.value =
+                                                controller.Productfeatureelist
                                                     .value.images![index].path!;
                                           },
                                           child: CachedNetworkImage(
                                             width: screenWidth(7),
                                             height: screenHieght(20),
                                             imageUrl: controller
-                                                    .Productfeaturelist
+                                                    .Productfeatureelist
                                                     .value
                                                     .images![index]
                                                     .path ??
@@ -137,7 +140,7 @@ class _ProductViewState extends State<ProductView> {
                                   children: [
                                     Text(
                                       controller
-                                              .Productfeaturelist.value.name ??
+                                              .Productfeatureelist.value.name ??
                                           "",
                                       style: TextStyle(
                                         fontSize: 16,
@@ -151,7 +154,7 @@ class _ProductViewState extends State<ProductView> {
                                               color: Colors.grey, fontSize: 16),
                                         ),
                                         Text(
-                                          controller.Productfeaturelist.value
+                                          controller.Productfeatureelist.value
                                                   .material ??
                                               "",
                                           style: TextStyle(
@@ -215,67 +218,6 @@ class _ProductViewState extends State<ProductView> {
                             Row(
                               children: [
                                 Text(
-                                  'With Candel :',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: screenWidth(6),
-                                ),
-                                CustomSwitch(
-                                  switchValue: true,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: screenHieght(80),
-                            ),
-                            Text(
-                              'BoxShape :',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenHieght(100),
-                            ),
-                            SizedBox(
-                              height: screenHieght(30),
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  itemCount: controller.Productfeaturelist.value
-                                      .variations?.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return SizedBox(
-                                      width: screenHieght(12),
-                                      child: InkWell(
-                                        onTap: () {
-                                          controller.selecteedym.value =
-                                              controller
-                                                  .Productfeaturelist
-                                                  .value
-                                                  .variations![index]
-                                                  .image!;
-                                        },
-                                        child: Text(
-                                          controller
-                                              .Productfeaturelist
-                                              .value
-                                              .variations![index]
-                                              .attributes!
-                                              .boxShape!,
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
-                            Row(
-                              children: [
-                                Text(
                                   'Colors:',
                                   style: TextStyle(
                                     fontSize: 20,
@@ -284,71 +226,22 @@ class _ProductViewState extends State<ProductView> {
                                 SizedBox(
                                   width: screenWidth(80),
                                 ),
-                                Text(
-                                  controller
-                                          .Productfeaturelist
-                                          .value
-                                          .variations![controller.id!]
-                                          .attributes!
-                                          .color ??
-                                      "",
-                                  style: TextStyle(fontSize: 20),
-                                ),
+                                // Text(
+                                //   controller
+                                //       .Productfeatureelist
+                                //       .value
+                                //       .variations![cc.selectedIndexx.value]
+                                //       .attributes!
+                                //       .color!,
+                                //   style: TextStyle(fontSize: 20),
+                                // ),
                               ],
-                            ),
-                            SizedBox(
-                              height: screenHieght(140),
-                            ),
-                            SizedBox(
-                              height: screenHieght(20),
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: controller.Productfeaturelist.value
-                                    .variations!.length,
-                                itemBuilder: (context, index) {
-                                  return Row(
-                                    children: [
-                                      ColorItem(
-                                        color: controller
-                                            .Productfeaturelist
-                                            .value
-                                            .variations![index]
-                                            .attributes!
-                                            .hex!,
-                                        isSelected:
-                                            controller.selectedColor?.value ==
-                                                controller
-                                                    .Productfeaturelist
-                                                    .value
-                                                    .variations![index]
-                                                    .attributes!
-                                                    .hex!,
-                                        onTap: () {
-                                          controller.selectedColor?.value =
-                                              controller
-                                                  .Productfeaturelist
-                                                  .value
-                                                  .variations![index]
-                                                  .attributes!
-                                                  .hex!;
-                                          controller.selecteedym.value =
-                                              controller
-                                                  .Productfeaturelist
-                                                  .value
-                                                  .variations![index]
-                                                  .image!;
-                                        },
-                                      ),
-                                      SizedBox(
-                                        width: screenWidth(40),
-                                      )
-                                    ],
-                                  );
-                                },
-                              ),
                             ),
                           ],
                         ),
+                      ),
+                      SizedBox(
+                        height: screenHieght(80),
                       ),
                       Container(
                         decoration: BoxDecoration(color: Colors.black),
@@ -375,8 +268,8 @@ class _ProductViewState extends State<ProductView> {
                             ),
                             Container(
                               child: ReadMoreText(
-                                controller
-                                        .Productfeaturelist.value.description ??
+                                controller.Productfeatureelist.value
+                                        .description ??
                                     "",
                                 trimLines: 3,
                                 colorClickableText: Colors.blue,
@@ -408,7 +301,7 @@ class _ProductViewState extends State<ProductView> {
                                 Expanded(
                                   child: Text(
                                     controller
-                                        .Productfeaturelist.value.description!,
+                                        .Productfeatureelist.value.description!,
                                     overflow: TextOverflow.clip,
                                   ),
                                 )
@@ -426,7 +319,7 @@ class _ProductViewState extends State<ProductView> {
                                 Expanded(
                                   child: Text(
                                     controller
-                                        .Productfeaturelist.value.description!,
+                                        .Productfeatureelist.value.description!,
                                   ),
                                 )
                               ],
@@ -455,7 +348,7 @@ class _ProductViewState extends State<ProductView> {
                               width: screenWidth(6),
                             ),
                             Obx(() => Text(
-                                  controller.Productfeaturelist.value.price ??
+                                  controller.Productfeatureelist.value.price ??
                                       "00",
                                   style: TextStyle(
                                       fontSize: 20, fontFamily: 'welcome'),

@@ -10,8 +10,8 @@ class CommonResponse<T> {
     this.statusCode = json['status'];
     if (statusCode.toString().startsWith('2')) {
       this.data = json['response']['data']; //data
-      this.data2 = json['response']; //data success
-      this.data3 = json['data'];
+      // this.data2 = json['response']; //data success//all keys
+      // this.data3 = json['data'];
       // this.staus==true
     } else {
       if (json['response'] != null &&

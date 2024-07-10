@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ownertech.flutter_templete">
    <application
+        android:usesCleartextTraffic="true"
         android:label="velveta"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

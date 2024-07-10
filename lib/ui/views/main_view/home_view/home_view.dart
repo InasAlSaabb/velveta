@@ -12,8 +12,11 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_cat.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_product.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_slider.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
+import 'package:flutter_templete/ui/views/main_view/favorite_view/favorite_view.dart';
 import 'package:flutter_templete/ui/views/main_view/home_view/home_controller.dart';
+import 'package:flutter_templete/ui/views/product_details/product_controller.dart';
 import 'package:flutter_templete/ui/views/product_details/products_view.dart';
+import 'package:flutter_templete/ui/views/product_view2/product_view2.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatefulWidget {
@@ -67,6 +70,9 @@ class _HomeViewState extends State<HomeView> {
                           SvgPicture.asset('assets/images/Map.svg'),
                           SizedBox(width: screenWidth(40)),
                           DropdownButton<AddressGetModel>(
+                            // hint: Text(controller.dropdownItems.length != 0
+                            //     ? "${controller.selectedValue}"
+                            //     : "GHAZAl"),
                             alignment: Alignment.bottomLeft,
                             value: controller.selectedValue,
                             onChanged: (AddressGetModel? newValue) {
@@ -77,9 +83,9 @@ class _HomeViewState extends State<HomeView> {
                             items: controller.dropdownItems.map((address) {
                               return DropdownMenuItem<AddressGetModel>(
                                 value: address,
-                                child:
-                                    // Text("${address.city!},${address.state}"),
-                                    Text("${address.name}"),
+                                child: Text(controller.dropdownItems.length == 0
+                                    ? "sSyria"
+                                    : "${address.name}"),
                               );
                             }).toList(),
                           )
@@ -125,7 +131,8 @@ class _HomeViewState extends State<HomeView> {
                               itemCount: controller.categorylistt.length,
                               itemBuilder: (BuildContext context, int index) {
                                 controller.selectedIndex.value = index;
-
+                                controller.idCategory.value =
+                                    controller.selectedIndex.value;
                                 String categoryy =
                                     controller.categorylistt[index].name ?? "";
                                 return CustomCat(
@@ -157,10 +164,19 @@ class _HomeViewState extends State<HomeView> {
                                       children: [
                                         InkWell(
                                             onTap: () {
-                                              Get.off(ProductView(
-                                                model: controller
-                                                    .Productbyidlist[index],
-                                              ));
+                                              controller.selectedIndexx.value ==
+                                                      0
+                                                  ? Get.to(ProductView(
+                                                      id: controller
+                                                          .Productbyidlist[
+                                                              index]
+                                                          .id!,
+                                                    ))
+                                                  : Get.to(ProductView2(
+                                                      id: controller
+                                                          .Productbyidlist[
+                                                              index]
+                                                          .id!));
                                             },
                                             child: CustomProduct(
                                               imageurl: controller

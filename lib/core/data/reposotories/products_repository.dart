@@ -3,6 +3,7 @@ import 'package:flutter_templete/core/data/models/ProductDetail_model.dart';
 import 'package:flutter_templete/core/data/models/address_model.dart';
 import 'package:flutter_templete/core/data/models/category_model.dart';
 import 'package:flutter_templete/core/data/models/common_response.dart';
+import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/product_id_model.dart';
 import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
 import 'package:flutter_templete/core/data/network/endpoints/address_endpoints.dart';
@@ -122,6 +123,33 @@ class getProductsRepository {
             },
           );
           return Right(resultList);
+        } else {
+          return Left(commonResponse.message ?? '');
+        }
+      });
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, ProductFearuresModel>> getFeatureOfProduct(
+      {required int id}) async {
+    try {
+      return NetworkUtil.sendRequest(
+        type: RequestType.GET,
+        url: ProductsEndpoints.getproductsbyId,
+        params: {"product_id": id.toString()},
+        headers: NetworkConfig.getHeaders(
+          needAuth: false,
+          type: RequestType.GET,
+        ),
+      ).then((response) {
+        CommonResponse<dynamic> commonResponse =
+            CommonResponse.fromJson(response);
+        if (commonResponse.getStatus) {
+          ProductFearuresModel model =
+              ProductFearuresModel.fromJson(commonResponse.data ?? {});
+          return Right(model);
         } else {
           return Left(commonResponse.message ?? '');
         }

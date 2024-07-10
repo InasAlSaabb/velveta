@@ -35,17 +35,12 @@ class BaseController extends GetxController {
       requestStatus == RequestStatus.LOADING &&
       operationTypeList.contains(OperationType.CATIDTH);
 
-  // bool get isMealLoading =>
-  //     requestStatus == RequestStatus.LOADING &&
-  //     operationTypeList.contains(OperationType.MEAL);
-
   set setOperationType(OperationType value) {
     operationType.value = value;
   }
 
   Future runFutureFunction({
     required Future function,
-    // OperationType? type = OperationType.NONE
   }) async {
     await function;
   }

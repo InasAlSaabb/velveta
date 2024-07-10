@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_templete/core/data/models/address_get_model.dart';
 import 'package:flutter_templete/core/data/models/category_model.dart';
+import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/product_id_model.dart';
 import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
 import 'package:flutter_templete/core/data/models/sliderr_model.dart';
@@ -25,9 +26,11 @@ class HomeController extends BaseController {
     super.onInit();
   }
 
+  RxInt idCategory = 0.obs;
   RxList<CategoryModel> categorylistt = <CategoryModel>[].obs;
   RxList<SliderrModel> sliderrlist = <SliderrModel>[].obs;
   RxList<ProductsByIDModel> Productbyidlist = <ProductsByIDModel>[].obs;
+
   RxList<String> third = <String>[].obs;
   RxInt cartCount = 0.obs;
   // String selectedcategory = "Lux";
@@ -92,7 +95,7 @@ class HomeController extends BaseController {
 
   getProductsByCatId({required int id}) {
     runLoadingFutureFunction(
-      type: OperationType.CATID,
+      // type: OperationType.CATID,
       function: getProductsRepository().getProductsByCategoryId(id: id).then(
         (value) {
           value.fold(
@@ -117,6 +120,7 @@ class HomeController extends BaseController {
       ),
     );
   }
+  //fea
 
   getProductsByCatIdth({required int id}) {
     runLoadingFutureFunction(

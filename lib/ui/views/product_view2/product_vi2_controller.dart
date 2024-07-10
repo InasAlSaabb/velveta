@@ -9,10 +9,10 @@ import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:get/get.dart';
 
-class ProductController extends BaseController {
+class ProductView2Controller extends BaseController {
   int? id;
-  ProductController({
-    this.id,
+  ProductView2Controller({
+    required this.id,
   });
   @override
   void onInit() {
@@ -22,9 +22,8 @@ class ProductController extends BaseController {
     super.onInit();
   }
 
-  RxString selecteedym = "".obs;
-  RxInt selectedIndexcolor = 0.obs;
-  Rx<ProductFearuresModel> Productfeaturelist = ProductFearuresModel().obs;
+  RxString selecteeedym = "".obs;
+  Rx<ProductFearuresModel> Productfeatureelist = ProductFearuresModel().obs;
   getProductsFeaturesByID({required int id}) {
     runLoadingFutureFunction(
       function: getProductsRepository().getFeatureOfProduct(id: id).then(
@@ -37,8 +36,8 @@ class ProductController extends BaseController {
               );
             },
             (r) {
-              Productfeaturelist.value = r;
-              selecteedym.value = Productfeaturelist.value.mainImage!;
+              Productfeatureelist.value = r;
+              selecteeedym.value = Productfeatureelist.value.mainImage!;
               CustomToast.showMessage(
                 message: "succed",
                 messageType: MessageType.SUCCESS,
@@ -50,8 +49,6 @@ class ProductController extends BaseController {
     );
   }
 
-  RxString? selectedColor = "".obs;
-  // ProductsModel product = ProductsModel();
   RxInt count = 1.obs;
   void changeCount(bool increase) {
     if (increase) {

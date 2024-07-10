@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 
@@ -34,34 +35,27 @@ class _CustomProductState extends State<CustomProduct> {
               children: [
                 CachedNetworkImage(
                     width: screenWidth(1),
-                    height: screenHieght(4),
+                    height: screenHieght(6),
                     imageUrl: widget.imageurl),
-                Positioned(
-                  top: 2,
-                  right: 2,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.black,
-                    maxRadius: 25,
-                    child: SvgPicture.asset('assets/images/ic_favorite.svg'),
-                  ),
-                )
               ],
             ),
             SizedBox(
-              height: screenHieght(40),
+              height: screenHieght(60),
             ),
             Text(
               widget.productname ?? "",
-              style: TextStyle(fontSize: 25, fontFamily: 'Welcome'),
+              style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
+            ),
+            SizedBox(
+              height: screenHieght(200),
+            ),
+            Text(
+              widget.productdetail ?? "",
+              style: TextStyle(color: AppColors.secondary2GreyVColor),
             ),
             SizedBox(
               height: screenHieght(100),
             ),
-            Text(widget.productdetail ?? ""),
-            SizedBox(
-              height: screenHieght(100),
-            ),
-            CustomButton(text: "Add To Cart", onPressed: () {}),
             SizedBox(
               height: screenHieght(40),
             ),
