@@ -34,7 +34,7 @@ class _CheckoutViewState extends State<CheckoutView> {
             Row(children: [
               InkWell(
                   onTap: () {
-                    Get.to(CartView());
+                    Get.to(CartVieww());
                   },
                   child: SvgPicture.asset('assets/images/arrow_back.svg')),
               SizedBox(
@@ -90,31 +90,53 @@ class _CheckoutViewState extends State<CheckoutView> {
               style: TextStyle(fontSize: 25),
             ),
             SizedBox(
+              height: screenHieght(70),
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: screenWidth(60),
+                ),
+                CustomRadio(value: 0, onTaped: () {}, selected: 0),
+                SizedBox(
+                  width: screenWidth(40),
+                ),
+                Text(
+                  'MyFatoorah',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+            SizedBox(
               height: screenHieght(60),
             ),
             Row(
               children: [
-                Text(
-                  'cash',
-                  style: TextStyle(fontSize: 20),
+                Image.asset(
+                  'assets/images/logos_visa.png',
+                  height: screenHieght(60),
                 ),
-                Spacer(),
-                CustomRadio(value: 0, onTaped: () {}, selected: 0)
+                SizedBox(
+                  width: screenWidth(60),
+                ),
+                Image.asset(
+                  'assets/images/uim_master-card.png',
+                  height: screenHieght(60),
+                ),
+                SizedBox(
+                  width: screenWidth(60),
+                ),
+                Image.asset(
+                  'assets/images/fontisto_american-express.png',
+                  height: screenHieght(60),
+                ),
               ],
             ),
             SizedBox(
-              height: screenHieght(200),
+              height: screenHieght(60),
             ),
-            Row(
-              children: [
-                Text(
-                  'By Card',
-                  style: TextStyle(fontSize: 20),
-                ),
-                Spacer(),
-                CustomRadio(value: 1, onTaped: () {}, selected: 0)
-              ],
-            ),
+            Text(
+                'After clicking “pay ” you will be redirected to MyFatoorah to complete your purchase securely'),
             SizedBox(
               height: screenHieght(6),
             ),

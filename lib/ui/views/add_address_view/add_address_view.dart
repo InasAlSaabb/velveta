@@ -54,7 +54,7 @@ class _AddAdressViewState extends State<AddAdressView> {
               style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
             ),
           ),
-          CustomTextFormField(
+          CustomTextIFormField(
               hintText: 'Address Line',
               controller: controller.addressline,
               fillColor: Colors.white,
@@ -69,7 +69,7 @@ class _AddAdressViewState extends State<AddAdressView> {
           ),
           Padding(
             padding: EdgeInsetsDirectional.only(bottom: screenHieght(40)),
-            child: CustomTextFormField(
+            child: CustomTextIFormField(
                 hintText: 'City',
                 controller: controller.city,
                 fillColor: Colors.white,
@@ -85,7 +85,7 @@ class _AddAdressViewState extends State<AddAdressView> {
           ),
           Padding(
             padding: EdgeInsetsDirectional.only(bottom: screenHieght(40)),
-            child: CustomTextFormField(
+            child: CustomTextIFormField(
                 hintText: 'name',
                 controller: controller.name,
                 fillColor: Colors.white,
@@ -101,7 +101,7 @@ class _AddAdressViewState extends State<AddAdressView> {
           ),
           Padding(
             padding: EdgeInsetsDirectional.only(bottom: screenHieght(25)),
-            child: CustomTextFormField(
+            child: CustomTextIFormField(
                 hintText: 'state',
                 controller: controller.state,
                 fillColor: Colors.white,
@@ -115,7 +115,7 @@ class _AddAdressViewState extends State<AddAdressView> {
               style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
             ),
           ),
-          CustomTextFormField(
+          CustomTextIFormField(
               hintText: 'Zip Code',
               controller: controller.zipcode,
               fillColor: Colors.white,

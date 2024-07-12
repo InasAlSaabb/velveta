@@ -2,6 +2,7 @@ import 'package:flutter_templete/app/my_app_controller.dart';
 import 'package:flutter_templete/core/data/reposotories/shared_prefernces.dart';
 import 'package:flutter_templete/core/enums/connectivity_status.dart';
 import 'package:flutter_templete/core/enums/message_type.dart';
+import 'package:flutter_templete/core/services/cart_service.dart';
 import 'package:flutter_templete/core/services/cart_services.dart';
 import 'package:flutter_templete/core/services/connectivity_service.dart';
 import 'package:flutter_templete/core/services/location_service.dart';

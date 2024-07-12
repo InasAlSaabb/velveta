@@ -47,7 +47,7 @@ class _MainViewState extends State<MainView> {
         children: [
           HomeView(),
           FavoriteView(),
-          CartView(),
+          CartVieww(),
           ProfileView(),
         ],
       ),

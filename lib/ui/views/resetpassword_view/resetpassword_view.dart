@@ -76,7 +76,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
           Obx(
             () => Padding(
               padding: EdgeInsetsDirectional.only(top: screenHieght(100)),
-              child: CustomTextFormField(
+              child: CustomTextIFormField(
                 obscureText: !controller.passwordVisible.value,
                 suffixIcon: InkWell(
                   onTap: () {
@@ -118,7 +118,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
           Obx(
             () => Padding(
               padding: EdgeInsetsDirectional.only(top: screenHieght(100)),
-              child: CustomTextFormField(
+              child: CustomTextIFormField(
                 obscureText: !controller.passwordVisible2.value,
                 suffixIcon: InkWell(
                   onTap: () {

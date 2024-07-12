@@ -7,6 +7,7 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_circle.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_switch.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 import 'package:flutter_templete/ui/views/cart_view/cart_view.dart';
+import 'package:flutter_templete/ui/views/main_view/cart_view/cart_view.dart';
 import 'package:flutter_templete/ui/views/main_view/home_view/home_controller.dart';
 import 'package:flutter_templete/ui/views/product_details/product_controller.dart';
 import 'package:flutter_templete/ui/views/product_view2/product_vi2_controller.dart';

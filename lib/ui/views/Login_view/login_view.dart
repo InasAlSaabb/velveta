@@ -80,7 +80,7 @@ class _LoginViewState extends State<LoginView> {
           ),
           Padding(
             padding: EdgeInsets.only(top: screenHieght(60)),
-            child: CustomTextFormField(
+            child: CustomTextIFormField(
               hintText: tr('key_email'),
               controller: controller.emailController,
               fillColor: Colors.white,
@@ -97,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
           Padding(
             padding: EdgeInsetsDirectional.only(top: screenHieght(60)),
             child: Obx(
-              () => CustomTextFormField(
+              () => CustomTextIFormField(
                 obscureText: !controller.passwordVisible2.value,
                 suffixIcon: InkWell(
                   onTap: () {

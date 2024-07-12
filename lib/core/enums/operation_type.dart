@@ -6,5 +6,8 @@ enum OperationType {
   CATID,
   CATIDTH,
   SLIDER,
-  FEA
+  FEA,
+  CARTPRODUCTS,
+  FAVORITE,
+  PRODUCTS_VIEW,
 }

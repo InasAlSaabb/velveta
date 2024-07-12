@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/main.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
-import 'package:flutter_templete/ui/shared/custom_widgets/custom_text.dart';
+import 'package:flutter_templete/ui/shared/custom_widgets/custom_texti.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 
 class CustomCategory03 extends StatelessWidget {
@@ -50,7 +50,7 @@ class CustomCategory03 extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CustomText(
+              CustomTextI(
                 textAlign: TextAlign.start,
                 text: text,
                 // text: mealList[index].name ?? '',
@@ -60,19 +60,19 @@ class CustomCategory03 extends StatelessWidget {
               (screenWidth(35)).ph,
               Row(
                 children: [
-                  CustomText(
+                  CustomTextI(
                     textAlign: TextAlign.start,
                     text: 'Café  ',
                     textColor: AppColors.mainlightgrey,
                     // fontSize: ,
                   ),
-                  CustomText(
+                  CustomTextI(
                     textAlign: TextAlign.start,
                     text: ' . ',
                     textColor: AppColors.mainOrangeColor,
                     // fontSize: ,
                   ),
-                  CustomText(
+                  CustomTextI(
                     textAlign: TextAlign.start,
                     text: 'Western Food',
                     textColor: AppColors.mainlightgrey,
@@ -90,14 +90,14 @@ class CustomCategory03 extends StatelessWidget {
                     width: screenWidth(18),
                     height: screenWidth(18),
                   ),
-                  CustomText(
+                  CustomTextI(
                     textAlign: TextAlign.start,
                     text: ' 4.9 ',
                     textColor: AppColors.mainOrangeColor,
                     // fontSize: ,
                   ),
                   (screenWidth(35)).pw,
-                  CustomText(
+                  CustomTextI(
                     textAlign: TextAlign.start,
                     text: '(124 ratings)',
                     textColor: AppColors.mainlightgrey,

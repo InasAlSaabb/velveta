@@ -6,6 +6,7 @@ import 'package:flutter_templete/core/data/models/address_get_model.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
 import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/main.dart';
+import 'package:flutter_templete/test_pay.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_cat.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_slider.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 import 'package:flutter_templete/ui/views/main_view/favorite_view/favorite_view.dart';
 import 'package:flutter_templete/ui/views/main_view/home_view/home_controller.dart';
+import 'package:flutter_templete/ui/views/pay.dart';
 import 'package:flutter_templete/ui/views/product_details/product_controller.dart';
 import 'package:flutter_templete/ui/views/product_details/products_view.dart';
 import 'package:flutter_templete/ui/views/product_view2/product_view2.dart';
@@ -41,59 +43,64 @@ class _HomeViewState extends State<HomeView> {
               SizedBox(
                 height: screenHieght(40),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hello !",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Welcome'),
-                      ),
-                      Text(
-                        '  ${storage.getName() ?? "User name"}   ',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Welcome'),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset('assets/images/Map.svg'),
-                          SizedBox(width: screenWidth(40)),
-                          DropdownButton<AddressGetModel>(
-                            // hint: Text(controller.dropdownItems.length != 0
-                            //     ? "${controller.selectedValue}"
-                            //     : "GHAZAl"),
-                            alignment: Alignment.bottomLeft,
-                            value: controller.selectedValue,
-                            onChanged: (AddressGetModel? newValue) {
-                              setState(() {
-                                controller.selectedValue = newValue!;
-                              });
-                            },
-                            items: controller.dropdownItems.map((address) {
-                              return DropdownMenuItem<AddressGetModel>(
-                                value: address,
-                                child: Text(controller.dropdownItems.length == 0
-                                    ? "sSyria"
-                                    : "${address.name}"),
-                              );
-                            }).toList(),
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ],
+              GestureDetector(
+                onTap: () => Get.to(() => TestPay()),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Hello !",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Welcome'),
+                        ),
+                        Text(
+                          '  ${storage.getName() ?? "User name"}   ',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Welcome'),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            SvgPicture.asset('assets/images/Map.svg'),
+                            SizedBox(width: screenWidth(40)),
+                            DropdownButton<AddressGetModel>(
+                              alignment: Alignment.bottomLeft,
+                              value: controller.selectedValue,
+                              onChanged: (AddressGetModel? newValue) {
+                                setState(() {
+                                  controller.selectedValue = newValue!;
+                                });
+                              },
+                              items: controller.dropdownItems.isEmpty
+                                  ? [
+                                      DropdownMenuItem<AddressGetModel>(
+                                        value: AddressGetModel(name: 'sSyria'),
+                                        child: Text('sSyria'),
+                                      )
+                                    ]
+                                  : controller.dropdownItems.map((address) {
+                                      return DropdownMenuItem<AddressGetModel>(
+                                        value: address,
+                                        child: Text(address.name ?? "Loctions"),
+                                      );
+                                    }).toList(),
+                            )
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
               SizedBox(
                 height: screenHieght(40),

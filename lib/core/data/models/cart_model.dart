@@ -1,30 +1,29 @@
 import 'dart:convert';
 
+import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
+
 class CartModel {
   int? count;
   double? total;
-  // MealModel? meal;
+  ProductFearuresModel? meal;
 
-  CartModel({
-    this.count,
-    this.total,
-    //  this.meal
-  });
+  CartModel({this.count, this.total, this.meal});
 
   CartModel.fromJson(Map<String, dynamic> json) {
     count = json['count'];
     total = json['total'];
-    // meal
-    //  = json['meal'] != null ? new MealModel.fromJson(json['meal']) : null;
+    meal = json['meal'] != null
+        ? new ProductFearuresModel.fromJson(json['meal'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['count'] = this.count;
     data['total'] = this.total;
-    // if (this.meal != null) {
-    //   data['meal'] = this.meal!.toJson();
-    // }
+    if (this.meal != null) {
+      data['meal'] = this.meal!.toJson();
+    }
     return data;
   }
 
@@ -32,7 +31,7 @@ class CartModel {
     return {
       'count': model.count,
       'total': model.total,
-      // 'meal': model.meal,
+      'meal': model.meal,
     };
   }
 
@@ -41,8 +40,6 @@ class CartModel {
             .map<Map<String, dynamic>>((element) => CartModel.toMap(element))
             .toList(),
       );
-  //convert to string
-  //key value
 
   static List<CartModel> decode(String strList) =>
       (json.decode(strList) as List<dynamic>)

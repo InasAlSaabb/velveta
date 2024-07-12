@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+class CustomTextIFormField extends StatelessWidget {
+  const CustomTextIFormField({
     super.key,
     required this.hintText,
     required this.controller,

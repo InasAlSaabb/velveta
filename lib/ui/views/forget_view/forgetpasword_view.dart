@@ -74,7 +74,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: screenHieght(60)),
-                child: CustomTextFormField(
+                child: CustomTextIFormField(
                     hintText: 'Email',
                     controller: controller.email,
                     fillColor: Colors.white,

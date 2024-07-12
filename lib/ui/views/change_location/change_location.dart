@@ -5,7 +5,7 @@ import 'package:flutter_templete/core/translation/app_translation.dart';
 import 'package:flutter_templete/main.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_radio.dart';
-import 'package:flutter_templete/ui/shared/custom_widgets/custom_text.dart';
+import 'package:flutter_templete/ui/shared/custom_widgets/custom_texti.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 import 'package:flutter_templete/ui/views/add_address_view/add_address_view.dart';
 import 'package:flutter_templete/ui/views/change_location/change_location_controller.dart';
@@ -107,28 +107,28 @@ class _ChangeLocationViewState extends State<ChangeLocationView> {
                                 ),
                                 Row(
                                   children: [
-                                    CustomText(
+                                    CustomTextI(
                                       textColor: Colors.grey,
                                       textAlign: TextAlign.center,
                                       text:
                                           controller.addressList[index].city! +
                                               ",",
                                     ),
-                                    CustomText(
+                                    CustomTextI(
                                       textColor: Colors.grey,
                                       textAlign: TextAlign.center,
                                       text:
                                           controller.addressList[index].state! +
                                               ",",
                                     ),
-                                    CustomText(
+                                    CustomTextI(
                                       textColor: Colors.grey,
                                       textAlign: TextAlign.center,
                                       text:
                                           controller.addressList[index].name! +
                                               ",",
                                     ),
-                                    CustomText(
+                                    CustomTextI(
                                       textColor: Colors.grey,
                                       textAlign: TextAlign.center,
                                       text: controller

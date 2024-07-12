@@ -1,4 +1,4 @@
-package com.ownertech.flutter_templete;
+package com.inas.velveta;
 
 import io.flutter.embedding.android.FlutterActivity;
 

@@ -158,4 +158,46 @@ class getProductsRepository {
       return Left(e.toString());
     }
   }
+
+  Future<Either<String, ProductFearuresModel>> getProducts(
+      {required int id}) async {
+    try {
+      final response = await NetworkUtil.sendRequest(
+          type: RequestType.GET,
+          url: ProductsEndpoints.getPRoduct,
+          headers: NetworkConfig.getHeaders(
+              needAuth: true,
+              type: RequestType.GET,
+              extraHeaders: {
+                "Authorization":
+                    "Bearer 61|HskGRJIOV6a7WBwbkEZGH4nw7zs1IUKkXwbUjxGh88009906"
+              }),
+          params: {"product_id": id.toString()});
+
+      // final dynamic responseData = response['body'];
+
+      CommonResponse<dynamic> commonResponse =
+          CommonResponse.fromJson(response);
+
+      if (commonResponse.getStatus) {
+        // List<ProductFearuresModel> result = [];
+
+        // commonResponse.data!.forEach(
+        //   (element) {
+        //     result.add(ProductFearuresModel.fromJson(element));
+        //   },
+        // );
+        // result.addAll(commonResponse.data!.map(
+        //   (element) => ProductFearuresModel.fromJson(element),
+        // ));
+        ProductFearuresModel model = ProductFearuresModel.fromJson(
+            commonResponse.data as Map<String, dynamic>);
+        return Right(model);
+      } else {
+        return Left(commonResponse.message ?? '');
+      }
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

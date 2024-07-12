@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templete/app/my_app.dart';
 import 'package:flutter_templete/app/my_app_controller.dart';
 import 'package:flutter_templete/core/data/reposotories/shared_prefernces.dart';
+import 'package:flutter_templete/core/services/cart_service.dart';
 import 'package:flutter_templete/core/services/cart_services.dart';
 import 'package:flutter_templete/core/services/connectivity_service.dart';
 import 'package:flutter_templete/core/services/location_service.dart';
+import 'package:flutter_templete/core/services/pay_key.dart';
 import 'package:get/get.dart';
 import 'package:myfatoorah_flutter/myfatoorah_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> main() async {
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // MFSDK.init("Add Your API Key", MFCountry.KUWAIT, MFEnvironment.TEST);
+  //MFSDK.init(ApiKeys.apiKey, MFCountry.KUWAIT, MFEnvironment.TEST);
 
   await Get.putAsync<SharedPreferences>(() async {
     final prefs = await SharedPreferences.getInstance();

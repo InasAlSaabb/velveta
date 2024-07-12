@@ -78,7 +78,7 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           Padding(
             padding: EdgeInsets.only(top: screenHieght(100)),
-            child: CustomTextFormField(
+            child: CustomTextIFormField(
                 hintText: 'First Name',
                 controller: controller.firstname,
                 fillColor: Colors.white,
@@ -93,7 +93,7 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           Padding(
             padding: EdgeInsetsDirectional.only(top: screenHieght(100)),
-            child: CustomTextFormField(
+            child: CustomTextIFormField(
                 hintText: 'Last Name',
                 controller: controller.secondname,
                 fillColor: Colors.white,
@@ -108,7 +108,7 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           Padding(
             padding: EdgeInsets.only(top: screenHieght(100)),
-            child: CustomTextFormField(
+            child: CustomTextIFormField(
                 hintText: 'Email',
                 controller: controller.email,
                 fillColor: Colors.white,
@@ -124,7 +124,7 @@ class _SignUpViewState extends State<SignUpView> {
           Obx(
             () => Padding(
               padding: EdgeInsetsDirectional.only(top: screenHieght(100)),
-              child: CustomTextFormField(
+              child: CustomTextIFormField(
                 obscureText: !controller.passwordVisible.value,
                 suffixIcon: InkWell(
                   onTap: () {
@@ -166,7 +166,7 @@ class _SignUpViewState extends State<SignUpView> {
           Obx(
             () => Padding(
               padding: EdgeInsetsDirectional.only(top: screenHieght(100)),
-              child: CustomTextFormField(
+              child: CustomTextIFormField(
                 obscureText: !controller.passwordVisible2.value,
                 suffixIcon: InkWell(
                   onTap: () {
