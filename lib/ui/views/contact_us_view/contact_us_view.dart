@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
+import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/main.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
-import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button_G.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_form_message.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_text.dart';
@@ -34,7 +33,7 @@ class _ContactUsViewState extends State<ContactUsView> {
               child: Obx(
                 () => Column(
                   children: [
-                    screenHieght(30).ph,
+                    screenHieght(18).ph,
                     CustomBeginMain(text: tr("contact_us")),
                     screenHieght(40).ph,
                     SizedBox(
@@ -53,11 +52,13 @@ class _ContactUsViewState extends State<ContactUsView> {
                           text: "+11 11 11 11",
                           fonttext: screenWidth(25),
                         ),
-                        screenWidth(19).pw,
+                        SizedBox(
+                          width: screenWidth(20),
+                        ),
                         SvgPicture.asset("assets/images/ic_sharp-email.svg"),
                         screenWidth(30).pw,
                         CustomText(
-                          text: "user@gmail.com",
+                          text: storage.getName() ?? "user@gmail.com",
                           fonttext: screenWidth(25),
                         ),
                       ],
@@ -104,7 +105,7 @@ class _ContactUsViewState extends State<ContactUsView> {
                       iscount: false,
                       isborder: false,
                       hieght: screenHieght(15),
-                      hintColor: AppColors.maingrey,
+                      hintColor: AppColors.mainbackgroundandborderGreyVColor,
                       hint: tr("your_email"),
                       radius: 1,
                       fillColor: AppColors.mainWhiteVColor,
@@ -115,7 +116,7 @@ class _ContactUsViewState extends State<ContactUsView> {
                       iscount: true,
                       controller: controller.messageController.value,
                       isborder: false,
-                      hintColor: AppColors.mainGreyColor,
+                      hintColor: AppColors.mainbackgroundandborderGreyVColor,
                       hint: tr("your_message"),
                       maxline: 7,
                       hieght: screenHieght(3),

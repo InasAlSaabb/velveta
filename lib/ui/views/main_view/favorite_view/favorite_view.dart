@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templete/ui/shared/colors.dart';
 
 class FavoriteView extends StatefulWidget {
   const FavoriteView({super.key});
@@ -11,6 +12,7 @@ class _FavoriteViewState extends State<FavoriteView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.mainWhiteVColor,
       body: Text("Favorite"),
     );
   }

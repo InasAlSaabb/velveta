@@ -52,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hello !",
+                          tr('key_hello_!'),
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
@@ -73,28 +73,28 @@ class _HomeViewState extends State<HomeView> {
                           children: [
                             SvgPicture.asset('assets/images/Map.svg'),
                             SizedBox(width: screenWidth(40)),
-                            DropdownButton<AddressGetModel>(
-                              alignment: Alignment.bottomLeft,
-                              value: controller.selectedValue,
-                              onChanged: (AddressGetModel? newValue) {
-                                setState(() {
-                                  controller.selectedValue = newValue!;
-                                });
-                              },
-                              items: controller.dropdownItems.isEmpty
-                                  ? [
-                                      DropdownMenuItem<AddressGetModel>(
-                                        value: AddressGetModel(name: 'sSyria'),
-                                        child: Text('sSyria'),
-                                      )
-                                    ]
-                                  : controller.dropdownItems.map((address) {
-                                      return DropdownMenuItem<AddressGetModel>(
-                                        value: address,
-                                        child: Text(address.name ?? "Loctions"),
-                                      );
-                                    }).toList(),
-                            )
+                            // DropdownButton<AddressGetModel>(
+                            //   alignment: Alignment.bottomLeft,
+                            //   value: controller.selectedValue,
+                            //   onChanged: (AddressGetModel? newValue) {
+                            //     setState(() {
+                            //       controller.selectedValue = newValue!;
+                            //     });
+                            //   },
+                            //   items: controller.dropdownItems.isEmpty
+                            //       ? [
+                            //           DropdownMenuItem<AddressGetModel>(
+                            //             value: AddressGetModel(name: 'sSyria'),
+                            //             child: Text('sSyria'),
+                            //           )
+                            //         ]
+                            //       : controller.dropdownItems.map((address) {
+                            //           return DropdownMenuItem<AddressGetModel>(
+                            //             value: address,
+                            //             child: Text(address.name ?? "Loctions"),
+                            //           );
+                            //         }).toList(),
+                            // )
                           ],
                         )
                       ],
@@ -121,7 +121,7 @@ class _HomeViewState extends State<HomeView> {
               }),
               screenHieght(20).ph,
               Text(
-                "Categories",
+                tr('key_Categories'),
                 style: TextStyle(fontSize: 25, fontFamily: 'WElcome'),
               ),
               screenHieght(60).ph,
@@ -225,14 +225,16 @@ class _HomeViewState extends State<HomeView> {
                                         child: Column(
                                           children: [
                                             Text(
-                                              "To Make Your Customer Order ",
+                                              tr('key_to_make_your'),
                                               style: TextStyle(fontSize: 25),
                                             ),
                                             SizedBox(
                                               height: screenHieght(80),
                                             ),
                                             CustomButton(
-                                                text: "Call Us",
+                                                textColor:
+                                                    AppColors.mainWhiteVColor,
+                                                text: tr('key_call'),
                                                 onPressed: () {}),
                                           ],
                                         ),
@@ -246,25 +248,6 @@ class _HomeViewState extends State<HomeView> {
                                 })
                             : Text(""));
               }),
-              // Obx(() {
-              //   return SizedBox(
-              //       child: controller.sliderrlist.isEmpty
-              //           ? Text(tr("key_no_product"))
-              //           : ListView.builder(
-              //               physics: BouncingScrollPhysics(),
-              //               shrinkWrap: true,
-              //               itemCount: controller.sliderrlist.length,
-              //               itemBuilder: (BuildContext context, int index) {
-              //                 return Padding(
-              //                   padding: const EdgeInsets.all(8.0),
-              //                   child: CachedNetworkImage(
-              //                       width: screenWidth(1),
-              //                       height: screenHieght(4),
-              //                       imageUrl:
-              //                           controller.sliderrlist[index].image!),
-              //                 );
-              //               }));
-              // }),
             ],
           ),
         ),
@@ -272,163 +255,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-// Container(
-//                                   clipBehavior: Clip.antiAlias,
-//                                   alignment:
-//                                       AlignmentDirectional.center,
-//                                   width: screenWidth(3),
-//                                   decoration: BoxDecoration(
-//                                     color: AppColors.mainWhiteColor,
-//                                     borderRadius:
-//                                         BorderRadius.circular(20),
-//                                     border: Border.all(
-//                                       color: AppColors.mainGreyColor,
-//                                     ),
-//                                   ),
-//                                   child: Column(
-//                                     children: [
-//                                       screenWidth(30).ph,
-//                                       Container(
-//                                         width: screenWidth(4),
-//                                         height: screenWidth(4),
-//                                         decoration: BoxDecoration(
-//                                           borderRadius:
-//                                               BorderRadius.circular(20),
-//                                         ),
-//                                         child: ClipRRect(
-//                                           borderRadius:
-//                                               BorderRadius.circular(15),
-//                                           child: CachedNetworkImage(
-//                                             imageUrl: controller
-//                                                     .categorylistt[
-//                                                         index]
-//                                                     .image ??
-//                                                 '',
-//                                             fit: BoxFit.cover,
-//                                             placeholder:
-//                                                 (context, url) =>
-//                                                     Container(
-//                                               width: screenWidth(20),
-//                                               height: screenWidth(20),
-//                                               child:
-//                                                   CircularProgressIndicator(),
-//                                             ),
-//                                             errorWidget:
-//                                                 (context, url, error) =>
-//                                                     Icon(Icons.error),
-//                                           ),
-//                                         ),
-//                                       ),
-//                                       screenWidth(25).ph,
-//                                       Padding(
-//                                         padding: EdgeInsets.symmetric(
-//                                             horizontal:
-//                                                 screenWidth(20)),
-//                                         child: Column(
-//                                           crossAxisAlignment:
-//                                               CrossAxisAlignment.start,
-//                                           children: [
-//                                             Text(
-//                                               controller
-//                                                       .categorylistt[
-//                                                           index]
-//                                                       .name ??
-//                                                   '',
-//                                               style: TextStyle(
-//                                                 fontWeight:
-//                                                     FontWeight.bold,
-//                                                 fontSize:
-//                                                     screenWidth(30),
-//                                               ),
-//                                               textAlign:
-//                                                   TextAlign.start,
-//                                               maxLines: 3,
-//                                               overflow:
-//                                                   TextOverflow.ellipsis,
-//                                             ),
-//                                             screenWidth(30).ph,
-//                                             Row(
-//                                                 mainAxisAlignment:
-//                                                     MainAxisAlignment
-//                                                         .spaceAround,
-//                                                 children: [
-//                                                   Text(
-//                                                     tr("key_price"),
-//                                                     style: TextStyle(
-//                                                         fontWeight:
-//                                                             FontWeight
-//                                                                 .bold,
-//                                                         color: AppColors
-//                                                             .mainBlueColor),
-//                                                   ),
-//                                                   Text(
-//                                                     '${controller.categorylistt[index].description}',
-//                                                     style: TextStyle(
-//                                                         color: AppColors
-//                                                             .mainblack,
-//                                                         fontWeight:
-//                                                             FontWeight
-//                                                                 .bold),
-//                                                     maxLines: 2,
-//                                                   ),
-//                                                 ])
-//                                           ],
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-
-// // InkWell(
-// //   onTap: () {
-// //     Get.to(ProductView());
-// //   },
-// //   child: CustomProduct(
-// //     imageurl:
-// //         "https://s3-alpha-sig.figma.com/img/4d14/0eff/ebc80cec12ead181401214ac7ed97382?Expires=1715558400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=U5ccnZsv9MGg3TveDcy3p~pj8eWQCfstLdDjMSTd5QiJBaXuPBT4baDWCZI8ZXE2dIF71Dtx5rF7781zksokcgo0y7ei8RuXZ73EMUGl08jD2E27u6c6kRpnzipHjyXMfJRkS8yLYtBKBuiP1ea5fWwiOrrHHThM48CdjADRKbA-CT9g8-QFnuE3hgBhmlyIU4XF2b4nCok-cf-HhQ9urZ4~hebSn7-K0E6D5oyIiKt6SfEDyGV~UC~~vBYEzQDF7dv4aTlI6DrgN~qmbUNTYuVGxtACG5T~GO09F~mCrLD9f2xzUOtP~UC-RIbGWB4ytoZni-Pvx0dXuXeirADYBA__",
-// //     productdetail: "asdfghasdfghasdfqwedsazxcfvgbthy",
-// //     productname: "productname",
-// //   ),
-// // ),
-// .
-//       Container(
-//         child: Padding(
-//           padding: EdgeInsets.symmetric(horizontal: screenWidth(10)),
-//           child: Column(children: [
-//             Text("To Make Your Customer Order "),
-//             SizedBox(
-//               height: screenHieght(80),
-//             ),
-//             CustomButton(text: "Call Us", onPressed: () {}),
-//           ]),
-//         ),
-//       ),
-//       SizedBox(
-//         height: screenHieght(80),
-//       ),
-//       Text('Sample'),
-//       SizedBox(
-//         height: screenHieght(5),
-//         child: ListView.builder(
-//           scrollDirection: Axis.horizontal,
-//           itemCount: controller.imageUrls.length,
-//           itemBuilder: (context, index) {
-//             return Container(
-//               margin: EdgeInsets.all(8.0),
-//               child: Column(
-//                 children: <Widget>[
-//                   Image.network(
-//                     controller.imageUrls[index],
-//                     width: 100.0,
-//                     height: 100.0,
-//                     fit: BoxFit.cover,
-//                   ),
-//                   SizedBox(height: 8.0),
-//                   Text('Item $index'),
-//                 ],
-//               ),
-//             );
-//           },
-//         ),
-//       )
-//     ])),

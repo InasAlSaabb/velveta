@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 
@@ -44,6 +43,7 @@ class CustomButton extends StatelessWidget {
                 color: borderColor!,
               )
             : null,
+        shape: BeveledRectangleBorder(),
         backgroundColor: backgroundColor ?? AppColors.secondarytextcBlackVColor,
         fixedSize: Size(width ?? screenWidth(1.1), hieght ?? screenHieght(15)),
       ),

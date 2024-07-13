@@ -4,6 +4,7 @@ import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
 import 'package:flutter_templete/core/data/reposotories/products_repository.dart';
 import 'package:flutter_templete/core/enums/message_type.dart';
 import 'package:flutter_templete/core/enums/operation_type.dart';
+import 'package:flutter_templete/core/enums/request_status.dart';
 import 'package:flutter_templete/core/services/base_controller.dart';
 import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_toast.dart';
@@ -22,6 +23,8 @@ class ProductView2Controller extends BaseController {
     super.onInit();
   }
 
+  bool get isLoading => requestStatus.value == RequestStatus.LOADING;
+  RxBool isFavorite = false.obs;
   RxString selecteeedym = "".obs;
   Rx<ProductFearuresModel> Productfeatureelist = ProductFearuresModel().obs;
   getProductsFeaturesByID({required int id}) {

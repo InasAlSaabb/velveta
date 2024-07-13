@@ -23,6 +23,7 @@ class _SignUpViewState extends State<SignUpView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: AppColors.mainWhiteVColor,
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
@@ -37,7 +38,7 @@ class _SignUpViewState extends State<SignUpView> {
                 children: [
                   InkWell(
                       onTap: () {
-                        Get.to(LandingView());
+                        Get.back();
                       },
                       child: SvgPicture.asset('assets/images/arrow_back.svg')),
                   SizedBox(
@@ -202,6 +203,7 @@ class _SignUpViewState extends State<SignUpView> {
             height: screenHieght(40),
           ),
           CustomButton(
+              textColor: AppColors.mainWhiteVColor,
               text: 'Create Account',
               onPressed: () {
                 controller.register();
@@ -209,30 +211,27 @@ class _SignUpViewState extends State<SignUpView> {
           SizedBox(
             height: screenHieght(40),
           ),
-          Padding(
-            padding:
-                EdgeInsetsDirectional.symmetric(horizontal: screenWidth(6)),
-            child: Row(
-              children: [
-                Text(
-                  'have An Account?  ',
-                  style: TextStyle(
-                    color: AppColors.mainblack,
-                    fontSize: 20,
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'have An Account?  ',
+                style: TextStyle(
+                  color: AppColors.mainblack,
+                  fontSize: 15,
                 ),
-                InkWell(
-                  onTap: () {
-                    Get.to(LoginView());
-                  },
-                  child: Text(
-                    'Log In',
-                    style: TextStyle(fontSize: 18, fontFamily: 'Welcome'),
-                  ),
-                )
-              ],
-            ),
-          )
+              ),
+              InkWell(
+                onTap: () {
+                  Get.off(LoginView());
+                },
+                child: Text(
+                  'Log In',
+                  style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
+                ),
+              )
+            ],
+          ),
         ]),
       ),
     ));

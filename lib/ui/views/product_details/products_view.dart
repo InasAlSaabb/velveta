@@ -1,14 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_templete/core/translation/app_translation.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_circle.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_item.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_switch.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
-import 'package:flutter_templete/ui/views/cart_view/cart_view.dart';
 import 'package:flutter_templete/ui/views/main_view/cart_view/cart_view.dart';
 import 'package:flutter_templete/ui/views/product_details/product_controller.dart';
 import 'package:get/get.dart';
@@ -107,17 +106,16 @@ class _ProductViewState extends State<ProductView> {
                                         maxRadius: 25,
                                         child: IconButton(
                                           onPressed: () {
-                                            setState(() {
-                                              isFavorite = !isFavorite;
-                                            });
+                                            controller.isFavorite.value =
+                                                !controller.isFavorite.value;
                                           },
                                           icon: Icon(
-                                            isFavorite
+                                            controller.isFavorite.value
                                                 ? Icons.favorite
                                                 : Icons.favorite_border,
-                                            color: isFavorite
-                                                ? Colors.white
-                                                : null,
+                                            color: controller.isFavorite.value
+                                                ? AppColors.mainWhiteVColor
+                                                : AppColors.mainWhiteVColor,
                                           ),
                                         )
                                         //  SvgPicture.asset(
@@ -127,9 +125,14 @@ class _ProductViewState extends State<ProductView> {
                                   Positioned(
                                       top: screenHieght(30),
                                       left: screenWidth(40),
-                                      child: Icon(
-                                        Icons.arrow_back,
-                                        size: screenHieght(30),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          size: screenHieght(30),
+                                        ),
                                       ))
                                 ],
                               ),
@@ -162,7 +165,7 @@ class _ProductViewState extends State<ProductView> {
                                           Row(
                                             children: [
                                               Text(
-                                                'Material: ',
+                                                tr('key_material'),
                                                 style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 16),
@@ -234,7 +237,7 @@ class _ProductViewState extends State<ProductView> {
                                   Row(
                                     children: [
                                       Text(
-                                        'With Candel :',
+                                        tr('key_With Candel'),
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
@@ -251,7 +254,7 @@ class _ProductViewState extends State<ProductView> {
                                     height: screenHieght(80),
                                   ),
                                   Text(
-                                    'BoxShape :',
+                                    tr('key_BoxShape'),
                                     style: TextStyle(
                                       fontSize: 20,
                                     ),
@@ -302,7 +305,7 @@ class _ProductViewState extends State<ProductView> {
                                   Row(
                                     children: [
                                       Text(
-                                        'Colors:',
+                                        tr('key_Colors'),
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
@@ -399,7 +402,7 @@ class _ProductViewState extends State<ProductView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Description ',
+                                    tr('key_Description'),
                                     style: TextStyle(
                                       fontSize: 25,
                                     ),
@@ -427,7 +430,7 @@ class _ProductViewState extends State<ProductView> {
                                     height: screenHieght(40),
                                   ),
                                   Text(
-                                    'Benefits',
+                                    tr('key_Benefits'),
                                     style: TextStyle(fontSize: 25),
                                   ),
                                   SizedBox(
@@ -480,8 +483,9 @@ class _ProductViewState extends State<ProductView> {
                                     horizontal: screenWidth(20)),
                                 child: Row(children: [
                                   CustomButton(
+                                      textColor: AppColors.mainWhiteVColor,
                                       width: screenWidth(2),
-                                      text: "Add To Cart",
+                                      text: tr('key_add_to_cart'),
                                       onPressed: () {
                                         controller.add(
                                             controller

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
+import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_cart_Product.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_favorite_container.dart';
@@ -97,15 +98,15 @@ class _CartViewwState extends State<CartVieww> {
                             height: screenHieght(40),
                           ),
                           OrdrInfoItem(
-                            title: 'Subtotal',
+                            title: tr('key_subtotal'),
                             value: r'$100',
                           ),
                           SizedBox(
                             height: screenHieght(80),
                           ),
                           OrdrInfoItem(
-                            title: 'Shipping',
-                            value: 'calc at the next step',
+                            title: tr('key_shipping'),
+                            value: tr('key_calcu'),
                           ),
                           SizedBox(
                             height: screenHieght(80),
@@ -118,8 +119,8 @@ class _CartViewwState extends State<CartVieww> {
                             height: screenHieght(80),
                           ),
                           OrdrInfoItem(
-                            title: 'Total',
-                            value: 'Calc at the next step',
+                            title: tr('key_total'),
+                            value: tr('key_calcu'),
                           )
                         ]),
                       ),
@@ -128,7 +129,8 @@ class _CartViewwState extends State<CartVieww> {
                       height: screenHieght(20),
                     ),
                     CustomButton(
-                        text: 'Continue To checkout',
+                        textColor: AppColors.mainWhiteVColor,
+                        text: tr('key_continuew_to_checkout'),
                         onPressed: () {
                           Get.to(CheckoutView());
                         })

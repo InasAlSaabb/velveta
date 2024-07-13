@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
+import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_order_info.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_radio.dart';
@@ -29,12 +30,13 @@ class _CheckoutViewState extends State<CheckoutView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: screenHieght(20),
+              height: screenHieght(18),
             ),
             Row(children: [
               InkWell(
                   onTap: () {
-                    Get.to(CartVieww());
+                    // Get.to(CartVieww());
+                    Get.back();
                   },
                   child: SvgPicture.asset('assets/images/arrow_back.svg')),
               SizedBox(
@@ -58,7 +60,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Delivery to ',
+                      tr('key_Delivery to'),
                       style: TextStyle(fontSize: 20),
                     ),
                     Text(
@@ -77,16 +79,16 @@ class _CheckoutViewState extends State<CheckoutView> {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       color: Colors.grey,
                     ),
-                    child: Text('change'),
+                    child: Text(tr('key_change')),
                   ),
                 )
               ],
             ),
             SizedBox(
-              height: screenHieght(15),
+              height: screenHieght(20),
             ),
             Text(
-              'Payment Method :',
+              tr('key_payment_method'),
               style: TextStyle(fontSize: 25),
             ),
             SizedBox(
@@ -102,7 +104,7 @@ class _CheckoutViewState extends State<CheckoutView> {
                   width: screenWidth(40),
                 ),
                 Text(
-                  'MyFatoorah',
+                  tr('key_myfatorah'),
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -135,8 +137,7 @@ class _CheckoutViewState extends State<CheckoutView> {
             SizedBox(
               height: screenHieght(60),
             ),
-            Text(
-                'After clicking “pay ” you will be redirected to MyFatoorah to complete your purchase securely'),
+            Text(tr('key_disc')),
             SizedBox(
               height: screenHieght(6),
             ),
@@ -151,15 +152,15 @@ class _CheckoutViewState extends State<CheckoutView> {
                     height: screenHieght(40),
                   ),
                   OrdrInfoItem(
-                    title: 'Subtotal',
+                    title: tr('key_subtotal'),
                     value: r'$100',
                   ),
                   SizedBox(
                     height: screenHieght(80),
                   ),
                   OrdrInfoItem(
-                    title: 'Shipping',
-                    value: 'calc at the next step',
+                    title: tr('key_shipping'),
+                    value: tr('key_calcu'),
                   ),
                   SizedBox(
                     height: screenHieght(80),
@@ -172,8 +173,8 @@ class _CheckoutViewState extends State<CheckoutView> {
                     height: screenHieght(80),
                   ),
                   OrdrInfoItem(
-                    title: 'Total',
-                    value: 'Calc at the next step',
+                    title: tr('key_total'),
+                    value: tr('key_calcu'),
                   )
                 ]),
               ),
@@ -183,7 +184,8 @@ class _CheckoutViewState extends State<CheckoutView> {
             ),
             Center(
               child: CustomButton(
-                  text: 'Pay',
+                  textColor: AppColors.mainWhiteVColor,
+                  text: tr('key_pay'),
                   onPressed: () {
                     Get.to(CheckoutView());
                   }),

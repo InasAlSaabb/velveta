@@ -41,7 +41,9 @@ class _CustomBeginMainState extends State<CustomBeginMain> {
                   ),
                 ),
         ),
-        screenWidth(30).pw,
+        SizedBox(
+          width: screenWidth(40),
+        ),
         CustomText(
           text: widget.text,
           colortext: AppColors.mainBlackVColor,

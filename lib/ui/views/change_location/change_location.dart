@@ -79,7 +79,7 @@ class _ChangeLocationViewState extends State<ChangeLocationView> {
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             icon: Icons.delete,
-                            label: 'Delete',
+                            label: tr('key_delete'),
                           ),
                         ],
                       ),
@@ -180,7 +180,7 @@ class _ChangeLocationViewState extends State<ChangeLocationView> {
                   Get.off(AddAdressView());
                 },
                 child: Text(
-                  'Add new Address',
+                  tr('key_add_new_address'),
                 ),
               ),
             ),

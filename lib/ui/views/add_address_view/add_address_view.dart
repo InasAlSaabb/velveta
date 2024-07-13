@@ -22,12 +22,13 @@ class _AddAdressViewState extends State<AddAdressView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: AppColors.mainWhiteVColor,
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
-            height: screenHieght(30),
+            height: screenHieght(18),
           ),
           Row(children: [
             InkWell(
@@ -44,33 +45,49 @@ class _AddAdressViewState extends State<AddAdressView> {
             ),
           ]),
           SizedBox(
-            height: screenHieght(20),
+            height: screenHieght(30),
           ),
           Padding(
             padding: EdgeInsets.only(
-                top: screenHieght(100), bottom: screenHieght(100)),
+                top: screenHieght(80), bottom: screenHieght(200)),
             child: Text(
-              'Address Line',
+              tr("key_name"),
+              style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.only(bottom: screenHieght(100)),
+            child: CustomTextIFormField(
+                hintText: tr("key_name"),
+                controller: controller.name,
+                fillColor: Colors.white,
+                hintTextColor: AppColors.secondaryGreyhintVColor),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: screenHieght(100), bottom: screenHieght(200)),
+            child: Text(
+              tr('key_address_line'),
               style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
             ),
           ),
           CustomTextIFormField(
-              hintText: 'Address Line',
+              hintText: tr('key_address_line'),
               controller: controller.addressline,
               fillColor: Colors.white,
               hintTextColor: AppColors.secondaryGreyhintVColor),
           Padding(
             padding: EdgeInsets.only(
-                top: screenHieght(25), bottom: screenHieght(100)),
+                top: screenHieght(50), bottom: screenHieght(100)),
             child: Text(
-              'City',
+              tr('key_city'),
               style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(bottom: screenHieght(40)),
+            padding: EdgeInsetsDirectional.only(bottom: screenHieght(100)),
             child: CustomTextIFormField(
-                hintText: 'City',
+                hintText: tr('key_city'),
                 controller: controller.city,
                 fillColor: Colors.white,
                 hintTextColor: AppColors.secondaryGreyhintVColor),
@@ -79,30 +96,14 @@ class _AddAdressViewState extends State<AddAdressView> {
             padding: EdgeInsets.only(
                 top: screenHieght(80), bottom: screenHieght(100)),
             child: Text(
-              'Name',
+              tr('key_state'),
               style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(bottom: screenHieght(40)),
+            padding: EdgeInsetsDirectional.only(bottom: screenHieght(100)),
             child: CustomTextIFormField(
-                hintText: 'name',
-                controller: controller.name,
-                fillColor: Colors.white,
-                hintTextColor: AppColors.secondaryGreyhintVColor),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                top: screenHieght(80), bottom: screenHieght(100)),
-            child: Text(
-              'state',
-              style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsetsDirectional.only(bottom: screenHieght(25)),
-            child: CustomTextIFormField(
-                hintText: 'state',
+                hintText: tr('key_state'),
                 controller: controller.state,
                 fillColor: Colors.white,
                 hintTextColor: AppColors.secondaryGreyhintVColor),
@@ -111,12 +112,12 @@ class _AddAdressViewState extends State<AddAdressView> {
             padding: EdgeInsets.only(
                 top: screenHieght(80), bottom: screenHieght(100)),
             child: Text(
-              'Zip Code',
+              tr('key_zip_code'),
               style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
             ),
           ),
           CustomTextIFormField(
-              hintText: 'Zip Code',
+              hintText: tr('key_zip_code'),
               controller: controller.zipcode,
               fillColor: Colors.white,
               hintTextColor: AppColors.secondaryGreyhintVColor),
@@ -125,7 +126,8 @@ class _AddAdressViewState extends State<AddAdressView> {
           ),
           Center(
               child: CustomButton(
-                  text: 'Save',
+                  textColor: AppColors.mainWhiteVColor,
+                  text: tr('key_save'),
                   onPressed: () {
                     controller.add();
                   }))

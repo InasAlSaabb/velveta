@@ -39,6 +39,7 @@ class CustomTextIFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return TextFormField(
+      cursorColor: AppColors.mainBlackVColor,
       // onChanged: myValidator,
       controller: controller,
       validator: validator,
@@ -55,15 +56,22 @@ class CustomTextIFormField extends StatelessWidget {
           maxHeight: maxHeight ?? screenHieght(15),
           maxWidth: maxWidth ?? screenWidth(1.1),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.mainbackgroundandborderGreyVColor,
+          ),
+        ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
-            color: AppColors.transparentColor,
+            color: AppColors.mainbackgroundandborderGreyVColor,
           ),
           // borderRadius: BorderRadius.circular(30),
         ),
         enabledBorder: OutlineInputBorder(
           // borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(strokeAlign: 2),
+          borderSide: BorderSide(
+              strokeAlign: 2,
+              color: AppColors.mainbackgroundandborderGreyVColor),
         ),
         filled: true,
         hintStyle: TextStyle(

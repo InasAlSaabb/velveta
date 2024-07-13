@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
+import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_form.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
@@ -23,6 +24,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.mainWhiteVColor,
         resizeToAvoidBottomInset: false,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
@@ -37,7 +39,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   children: [
                     InkWell(
                         onTap: () {
-                          Get.to(LoginView());
+                          Get.back();
                         },
                         child:
                             SvgPicture.asset('assets/images/arrow_back.svg')),
@@ -45,7 +47,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                       width: screenWidth(60),
                     ),
                     Text(
-                      tr('key_login'),
+                      tr('key_forget_password'),
                       style: TextStyle(fontSize: 20),
                     ),
                   ],
@@ -55,41 +57,36 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                 height: screenHieght(20),
               ),
               Text(
-                'It\'s happened . Don\'t Worry',
+                tr('key_Its_happened._Dont_worry'),
                 style: TextStyle(fontSize: 27, fontFamily: 'Welcome'),
-              ),
-              SizedBox(
-                height: 20,
               ),
               Padding(
                 padding: EdgeInsetsDirectional.only(bottom: screenHieght(30)),
                 child: Text(
-                  'Please Write Your Email Bellow To Send Code In It',
+                  tr('key_Please_write_your_email'),
                   style: TextStyle(fontSize: 15),
                 ),
               ),
               Text(
-                'Email',
+                tr('key_email'),
                 style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
               ),
               Padding(
-                padding: EdgeInsets.only(top: screenHieght(60)),
+                padding: EdgeInsets.only(top: screenHieght(120)),
                 child: CustomTextIFormField(
-                    hintText: 'Email',
+                    hintText: tr('key_email'),
                     controller: controller.email,
                     fillColor: Colors.white,
-                    hintTextColor: Colors.black),
+                    hintTextColor: AppColors.mainbackgroundandborderGreyVColor),
               ),
               SizedBox(
-                height: screenHieght(50),
+                height: screenHieght(30),
               ),
               CustomButton(
-                  text: 'Send',
+                  textColor: AppColors.mainWhiteVColor,
+                  text: tr('key_send_code'),
                   onPressed: () {
                     controller.sendOtp();
-                    // Get.to(VerfificationView(
-                    //   email: controller.email.text,
-                    // ));
                   }),
             ],
           ),

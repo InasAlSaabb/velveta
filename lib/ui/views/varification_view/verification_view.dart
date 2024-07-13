@@ -52,19 +52,22 @@ class _VerfificationViewState extends State<VerfificationView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColors.mainWhiteVColor,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: screenHieght(20),
+                height: screenHieght(18),
               ),
               Row(
                 children: [
                   InkWell(
                       onTap: () {
-                        Get.to(ForgetPasswordView());
+                        // Get.to(ForgetPasswordView());
+                        Get.back();
                       },
                       child: SvgPicture.asset('assets/images/arrow_back.svg')),
                   SizedBox(
@@ -80,23 +83,25 @@ class _VerfificationViewState extends State<VerfificationView> {
                 height: screenHieght(20),
               ),
               Text(
-                'Otp Code',
+                tr('key_otp_code'),
                 style: TextStyle(fontSize: 30, fontFamily: 'Welcome'),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              // SizedBox(
+              //   height: screenHieght(8),
+              // ),
               Text(
-                'code sent to your email',
+                tr('key_otp_code_sent'),
                 style: TextStyle(fontSize: 15),
               ),
-              SizedBox(
-                height: 5,
-              ),
+              // SizedBox(
+              //   height: 5,
+              // ),
               Row(
                 children: [
                   Text(
-                    widget.email.toString(),
+                    widget.email.toString() == Null
+                        ? "your email"
+                        : widget.email.toString(),
                     style: TextStyle(
                         fontSize: 15, color: AppColors.secondaryGreyColor),
                   ),
@@ -108,7 +113,7 @@ class _VerfificationViewState extends State<VerfificationView> {
                       Get.to(SignUpView());
                     },
                     child: Text(
-                      "?Change It",
+                      tr('key_change_it'),
                       style: TextStyle(
                           fontSize: 15, color: AppColors.secondaryGreyColor),
                     ),
@@ -116,7 +121,7 @@ class _VerfificationViewState extends State<VerfificationView> {
                 ],
               ),
               SizedBox(
-                height: screenHieght(15),
+                height: screenHieght(17),
               ),
               PinCodeTextField(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -154,7 +159,8 @@ class _VerfificationViewState extends State<VerfificationView> {
                 height: screenHieght(50),
               ),
               CustomButton(
-                  text: 'Reset Password',
+                  textColor: AppColors.mainWhiteVColor,
+                  text: tr('reset_password'),
                   onPressed: () {
                     // Get.to(ResetPasswordView()
                     // );
@@ -175,7 +181,7 @@ class _VerfificationViewState extends State<VerfificationView> {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text('Resend code '), Text('00:${start}')],
+                  children: [Text(tr('key_resend_code')), Text('00:${start}')],
                 ),
               ))
             ],

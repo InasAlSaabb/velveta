@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
+import 'package:flutter_templete/main.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_form.dart';
@@ -39,7 +40,7 @@ class _LoginViewState extends State<LoginView> {
                 children: [
                   InkWell(
                       onTap: () {
-                        Get.to(LandingView());
+                        Get.back();
                       },
                       child: SvgPicture.asset('assets/images/arrow_back.svg')),
                   SizedBox(
@@ -62,10 +63,7 @@ class _LoginViewState extends State<LoginView> {
           ),
           Text(
             tr('key_welcome_back_!'),
-            style: TextStyle(fontSize: 30, fontFamily: 'Welcome'),
-          ),
-          SizedBox(
-            height: screenHieght(130),
+            style: TextStyle(fontSize: 40, fontFamily: 'Welcome'),
           ),
           Padding(
             padding: EdgeInsetsDirectional.only(bottom: screenHieght(30)),
@@ -79,7 +77,7 @@ class _LoginViewState extends State<LoginView> {
             style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
           ),
           Padding(
-            padding: EdgeInsets.only(top: screenHieght(60)),
+            padding: EdgeInsetsDirectional.only(top: screenHieght(160)),
             child: CustomTextIFormField(
               hintText: tr('key_email'),
               controller: controller.emailController,
@@ -95,7 +93,7 @@ class _LoginViewState extends State<LoginView> {
             style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(top: screenHieght(60)),
+            padding: EdgeInsetsDirectional.only(top: screenHieght(160)),
             child: Obx(
               () => CustomTextIFormField(
                 obscureText: !controller.passwordVisible2.value,
@@ -130,33 +128,42 @@ class _LoginViewState extends State<LoginView> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: screenHieght(120),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Checkbox(
-                    value: true,
-                    onChanged: (bool? newValue) {
-                      newValue = false;
+          SizedBox(
+            width: screenHieght(1),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: screenWidth(16),
+                      child: Checkbox(
+                        activeColor: AppColors.mainBlackVColor,
+                        value: true,
+                        onChanged: (bool? newValue) {
+                          newValue = false;
+                        },
+                      ),
+                    ),
+                    Text(tr('key_rememebr _me')),
+                  ],
+                ),
+                InkWell(
+                    onTap: () {
+                      Get.off(ForgetPasswordView());
                     },
-                  ),
-                  Text(tr('key_rememebr _me')),
-                ],
-              ),
-              InkWell(
-                  onTap: () {
-                    Get.to(ForgetPasswordView());
-                  },
-                  child: Text(tr('key_Forgot_Password'))),
-            ],
+                    child: Text(tr('key_Forgot_Password'))),
+              ],
+            ),
           ),
           SizedBox(
             height: screenHieght(50),
           ),
           CustomButton(
+              textColor: AppColors.mainWhiteVColor,
               text: tr('key_login'),
               onPressed: () {
                 controller.login();
@@ -164,30 +171,27 @@ class _LoginViewState extends State<LoginView> {
           SizedBox(
             height: screenHieght(40),
           ),
-          Padding(
-            padding:
-                EdgeInsetsDirectional.symmetric(horizontal: screenWidth(10)),
-            child: Row(
-              children: [
-                Text(
-                  tr('key_Don\'nt_have_an_account'),
-                  style: TextStyle(
-                    color: AppColors.mainblack,
-                    fontSize: 20,
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                tr('key_Don\'nt_have_an_account'),
+                style: TextStyle(
+                  color: AppColors.secondaryGreyhintVColor,
+                  fontSize: 15,
                 ),
-                InkWell(
-                  onTap: () {
-                    Get.to(SignUpView());
-                  },
-                  child: Text(
-                    tr('key_sign_up'),
-                    style: TextStyle(fontSize: 15, fontFamily: 'Welcome'),
-                  ),
-                )
-              ],
-            ),
-          )
+              ),
+              InkWell(
+                onTap: () {
+                  Get.off(SignUpView());
+                },
+                child: Text(
+                  tr('key_sign_up'),
+                  style: TextStyle(fontSize: 20, fontFamily: 'Welcome'),
+                ),
+              )
+            ],
+          ),
         ]),
       ),
     ));

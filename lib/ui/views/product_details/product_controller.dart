@@ -24,6 +24,7 @@ class ProductController extends BaseController {
     super.onInit();
   }
 
+  RxBool isFavorite = false.obs;
   RxString selecteedym = "".obs;
   RxInt selectedIndexcolor = 0.obs;
   RxInt selectedVaritionGroup = 0.obs;

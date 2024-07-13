@@ -19,6 +19,7 @@ class _SplashSceenViewState extends State<SplashSceenView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+            backgroundColor: AppColors.mainWhiteVColor,
             resizeToAvoidBottomInset: false,
             body: Stack(
               alignment: Alignment.bottomCenter,
