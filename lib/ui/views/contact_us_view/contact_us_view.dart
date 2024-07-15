@@ -26,6 +26,7 @@ class _ContactUsViewState extends State<ContactUsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: AppColors.mainWhiteVColor,
         resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Padding(

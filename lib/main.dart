@@ -42,6 +42,10 @@ extension ExtendedNavigator on BuildContext {
     Navigator.push(this, MaterialPageRoute(builder: (_) => page));
   }
 
+  Future<dynamic> pushReplace(Widget page) async {
+    Navigator.pushReplacement(this, MaterialPageRoute(builder: (_) => page));
+  }
+
   void pop(Widget page, [result]) async {
     return Navigator.of(this).pop(result);
   }

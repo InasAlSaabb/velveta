@@ -33,7 +33,7 @@ class AddressRepository {
             CommonResponse.fromJson(response);
 
         if (commonResponse.getStatus) {
-          return Right(commonResponse.data ?? {});
+          return Right(commonResponse.getData['data'] ?? {});
         } else {
           return Left(commonResponse.message ?? '');
         }
@@ -60,7 +60,7 @@ class AddressRepository {
       if (commonResponse.getStatus) {
         List<AddressGetModel> result = [];
 
-        commonResponse.data!.forEach(
+        commonResponse.getData['data']!.forEach(
           (element) {
             result.add(AddressGetModel.fromJson(element));
           },
@@ -87,7 +87,7 @@ class AddressRepository {
             CommonResponse.fromJson(response);
 
         if (commonResponse.getStatus) {
-          return Right(commonResponse.data ?? {});
+          return Right(commonResponse.getData['data'] ?? {});
         } else {
           return Left(commonResponse.message ?? '');
         }

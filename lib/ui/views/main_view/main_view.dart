@@ -5,8 +5,6 @@ import 'package:flutter_templete/ui/views/main_view/favorite_view/favorite_view.
 import 'package:flutter_templete/ui/views/main_view/main_view_widgets/bottom_navigation_widget.dart';
 import 'package:flutter_templete/ui/views/main_view/profile_view/profile_view.dart';
 
-import 'package:get/get.dart';
-
 import 'home_view/home_view.dart';
 
 class MainView extends StatefulWidget {

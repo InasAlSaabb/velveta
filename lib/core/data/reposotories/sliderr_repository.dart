@@ -23,7 +23,7 @@ class SliderrREpository {
             CommonResponse.fromJson(response);
         if (commonResponse.getStatus) {
           List<SliderrModel> resultList = [];
-          commonResponse.data!.forEach(
+          commonResponse.getData['data']!.forEach(
             (element) {
               resultList.add(SliderrModel.fromJson(element));
             },

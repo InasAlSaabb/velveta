@@ -6,7 +6,6 @@ import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/main.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_text.dart';
-import 'package:flutter_templete/ui/shared/custom_widgets/custom_texti.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 
 class CustomFavoriteContainer extends StatefulWidget {
@@ -30,6 +29,15 @@ class CustomFavoriteContainer extends StatefulWidget {
       _CustomFavoriteContainerState();
 }
 
+String getFirstTwoWords(String text) {
+  List<String> words = text.split(' ');
+  if (words.length >= 2) {
+    return '${words[0]} ${words[1]}';
+  } else {
+    return text;
+  }
+}
+
 class _CustomFavoriteContainerState extends State<CustomFavoriteContainer> {
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ class _CustomFavoriteContainerState extends State<CustomFavoriteContainer> {
               offset: Offset(0, 6), // Offset in the x,y direction
             ),
           ],
-          color: AppColors.mainWhiteColor,
+          color: AppColors.mainWhiteVColor,
           borderRadius: BorderRadius.circular(5)),
       child: Row(
         children: [
@@ -58,27 +66,31 @@ class _CustomFavoriteContainerState extends State<CustomFavoriteContainer> {
           ClipRRect(
             child: CachedNetworkImage(
               fit: BoxFit.cover,
-              width: screenWidth(4.5),
+              width: screenWidth(4),
               height: screenHieght(1),
               imageUrl: widget.imagename ?? '',
               placeholder: (context, url) => CircularProgressIndicator(),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
-          screenWidth(20).pw,
+          SizedBox(
+            width: screenWidth(20),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               screenHieght(70).ph,
               Row(
                 children: [
-                  CustomText(
-                    text: widget.productName!,
-                    fonttext: screenWidth(30),
-                    colortext: AppColors.mainBlackVColor,
-                    weigthtext: FontWeight.bold,
+                  SizedBox(
+                    width: screenWidth(1.8),
+                    child: CustomText(
+                      text: getFirstTwoWords(widget.productName!),
+                      fonttext: screenWidth(30),
+                      colortext: AppColors.mainBlackVColor,
+                      weigthtext: FontWeight.bold,
+                    ),
                   ),
-                  screenWidth(50).pw,
                   InkWell(
                     onTap: () {
                       widget.deletfavor();

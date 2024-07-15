@@ -25,10 +25,11 @@ class UserRepository {
           }).then((response) {
         CommonResponse<Map<String, dynamic>> commonResponse =
             CommonResponse.fromJson(response);
+        TokenInfo token = TokenInfo.fromJson(
+          commonResponse.getData ?? {},
+        );
         if (commonResponse.getStatus) {
-          return Right(TokenInfo.fromJson(
-            commonResponse.data2 ?? {},
-          ));
+          return Right(token);
         } else {
           return Left(commonResponse.message ?? "");
         }
@@ -97,7 +98,7 @@ class UserRepository {
               CommonResponse.fromJson(response);
 
           if (commonResponse.getStatus) {
-            int token = commonResponse.data2?["token"] ?? '';
+            int token = commonResponse.data?["token"] ?? '';
             print(token);
             storage.setToken(token);
             return Right(commonResponse.getStatus);

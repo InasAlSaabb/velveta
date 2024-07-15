@@ -6,6 +6,7 @@ import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/product_id_model.dart';
 import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
 import 'package:flutter_templete/core/data/models/sliderr_model.dart';
+import 'package:flutter_templete/core/data/reposotories/favorite_repository.dart';
 import 'package:flutter_templete/core/data/reposotories/products_repository.dart';
 import 'package:flutter_templete/core/data/reposotories/sliderr_repository.dart';
 import 'package:flutter_templete/core/enums/message_type.dart';
@@ -33,7 +34,6 @@ class HomeController extends BaseController {
 
   RxList<String> third = <String>[].obs;
   RxInt cartCount = 0.obs;
-  // String selectedcategory = "Lux";
   RxInt selectedIndex = 0.obs;
   RxInt selectedIndexx = 0.obs;
 
@@ -146,32 +146,27 @@ class HomeController extends BaseController {
       ),
     );
   }
+
+  void add() {
+    runFullLoadingFutureFunction(
+      function: FavoriteRepository()
+          .addFavorite(product_id: 1, variation_id: 29)
+          .then(
+            (value) => value.fold(
+              (l) {
+                CustomToast.showMessage(
+                  messageType: MessageType.REJECTED,
+                  message: l,
+                );
+              },
+              (r) {
+                CustomToast.showMessage(
+                  messageType: MessageType.SUCCESS,
+                  message: r,
+                );
+              },
+            ),
+          ),
+    );
+  }
 }
-
-  // getProductsById({required int id}) {
-  //   // selectedcategory = id.toString();
-  //   runLoadingFutureFunction(
-  //     type: OperationType.CATID,
-  //     function: getProductsRepository().getproductsbyid(id: id).then(
-  //       (value) {
-  //         value.fold(
-  //           (l) {
-  //             CustomToast.showMessage(
-  //               message: l,
-  //               messageType: MessageType.REJECTED,
-  //             );
-  //           },
-  //           (r) {
-  //             Productbyidlist.clear();
-  //             Productbyidlist.value = r;
-
-  //             CustomToast.showMessage(
-  //               message: "succed",
-  //               messageType: MessageType.SUCCESS,
-  //             );
-  //           },
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_templete/core/data/models/cartproductmodel.dart';
 import 'package:flutter_templete/core/data/models/common_response.dart';
+import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/product_model.dart';
 import 'package:flutter_templete/core/data/network/endpoints/cart_endpoints.dart';
 import 'package:flutter_templete/core/data/network/network_config.dart';
@@ -17,12 +18,9 @@ class CartRepository {
           type: RequestType.POST,
           url: CartEndpoints.addTocart,
           headers: NetworkConfig.getHeaders(
-              needAuth: true,
-              type: RequestType.POST,
-              extraHeaders: {
-                "Authorization":
-                    "Bearer 61|HskGRJIOV6a7WBwbkEZGH4nw7zs1IUKkXwbUjxGh88009906"
-              }),
+            needAuth: true,
+            type: RequestType.POST,
+          ),
           params: {
             "product_id": product_id.toString(),
             "variation_id": variation_id.toString(),
@@ -35,7 +33,7 @@ class CartRepository {
           CommonResponse.fromJson(response);
 
       if (commonResponse.getStatus) {
-        return Right(commonResponse.data!);
+        return Right(commonResponse.getData['data']!);
       } else {
         return Left(commonResponse.message ?? '');
       }
@@ -50,12 +48,9 @@ class CartRepository {
         type: RequestType.GET,
         url: CartEndpoints.getcart,
         headers: NetworkConfig.getHeaders(
-            needAuth: true,
-            type: RequestType.GET,
-            extraHeaders: {
-              "Authorization":
-                  "Bearer 61|HskGRJIOV6a7WBwbkEZGH4nw7zs1IUKkXwbUjxGh88009906"
-            }),
+          needAuth: true,
+          type: RequestType.GET,
+        ),
       );
 
       // final dynamic responseData = response['body'];
@@ -66,7 +61,7 @@ class CartRepository {
       if (commonResponse.getStatus) {
         List<ProductFearuresModel> result = [];
 
-        response['response']['data']['items'].forEach(
+        commonResponse.getData['data']['items'].forEach(
           (element) {
             result.add(ProductFearuresModel.fromJson(element));
           },
@@ -92,12 +87,9 @@ class CartRepository {
           type: RequestType.PUT,
           url: CartEndpoints.editcart,
           headers: NetworkConfig.getHeaders(
-              needAuth: true,
-              type: RequestType.PUT,
-              extraHeaders: {
-                "Authorization":
-                    "Bearer 61|HskGRJIOV6a7WBwbkEZGH4nw7zs1IUKkXwbUjxGh88009906"
-              }),
+            needAuth: true,
+            type: RequestType.PUT,
+          ),
           params: {
             "item_id": item_id.toString(),
             "variation_id": variation_id.toString(),
@@ -110,7 +102,7 @@ class CartRepository {
           CommonResponse.fromJson(response);
 
       if (commonResponse.getStatus) {
-        return Right(commonResponse.data!);
+        return Right(commonResponse.getData['data']!);
       } else {
         return Left(commonResponse.message ?? '');
       }

@@ -108,6 +108,11 @@ class _ProductViewState extends State<ProductView> {
                                           onPressed: () {
                                             controller.isFavorite.value =
                                                 !controller.isFavorite.value;
+                                            controller.addtofav(
+                                                product_id: controller.id!,
+                                                variation_id: controller
+                                                    .selectedVaritionGroup
+                                                    .value);
                                           },
                                           icon: Icon(
                                             controller.isFavorite.value

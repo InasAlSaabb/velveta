@@ -28,7 +28,7 @@ class getProductsRepository {
             CommonResponse.fromJson(response);
         if (commonResponse.getStatus) {
           List<ProductsByIDModel> resultList = [];
-          commonResponse.data!.forEach(
+          commonResponse.getData['data']!.forEach(
             (element) {
               resultList.add(ProductsByIDModel.fromJson(element));
             },
@@ -59,7 +59,7 @@ class getProductsRepository {
         if (commonResponse.getStatus) {
           List<String> resultList = [];
 
-          commonResponse.data!.forEach(
+          commonResponse.getData['data']!.forEach(
             (element) {
               resultList.add(element);
             },
@@ -88,7 +88,7 @@ class getProductsRepository {
             CommonResponse.fromJson(response);
         if (commonResponse.getStatus) {
           List<CategoryModel> resultList = [];
-          commonResponse.data!.forEach(
+          commonResponse.getData['data']!.forEach(
             (element) {
               resultList.add(CategoryModel.fromJson(element));
             },
@@ -117,7 +117,7 @@ class getProductsRepository {
             CommonResponse.fromJson(response);
         if (commonResponse.getStatus) {
           List<ProductIdModel> resultList = [];
-          commonResponse.data!.forEach(
+          commonResponse.getData['data']!.forEach(
             (element) {
               resultList.add(ProductIdModel.fromJson(element));
             },
@@ -147,8 +147,8 @@ class getProductsRepository {
         CommonResponse<dynamic> commonResponse =
             CommonResponse.fromJson(response);
         if (commonResponse.getStatus) {
-          ProductFearuresModel model =
-              ProductFearuresModel.fromJson(commonResponse.data ?? {});
+          ProductFearuresModel model = ProductFearuresModel.fromJson(
+              commonResponse.getData['data'] ?? {});
           return Right(model);
         } else {
           return Left(commonResponse.message ?? '');
@@ -166,12 +166,9 @@ class getProductsRepository {
           type: RequestType.GET,
           url: ProductsEndpoints.getPRoduct,
           headers: NetworkConfig.getHeaders(
-              needAuth: true,
-              type: RequestType.GET,
-              extraHeaders: {
-                "Authorization":
-                    "Bearer 61|HskGRJIOV6a7WBwbkEZGH4nw7zs1IUKkXwbUjxGh88009906"
-              }),
+            needAuth: true,
+            type: RequestType.GET,
+          ),
           params: {"product_id": id.toString()});
 
       // final dynamic responseData = response['body'];
@@ -191,7 +188,7 @@ class getProductsRepository {
         //   (element) => ProductFearuresModel.fromJson(element),
         // ));
         ProductFearuresModel model = ProductFearuresModel.fromJson(
-            commonResponse.data as Map<String, dynamic>);
+            commonResponse.getData['data'] as Map<String, dynamic>);
         return Right(model);
       } else {
         return Left(commonResponse.message ?? '');

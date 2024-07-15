@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
 import 'package:flutter_templete/core/data/reposotories/cart_repository.dart';
+import 'package:flutter_templete/core/data/reposotories/favorite_repository.dart';
 import 'package:flutter_templete/core/data/reposotories/products_repository.dart';
 import 'package:flutter_templete/core/enums/message_type.dart';
 import 'package:flutter_templete/core/enums/operation_type.dart';
@@ -68,6 +69,29 @@ class ProductController extends BaseController {
         count--;
       }
     }
+  }
+
+  void addtofav({required int product_id, required int variation_id}) {
+    runFullLoadingFutureFunction(
+      function: FavoriteRepository()
+          .addFavorite(product_id: product_id, variation_id: variation_id)
+          .then(
+            (value) => value.fold(
+              (l) {
+                CustomToast.showMessage(
+                  messageType: MessageType.REJECTED,
+                  message: l,
+                );
+              },
+              (r) {
+                CustomToast.showMessage(
+                  messageType: MessageType.SUCCESS,
+                  message: r,
+                );
+              },
+            ),
+          ),
+    );
   }
 
   void add(int id, int variation_id, int quantity, ProductFearuresModel model) {

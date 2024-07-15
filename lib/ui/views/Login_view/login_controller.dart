@@ -53,6 +53,7 @@ class LoginController extends BaseController {
                   message: "Succed",
                 );
                 storage.setName(emailController.text);
+                storage.setTokenInfo(r);
                 Get.to(MainView());
               },
             ),

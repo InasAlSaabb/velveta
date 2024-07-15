@@ -24,6 +24,7 @@ class _CheckoutViewState extends State<CheckoutView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: AppColors.mainWhiteVColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
         child: Column(

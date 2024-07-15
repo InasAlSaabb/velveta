@@ -3,14 +3,17 @@ class CommonResponse<T> {
   T? data;
   T? data2;
   T? data3;
+  T? policy;
 
   String? message; //error
 //objject
   CommonResponse.fromJson(dynamic json) {
     this.statusCode = json['status'];
     if (statusCode.toString().startsWith('2')) {
-      this.data = json['response']['data']; //data
-      // this.data2 = json['response']; //data success//all keys
+      this.data = json['response']; //data
+      // this.data2 = json['response'];
+
+      //data success//all keys
       // this.data3 = json['data'];
       // this.staus==true
     } else {
@@ -44,6 +47,7 @@ class CommonResponse<T> {
   }
   // bool get getStatus=>statusCode==200?true:false;
   bool get getStatus => statusCode.toString().startsWith('2');
+  T get getData => data!;
   //ok or not ok for this req
   //for  developper
   //message from api

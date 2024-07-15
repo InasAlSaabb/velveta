@@ -22,11 +22,11 @@ class ContactUsRepository {
         },
         headers: NetworkConfig.getHeaders(needAuth: false),
       ).then((response) {
-        CommonResponse<List<dynamic>> commonResponse =
+        CommonResponse<dynamic> commonResponse =
             CommonResponse.fromJson(response);
         List<String> result = [];
         if (commonResponse.getStatus) {
-          commonResponse.data!.forEach(
+          commonResponse.getData['data']!.forEach(
             (element) {
               result.add(element);
             },

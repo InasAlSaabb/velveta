@@ -114,6 +114,9 @@ class _ProductView2State extends State<ProductView2> {
                                           onPressed: () {
                                             controller.isFavorite.value =
                                                 !controller.isFavorite.value;
+                                            controller.addtofav(
+                                                product_id: controller.id!,
+                                                variation_id: 29);
                                           },
                                           icon: Icon(
                                             controller.isFavorite.value
@@ -251,15 +254,11 @@ class _ProductView2State extends State<ProductView2> {
                                       SizedBox(
                                         width: screenWidth(80),
                                       ),
-                                      // Text(
-                                      //   controller
-                                      //       .Productfeatureelist
-                                      //       .value
-                                      //       .variations![cc.selectedIndexx.value]
-                                      //       .attributes!
-                                      //       .color!,
-                                      //   style: TextStyle(fontSize: 20),
-                                      // ),
+                                      Text(
+                                        controller.Productfeatureelist.value
+                                            .variations![0].attributes!.color!,
+                                        style: TextStyle(fontSize: 20),
+                                      ),
                                     ],
                                   ),
                                 ],

@@ -1,4 +1,5 @@
 import 'package:flutter_templete/core/data/models/cart_model.dart';
+import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/product_model.dart';
 import 'package:flutter_templete/core/data/reposotories/cart_repository.dart';
 import 'package:flutter_templete/core/enums/message_type.dart';
