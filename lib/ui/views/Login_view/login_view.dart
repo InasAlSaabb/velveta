@@ -138,16 +138,15 @@ class _LoginViewState extends State<LoginView> {
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    SizedBox(
-                      width: screenWidth(16),
-                      child: Checkbox(
-                        activeColor: AppColors.mainBlackVColor,
-                        value: true,
-                        onChanged: (bool? newValue) {
-                          newValue = false;
-                        },
-                      ),
-                    ),
+                    Obx(() {
+                      return Checkbox(
+                          activeColor: AppColors.mainBlackVColor,
+                          side: BorderSide(color: Colors.blue),
+                          value: controller.ischecked.value,
+                          onChanged: (value) {
+                            controller.ischecked.value = value!;
+                          });
+                    }),
                     Text(tr('key_rememebr _me')),
                   ],
                 ),

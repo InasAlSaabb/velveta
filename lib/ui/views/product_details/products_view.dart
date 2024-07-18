@@ -108,7 +108,7 @@ class _ProductViewState extends State<ProductView> {
                                           onPressed: () {
                                             controller.isFavorite.value =
                                                 !controller.isFavorite.value;
-                                            controller.addtofav(
+                                            controller.add(
                                                 product_id: controller.id!,
                                                 variation_id: controller
                                                     .selectedVaritionGroup
@@ -277,9 +277,24 @@ class _ProductViewState extends State<ProductView> {
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return SizedBox(
-                                            width: screenHieght(12),
+                                            width: screenHieght(8),
                                             child: InkWell(
                                               onTap: () {
+                                                controller.selectedIndexcolor
+                                                    .value = index;
+                                                controller.selectedshape.value =
+                                                    controller
+                                                        .Productfeaturelist
+                                                        .value
+                                                        .variations![index]
+                                                        .attributesId!
+                                                        .i2!;
+                                                controller.getcolor(
+                                                    id: controller.id!,
+                                                    shape: controller
+                                                        .selectedshape.value
+                                                        .toString());
+
                                                 controller.selectedVaritionGroup
                                                         .value =
                                                     controller
@@ -287,21 +302,28 @@ class _ProductViewState extends State<ProductView> {
                                                         .value
                                                         .variations![index]
                                                         .variationGroupId!;
-                                                controller.selecteedym.value =
-                                                    controller
-                                                        .Productfeaturelist
-                                                        .value
-                                                        .variations![index]
-                                                        .image!;
                                               },
-                                              child: Text(
-                                                controller
-                                                    .Productfeaturelist
-                                                    .value
-                                                    .variations![index]
-                                                    .attributes!
-                                                    .boxShape!,
-                                                style: TextStyle(fontSize: 20),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: index ==
+                                                                controller
+                                                                    .selectedIndexcolor
+                                                                    .value
+                                                            ? AppColors
+                                                                .blacktext
+                                                            : AppColors
+                                                                .mainWhiteVColor)),
+                                                child: Text(
+                                                  controller
+                                                      .Productfeaturelist
+                                                      .value
+                                                      .variations![index]
+                                                      .attributes!
+                                                      .boxShape!,
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
                                               ),
                                             ),
                                           );
@@ -337,55 +359,73 @@ class _ProductViewState extends State<ProductView> {
                                     height: screenHieght(20),
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: controller.Productfeaturelist
-                                          .value.variations!.length,
+                                      itemCount: controller.getcolorr.length,
                                       itemBuilder: (context, index) {
-                                        return Row(
-                                          children: [
-                                            ColorItem(
-                                              color: controller
-                                                  .Productfeaturelist
-                                                  .value
-                                                  .variations![index]
-                                                  .attributes!
-                                                  .hex!,
-                                              isSelected: controller
-                                                      .selectedColor?.value ==
-                                                  controller
-                                                      .Productfeaturelist
-                                                      .value
-                                                      .variations![index]
-                                                      .attributes!
-                                                      .hex!,
-                                              onTap: () {
-                                                controller.selectedVaritionGroup
-                                                        .value =
-                                                    controller
-                                                        .Productfeaturelist
-                                                        .value
-                                                        .variations![index]
-                                                        .variationGroupId!;
-                                                controller
-                                                        .selectedColor?.value =
-                                                    controller
-                                                        .Productfeaturelist
-                                                        .value
-                                                        .variations![index]
-                                                        .attributes!
-                                                        .hex!;
-                                                controller.selecteedym.value =
-                                                    controller
-                                                        .Productfeaturelist
-                                                        .value
-                                                        .variations![index]
-                                                        .image!;
-                                              },
-                                            ),
-                                            SizedBox(
-                                              width: screenWidth(40),
-                                            )
-                                          ],
-                                        );
+                                        return controller.getcolorr.isEmpty
+                                            ? Text('choose shape first')
+                                            : Row(
+                                                children: [
+                                                  ColorItem(
+                                                    color: controller
+                                                        .getcolorr[index]
+                                                        .colorHex!,
+                                                    isSelected: controller
+                                                            .selectedColor
+                                                            ?.value ==
+                                                        controller
+                                                            .getcolorr[index]
+                                                            .colorHex,
+                                                    onTap: () {
+                                                      controller
+                                                              .selectedVPriceroup
+                                                              .value =
+                                                          controller
+                                                              .getcolorr[index]
+                                                              .price!;
+                                                      controller
+                                                              .selectedVaritionGroup
+                                                              .value =
+                                                          controller
+                                                              .getcolorr[index]
+                                                              .varaitionId!;
+                                                      controller.selecteedym
+                                                              .value =
+                                                          controller
+                                                              .getcolorr[index]
+                                                              .image!;
+                                                      print(controller
+                                                          .selectedVaritionGroup
+                                                          .value);
+                                                    },
+                                                    // onTap: () {
+                                                    //   controller.selectedVaritionGroup
+                                                    //           .value =
+                                                    //       controller
+                                                    //           .Productfeaturelist
+                                                    //           .value
+                                                    //           .variations![index]
+                                                    //           .variationGroupId!;
+                                                    // controller
+                                                    //         .selectedColor?.value =
+                                                    //     controller
+                                                    //         .Productfeaturelist
+                                                    //         .value
+                                                    //         .variations![index]
+                                                    //         .attributes!
+                                                    //         .hex!;
+                                                    // controller.selecteedym.value =
+                                                    //     controller
+                                                    //         .Productfeaturelist
+                                                    //         .value
+                                                    //         .variations![index]
+                                                    //         .image!;
+                                                    // },
+                                                  ),
+                                                  SizedBox(
+                                                    width: screenWidth(40),
+                                                  )
+                                                ],
+                                              );
                                       },
                                     ),
                                   ),
@@ -492,23 +532,25 @@ class _ProductViewState extends State<ProductView> {
                                       width: screenWidth(2),
                                       text: tr('key_add_to_cart'),
                                       onPressed: () {
-                                        controller.add(
-                                            controller
-                                                .Productfeaturelist.value.id!,
-                                            controller
+                                        controller.addToCart(
+                                            id: controller.id,
+                                            variation_id: controller
                                                 .selectedVaritionGroup.value,
-                                            controller.count.value,
-                                            controller
-                                                .Productfeaturelist.value);
-                                        Get.to(CartVieww());
+                                            quantity: controller.count.value,
+                                            has_candel: 0);
+                                        // Get.to(CartVieww());
                                       }),
                                   SizedBox(
                                     width: screenWidth(6),
                                   ),
                                   Obx(() => Text(
-                                        controller.Productfeaturelist.value
-                                                .price ??
-                                            "00",
+                                        controller.selectedVPriceroup.value == 0
+                                            ? controller
+                                                .Productfeaturelist.value.price
+                                                .toString()
+                                            : controller
+                                                .selectedVPriceroup.value
+                                                .toString(),
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontFamily: 'welcome'),

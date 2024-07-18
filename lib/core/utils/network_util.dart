@@ -37,8 +37,11 @@ class NetworkUtil {
 
           break;
         case RequestType.POST:
-          response =
-              await client.post(uri, body: jsonEncode(body), headers: headers);
+          response = await client.post(
+            uri,
+            headers: headers,
+            body: jsonEncode(body),
+          );
           break;
         case RequestType.PUT:
           response =

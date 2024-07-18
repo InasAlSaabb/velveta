@@ -43,34 +43,37 @@ class _CustomCArtPRoductState extends State<CustomCArtPRoduct> {
               offset: Offset(0, 6), // Offset in the x,y direction
             ),
           ],
-          color: AppColors.mainWhiteColor,
+          color: AppColors.mainWhiteVColor,
           borderRadius: BorderRadius.circular(5)),
       child: Row(
         children: [
           ClipRRect(
             child: CachedNetworkImage(
               fit: BoxFit.cover,
-              width: screenWidth(4.5),
+              width: screenWidth(3.5),
               height: screenHieght(1),
               imageUrl: widget.imagename ?? '',
               placeholder: (context, url) => CircularProgressIndicator(),
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ),
-          screenWidth(20).pw,
+          SizedBox(
+            width: screenWidth(40),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              screenHieght(70).ph,
               Row(
                 children: [
-                  CustomText(
-                    text: widget.productName!,
-                    fonttext: screenWidth(30),
-                    colortext: AppColors.mainBlackVColor,
-                    weigthtext: FontWeight.bold,
+                  SizedBox(
+                    width: screenWidth(2.2),
+                    child: CustomText(
+                      text: widget.productName!,
+                      fonttext: screenWidth(30),
+                      colortext: AppColors.mainBlackVColor,
+                      weigthtext: FontWeight.bold,
+                    ),
                   ),
-                  screenWidth(50).pw,
                 ],
               ),
               CustomText(
@@ -83,7 +86,7 @@ class _CustomCArtPRoductState extends State<CustomCArtPRoduct> {
                 colortext: AppColors.mainBlackVColor,
                 fonttext: screenWidth(27),
               ),
-              screenHieght(storage.getAppLanguage() == 'en' ? 30 : 70).ph,
+              screenHieght(storage.getAppLanguage() == 'en' ? 120 : 140).ph,
               CustomText(
                 text: "\$ ${widget.price!}",
                 weigthtext: FontWeight.bold,
@@ -91,51 +94,40 @@ class _CustomCArtPRoductState extends State<CustomCArtPRoduct> {
               ),
             ],
           ),
-          SizedBox(
-            width: screenWidth(19),
-          ),
-          Container(
+          Column(children: [
+            Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.blacktext)),
+                height: screenHieght(24),
+                width: screenWidth(10),
+                child: Icon(Icons.add)),
+            Container(
+              height: screenHieght(24),
+              width: screenWidth(10),
               decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 4.0,
-                    spreadRadius: 2.0,
-                    offset: Offset(0, 2),
-                  ),
-                ],
+                shape: BoxShape.rectangle,
+                color: Colors.black,
               ),
-              child: Column(children: [
-                Container(
-                    height: screenHieght(24),
-                    width: screenWidth(8),
-                    child: Icon(Icons.add)),
-                Container(
-                  height: screenHieght(24),
-                  width: screenWidth(8),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Colors.black,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '1',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+              child: Center(
+                child: Text(
+                  '1',
+                  style: TextStyle(color: Colors.white),
                 ),
-                Container(
-                  height: screenHieght(24),
-                  width: screenWidth(8),
-                  child: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      // Delete button action
-                    },
-                  ),
-                ),
-              ])),
+              ),
+            ),
+            Container(
+              decoration:
+                  BoxDecoration(border: Border.all(color: AppColors.blacktext)),
+              height: screenHieght(24),
+              width: screenWidth(10),
+              child: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  // Delete button action
+                },
+              ),
+            ),
+          ])
         ],
       ),
     );

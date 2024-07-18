@@ -1,12 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_templete/core/data/models/ProductDetail_model.dart';
-import 'package:flutter_templete/core/data/models/address_model.dart';
 import 'package:flutter_templete/core/data/models/category_model.dart';
+import 'package:flutter_templete/core/data/models/color_model.dart';
 import 'package:flutter_templete/core/data/models/common_response.dart';
 import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/product_id_model.dart';
 import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
-import 'package:flutter_templete/core/data/network/endpoints/address_endpoints.dart';
 import 'package:flutter_templete/core/data/network/endpoints/products_endpoints.dart';
 import 'package:flutter_templete/core/data/network/network_config.dart';
 import 'package:flutter_templete/core/enums/request_type.dart';
@@ -190,6 +188,43 @@ class getProductsRepository {
         ProductFearuresModel model = ProductFearuresModel.fromJson(
             commonResponse.getData['data'] as Map<String, dynamic>);
         return Right(model);
+      } else {
+        return Left(commonResponse.message ?? '');
+      }
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, List<ColorModel>>> getColor(
+      {required int product_id, required int shape_id}) async {
+    try {
+      final response = await NetworkUtil.sendRequest(
+        type: RequestType.GET,
+        url: ProductsEndpoints.getColor,
+        params: {
+          "product_id": product_id.toString(),
+          "shape_id": shape_id.toString()
+        },
+        headers: NetworkConfig.getHeaders(
+          needAuth: false,
+          type: RequestType.GET,
+        ),
+      );
+
+      CommonResponse<dynamic> commonResponse =
+          CommonResponse.fromJson(response);
+
+      if (commonResponse.getStatus) {
+        List<ColorModel> result = [];
+
+        commonResponse.getData["data"]!.forEach(
+          (element) {
+            result.add(ColorModel.fromJson(element));
+          },
+        );
+
+        return Right(result);
       } else {
         return Left(commonResponse.message ?? '');
       }

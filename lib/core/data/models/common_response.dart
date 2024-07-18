@@ -1,29 +1,18 @@
 class CommonResponse<T> {
-  int? statusCode; //ok
+  int? statusCode;
   T? data;
-  T? data2;
-  T? data3;
-  T? policy;
+  String? message;
 
-  String? message; //error
-//objject
   CommonResponse.fromJson(dynamic json) {
     this.statusCode = json['status'];
     if (statusCode.toString().startsWith('2')) {
-      this.data = json['response']; //data
-      // this.data2 = json['response'];
-
-      //data success//all keys
-      // this.data3 = json['data'];
-      // this.staus==true
+      this.data = json['response'];
     } else {
       if (json['response'] != null &&
           json['response'] is Map &&
           json['response']['title'] != null) {
-        //title or num
-        this.message = json['response']['title']; //if no key for error
+        this.message = json['response']['title'];
       } else {
-        //or status code
         switch (statusCode) {
           case 400:
             this.message = '400 Bad Request';
@@ -40,17 +29,11 @@ class CommonResponse<T> {
           case 503:
             this.message = '503 Server unavailable';
             break;
-          //error on phone without console
         }
       }
     }
   }
-  // bool get getStatus=>statusCode==200?true:false;
+
   bool get getStatus => statusCode.toString().startsWith('2');
   T get getData => data!;
-  //ok or not ok for this req
-  //for  developper
-  //message from api
-//
 }
-// CommonResponse<String>();

@@ -6,7 +6,8 @@ import 'package:flutter_templete/core/data/models/address_get_model.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
 import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/main.dart';
-import 'package:flutter_templete/test_pay.dart';
+import 'package:flutter_templete/ui/views/contact_us_view/contact_us_view.dart';
+import 'package:flutter_templete/ui/views/test_pay/test_pay.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_cat.dart';
@@ -43,64 +44,70 @@ class _HomeViewState extends State<HomeView> {
               SizedBox(
                 height: screenHieght(40),
               ),
-              GestureDetector(
-                onTap: () => Get.to(() => TestPay()),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tr('key_hello_!'),
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Welcome'),
-                        ),
-                        Text(
-                          '  ${storage.getName() ?? "User name"}   ',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Welcome'),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset('assets/images/Map.svg'),
-                            SizedBox(width: screenWidth(40)),
-                            // DropdownButton<AddressGetModel>(
-                            //   alignment: Alignment.bottomLeft,
-                            //   value: controller.selectedValue,
-                            //   onChanged: (AddressGetModel? newValue) {
-                            //     setState(() {
-                            //       controller.selectedValue = newValue!;
-                            //     });
-                            //   },
-                            //   items: controller.dropdownItems.isEmpty
-                            //       ? [
-                            //           DropdownMenuItem<AddressGetModel>(
-                            //             value: AddressGetModel(name: 'sSyria'),
-                            //             child: Text('sSyria'),
-                            //           )
-                            //         ]
-                            //       : controller.dropdownItems.map((address) {
-                            //           return DropdownMenuItem<AddressGetModel>(
-                            //             value: address,
-                            //             child: Text(address.name ?? "Loctions"),
-                            //           );
-                            //         }).toList(),
-                            // )
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tr('key_hello_!'),
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Welcome'),
+                      ),
+                      Text(
+                        '  ${storage.getName() ?? "User name"}   ',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Welcome'),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset('assets/images/Map.svg'),
+                          SizedBox(width: screenWidth(40)),
+                          Obx(
+                            () {
+                              final selectedName =
+                                  controller.selectedName.value;
+                              final nameList = controller
+                                  .getNameList(controller.addressList);
+                              final isSelectedNameValid =
+                                  nameList.contains(selectedName);
+
+                              return SizedBox(
+                                height: screenHieght(20),
+                                child: DropdownButton<String>(
+                                  dropdownColor: AppColors.mainWhiteVColor,
+                                  value:
+                                      isSelectedNameValid ? selectedName : null,
+                                  hint: const Text('Select Location'),
+                                  items: nameList.map(
+                                    (name) {
+                                      return DropdownMenuItem<String>(
+                                        value: name,
+                                        child: Text(name),
+                                      );
+                                    },
+                                  ).toList(),
+                                  onChanged: (value) {
+                                    controller.selectedName.value = value ?? '';
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
               ),
               SizedBox(
                 height: screenHieght(40),
@@ -235,7 +242,9 @@ class _HomeViewState extends State<HomeView> {
                                                 textColor:
                                                     AppColors.mainWhiteVColor,
                                                 text: tr('key_call'),
-                                                onPressed: () {}),
+                                                onPressed: () {
+                                                  Get.to(ContactUsView());
+                                                }),
                                           ],
                                         ),
                                       ),

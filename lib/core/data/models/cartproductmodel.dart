@@ -6,8 +6,9 @@ class CartProductModel {
   String? name;
   String? description;
   String? material;
-  String? price;
-  String? discountPrice;
+  int? price;
+  int? hasCandle;
+  int? discountPrice;
   Variation? variation;
 
   CartProductModel(
@@ -19,6 +20,7 @@ class CartProductModel {
       this.description,
       this.material,
       this.price,
+      this.hasCandle,
       this.discountPrice,
       this.variation});
 
@@ -31,6 +33,7 @@ class CartProductModel {
     description = json['description'];
     material = json['material'];
     price = json['price'];
+    hasCandle = json['has_candle'];
     discountPrice = json['discount_price'];
     variation = json['variation'] != null
         ? new Variation.fromJson(json['variation'])
@@ -47,6 +50,7 @@ class CartProductModel {
     data['description'] = this.description;
     data['material'] = this.material;
     data['price'] = this.price;
+    data['has_candle'] = this.hasCandle;
     data['discount_price'] = this.discountPrice;
     if (this.variation != null) {
       data['variation'] = this.variation!.toJson();
@@ -56,20 +60,20 @@ class CartProductModel {
 }
 
 class Variation {
-  String? attribute;
-  String? value;
+  String? color;
+  String? boxShape;
 
-  Variation({this.attribute, this.value});
+  Variation({this.color, this.boxShape});
 
   Variation.fromJson(Map<String, dynamic> json) {
-    attribute = json['attribute'];
-    value = json['value'];
+    color = json['Color'];
+    boxShape = json['Box Shape'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['attribute'] = this.attribute;
-    data['value'] = this.value;
+    data['Color'] = this.color;
+    data['Box Shape'] = this.boxShape;
     return data;
   }
 }

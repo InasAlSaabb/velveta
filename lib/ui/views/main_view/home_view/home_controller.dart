@@ -6,6 +6,8 @@ import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/product_id_model.dart';
 import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
 import 'package:flutter_templete/core/data/models/sliderr_model.dart';
+import 'package:flutter_templete/core/data/reposotories/address_repository.dart';
+import 'package:flutter_templete/core/data/reposotories/cart_repository.dart';
 import 'package:flutter_templete/core/data/reposotories/favorite_repository.dart';
 import 'package:flutter_templete/core/data/reposotories/products_repository.dart';
 import 'package:flutter_templete/core/data/reposotories/sliderr_repository.dart';
@@ -22,25 +24,84 @@ class HomeController extends BaseController {
     getAllproducts();
     getAllSliderrs();
     getProductsByCatId(id: 1);
-    storage.getAddressList();
-    // getAllCategory();
+    getAllAddress();
+
     super.onInit();
   }
 
+  RxList<AddressGetModel> addressList = <AddressGetModel>[].obs;
   RxInt idCategory = 0.obs;
   RxList<CategoryModel> categorylistt = <CategoryModel>[].obs;
   RxList<SliderrModel> sliderrlist = <SliderrModel>[].obs;
   RxList<ProductsByIDModel> Productbyidlist = <ProductsByIDModel>[].obs;
 
   RxList<String> third = <String>[].obs;
+  Rx<AddressGetModel> selectedValue = AddressGetModel().obs;
   RxInt cartCount = 0.obs;
   RxInt selectedIndex = 0.obs;
   RxInt selectedIndexx = 0.obs;
 
-  RxList<CategoryModel> sliderList = <CategoryModel>[].obs;
+  Rx<String?> selectedName = ''.obs;
 
-  late AddressGetModel selectedValue = dropdownItems.first;
-  List<AddressGetModel> dropdownItems = storage.getAddressList();
+  RxList<CategoryModel> sliderList = <CategoryModel>[].obs;
+  void addtocart(
+      {required id,
+      required int variation_id,
+      required int quantity,
+      required int has_candel}) {
+    runFullLoadingFutureFunction(
+      function: CartRepository()
+          .addToCart(
+              product_id: id,
+              variation_id: variation_id,
+              quantity: quantity,
+              has_candel: has_candel)
+          .then(
+            (value) => value.fold(
+              (l) {
+                CustomToast.showMessage(
+                  messageType: MessageType.REJECTED,
+                  message: l,
+                );
+              },
+              (r) {
+                // storage.setTokenInfo(r);
+                CustomToast.showMessage(
+                  messageType: MessageType.SUCCESS,
+                  message: r,
+                );
+              },
+            ),
+          ),
+    );
+  }
+
+  Future<void> getAllAddress() async {
+    runLoadingFutureFunction(
+        type: OperationType.ADDRESS,
+        function: AddressRepository().getAllAddress().then((value) {
+          value.fold((l) {
+            CustomToast.showMessage(
+                message: l, messageType: MessageType.REJECTED);
+          }, (r) {
+            CustomToast.showMessage(
+                message: "succed", messageType: MessageType.SUCCESS);
+            addressList.value = r;
+            getNameList(addressList);
+          });
+        }));
+  }
+
+  List<String> getNameList(List<AddressGetModel> addressList) {
+    List<String> nameList = [];
+
+    for (var address in addressList) {
+      nameList.add(address.name ?? '');
+    }
+
+    return nameList;
+  }
+
   void getAllproducts() {
     runLoadingFutureFunction(
         function: getProductsRepository().getAll().then(

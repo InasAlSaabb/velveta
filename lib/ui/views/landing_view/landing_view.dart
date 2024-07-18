@@ -20,6 +20,7 @@ class _LandingViewState extends State<LandingView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+            resizeToAvoidBottomInset: false,
             backgroundColor: AppColors.mainWhiteVColor,
             body: Stack(
               children: [
@@ -48,7 +49,7 @@ class _LandingViewState extends State<LandingView> {
                 Column(
                   children: [
                     SizedBox(
-                      height: screenHieght(6),
+                      height: screenHieght(9),
                     ),
                     Text(
                       tr('key_welcome'),

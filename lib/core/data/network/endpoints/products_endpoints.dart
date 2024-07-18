@@ -7,5 +7,6 @@ class ProductsEndpoints {
   static String getAll = NetworkConfig.getFullApiRoute2('categories');
   static String getSlider = NetworkConfig.getFullApiRoute4('sliders');
   static String getPRoduct = NetworkConfig.getFullApiRoute('products/getById');
+  static String getColor = NetworkConfig.getFullApiRoute4('products/getColors');
   // static String getAll = NetworkConfig.getFullApiRoute2('');
 }

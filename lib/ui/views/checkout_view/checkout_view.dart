@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
+import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_order_info.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_radio.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 import 'package:flutter_templete/ui/views/change_location/change_location.dart';
 import 'package:flutter_templete/ui/views/checkout_view/checkout_controller.dart';
+import 'package:flutter_templete/ui/views/main_view/cart_view/cart_controller.dart';
 import 'package:flutter_templete/ui/views/main_view/cart_view/cart_view.dart';
+import 'package:flutter_templete/ui/views/test_pay/test_pay.dart';
 import 'package:get/get.dart';
 
 class CheckoutView extends StatefulWidget {
@@ -20,6 +23,7 @@ class CheckoutView extends StatefulWidget {
 
 class _CheckoutViewState extends State<CheckoutView> {
   CheckoutController controller = Get.put(CheckoutController());
+  Cartcontroller cc = Get.put(Cartcontroller());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -188,7 +192,10 @@ class _CheckoutViewState extends State<CheckoutView> {
                   textColor: AppColors.mainWhiteVColor,
                   text: tr('key_pay'),
                   onPressed: () {
-                    Get.to(CheckoutView());
+                    controller.submit(
+                      basket_id: 48,
+                      address_id: 56,
+                    );
                   }),
             )
           ],

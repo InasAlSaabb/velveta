@@ -8,7 +8,6 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_circle.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_switch.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
-import 'package:flutter_templete/ui/views/cart_view/cart_view.dart';
 import 'package:flutter_templete/ui/views/main_view/cart_view/cart_view.dart';
 import 'package:flutter_templete/ui/views/main_view/home_view/home_controller.dart';
 import 'package:flutter_templete/ui/views/product_details/product_controller.dart';
@@ -373,9 +372,9 @@ class _ProductView2State extends State<ProductView2> {
                                     width: screenWidth(6),
                                   ),
                                   Obx(() => Text(
-                                        controller.Productfeatureelist.value
-                                                .price ??
-                                            "00",
+                                        controller
+                                            .Productfeatureelist.value.price
+                                            .toString(),
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontFamily: 'welcome'),

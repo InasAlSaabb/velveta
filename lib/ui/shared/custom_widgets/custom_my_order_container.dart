@@ -63,14 +63,17 @@ class _CustomMyOrderContainerState extends State<CustomMyOrderContainer> {
     return Container(
       width: screenWidth(1),
       height: screenHieght(6),
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5), // Shadow color
-          // spreadRadius: 5, // Spread radius
-          blurRadius: 10, // Blur radius
-          offset: Offset(0, 6), // Offset in the x,y direction
-        ),
-      ], color: AppColors.whitecolor, borderRadius: BorderRadius.circular(5)),
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5), // Shadow color
+              // spreadRadius: 5, // Spread radius
+              blurRadius: 10, // Blur radius
+              offset: Offset(0, 6), // Offset in the x,y direction
+            ),
+          ],
+          color: AppColors.mainWhiteVColor,
+          borderRadius: BorderRadius.circular(5)),
       child: Row(
         children: [
           // screenWidth(3).pw,
@@ -79,12 +82,20 @@ class _CustomMyOrderContainerState extends State<CustomMyOrderContainer> {
           //   height: screenHieght(8),
           //   fit: BoxFit.cover,
           // ),
-          Image.asset(
-            "assets/images/${widget.imagename}.png",
-            width: screenWidth(4),
+          ClipRRect(
+            child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              width: screenWidth(3.5),
+              height: screenHieght(1),
+              imageUrl: widget.imagename ?? '',
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
           ),
           // CachedNetworkImage(imageUrl: "${widget.imagename}"),
-          screenWidth(20).pw,
+          SizedBox(
+            width: screenWidth(20),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -123,7 +134,7 @@ class _CustomMyOrderContainerState extends State<CustomMyOrderContainer> {
                 fonttext: screenWidth(28),
               ),
               Spacer(),
-              screenHieght(storage.getAppLanguage() == 'en' ? 35 : 70).ph,
+              screenHieght(storage.getAppLanguage() == 'en' ? 70 : 140).ph,
               CustomText(
                 text: "\$  ${widget.price}",
                 weigthtext: FontWeight.bold,
@@ -152,7 +163,9 @@ class _CustomMyOrderContainerState extends State<CustomMyOrderContainer> {
               screenHieght(10).ph,
               Row(
                 children: [
-                  screenWidth(5.2).pw,
+                  SizedBox(
+                    width: screenWidth(30),
+                  ),
                   CBG(
                       isSide: true,
                       colorBorder: state.value == OrderStateEnum.DECILING

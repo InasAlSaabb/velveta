@@ -113,7 +113,7 @@ class _CustomFavoriteContainerState extends State<CustomFavoriteContainer> {
                 colortext: AppColors.mainBlackVColor,
                 fonttext: screenWidth(27),
               ),
-              screenHieght(storage.getAppLanguage() == 'en' ? 30 : 70).ph,
+              screenHieght(storage.getAppLanguage() == 'en' ? 60 : 140).ph,
               CustomText(
                 text: "\$ ${widget.price!}",
                 weigthtext: FontWeight.bold,

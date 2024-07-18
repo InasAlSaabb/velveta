@@ -10,5 +10,6 @@ enum OperationType {
   CARTPRODUCTS,
   FAVORITE,
   PRODUCTS_VIEW,
-  PROFILE
+  PROFILE,
+  CARTINFO
 }

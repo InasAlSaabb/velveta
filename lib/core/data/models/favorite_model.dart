@@ -1,15 +1,19 @@
 class FavoriteModel {
-  int? id;
+  int? productId;
+  int? quantity;
   int? variationId;
+  int? hasCandle;
   Attributes? attributes;
   String? mainImage;
   String? name;
-  String? price;
-  String? discountPrice;
+  int? price;
+  int? discountPrice;
 
   FavoriteModel(
-      {this.id,
+      {this.productId,
+      this.quantity,
       this.variationId,
+      this.hasCandle,
       this.attributes,
       this.mainImage,
       this.name,
@@ -17,8 +21,10 @@ class FavoriteModel {
       this.discountPrice});
 
   FavoriteModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    productId = json['product_id'];
+    quantity = json['quantity'] ?? 1;
     variationId = json['variation_id'];
+    hasCandle = json['has_candle'];
     attributes = json['attributes'] != null
         ? new Attributes.fromJson(json['attributes'])
         : null;
@@ -30,8 +36,10 @@ class FavoriteModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
+    data['product_id'] = this.productId;
+    data['quantity'] = this.quantity;
     data['variation_id'] = this.variationId;
+    data['has_candle'] = this.hasCandle;
     if (this.attributes != null) {
       data['attributes'] = this.attributes!.toJson();
     }

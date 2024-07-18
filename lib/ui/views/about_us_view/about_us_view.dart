@@ -19,6 +19,7 @@ class _AboutUsViewState extends State<AboutUsView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.mainWhiteVColor,
         body: Column(
           children: [
             Padding(

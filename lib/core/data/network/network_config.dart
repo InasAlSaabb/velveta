@@ -29,20 +29,16 @@ class NetworkConfig {
     return BASE_API5 + apiroute;
   }
 
-  static Map<String, String>? getHeaders(
-      {bool needAuth = true,
-      RequestType? type,
-      Map<String, String>? extraHeaders}) {
+  static Map<String, String> getHeaders(
+      {bool? needAuth = true,
+      RequestType? type = RequestType.POST,
+      Map<String, String>? extraHeaders = const {}}) {
     return {
-      if (needAuth)
-        "Authorization": "Bearer ${storage.getTokenInfo()?.token ?? ''}",
-      // ${storage.getTokenInfo()?.token ?? ''
-      // }",
-      if (type != RequestType.GET)
-        "Content-Type": type == RequestType.MULTIPART
-            ? "multipart/form-data"
-            : "application/json",
-      ...extraHeaders ?? {}
+      'Accept-Language': storage.getAppLanguage(),
+      if (needAuth!)
+        'Authorization': 'Bearer ${storage.getTokenInfo()!.token}}',
+      if (type == RequestType.POST) 'Content-Type': 'application/json',
+      ...extraHeaders!
     };
   }
 }

@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter_templete/core/data/models/common_response.dart';
 import 'package:flutter_templete/core/data/models/profile_model.dart';
 import 'package:flutter_templete/core/data/network/endpoints/profile_endpoints.dart';
 import 'package:flutter_templete/core/data/network/network_config.dart';
 import 'package:flutter_templete/core/enums/request_type.dart';
+import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/core/utils/network_util.dart';
 
 class ProfileRepository {
@@ -15,16 +14,15 @@ class ProfileRepository {
         type: RequestType.GET,
         url: ProfileEndpoints.getinfoP,
         headers: NetworkConfig.getHeaders(
-          needAuth: true,
-          type: RequestType.GET,
-        ),
+            needAuth: false,
+            type: RequestType.GET,
+            extraHeaders: {
+              "Authorization": "Bearer ${storage.getTokenInfo()!.token}"
+            }),
       );
-
-      // final dynamic responseData = response['body'];
 
       CommonResponse<dynamic> commonResponse =
           CommonResponse.fromJson(response);
-      // ProfileModel model = commonResponse.data! as ProfileModel;
       ProfileModel model = ProfileModel.fromJson(
           commonResponse.getData['data'] as Map<String, dynamic>);
       if (commonResponse.getStatus) {
@@ -48,11 +46,8 @@ class ProfileRepository {
         ),
       );
 
-      // final dynamic responseData = response['body'];
-
       CommonResponse<dynamic> commonResponse =
           CommonResponse.fromJson(response);
-      // ProfileModel model = commonResponse.data! as ProfileModel;
 
       if (commonResponse.getStatus) {
         return Right(commonResponse.getData['messages']['successMessage']);
@@ -87,11 +82,8 @@ class ProfileRepository {
         ),
       );
 
-      // final dynamic responseData = response['body'];
-
       CommonResponse<dynamic> commonResponse =
           CommonResponse.fromJson(response);
-      // ProfileModel model = commonResponse.data! as ProfileModel;
 
       if (commonResponse.getStatus) {
         return Right(commonResponse.getData['messages']['successMessage']);

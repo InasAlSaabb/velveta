@@ -14,7 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 ConnectivityService get connectivityService => Get.find<ConnectivityService>();
 
 SharedPrefrenceRepostory get storage => Get.find<SharedPrefrenceRepostory>();
-CartService get cartService => Get.find<CartService>();
+// CartService get cartService => Get.find<CartService>();
 LocationService get locationService => Get.find<LocationService>();
 NotificationService get notificationService => Get.find<NotificationService>();
 // get get.size.width();

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templete/app/my_app.dart';
 import 'package:flutter_templete/app/my_app_controller.dart';
@@ -11,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:myfatoorah_flutter/myfatoorah_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // MFSDK.init("Add Your API Key", MFCountry.KUWAIT, MFEnvironment.TEST);
   //MFSDK.init(ApiKeys.apiKey, MFCountry.KUWAIT, MFEnvironment.TEST);
@@ -21,7 +23,7 @@ main() async {
     return prefs;
   });
   Get.put(SharedPrefrenceRepostory());
-  Get.put(CartService());
+  // Get.put(CartService());
   Get.put(ConnectivityService());
   Get.put(MyAppController());
   Get.put(LocationService());

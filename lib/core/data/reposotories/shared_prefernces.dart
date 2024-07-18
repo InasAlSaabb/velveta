@@ -4,6 +4,7 @@ import 'package:flutter_templete/app/app_config.dart';
 import 'package:flutter_templete/core/data/models/address_get_model.dart';
 import 'package:flutter_templete/core/data/models/apis/token_info.dart';
 import 'package:flutter_templete/core/data/models/cart_model.dart';
+import 'package:flutter_templete/core/data/models/my_order_pay.dart';
 import 'package:flutter_templete/core/enums/data_type.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +14,7 @@ class SharedPrefrenceRepostory {
   //!Keys------
   String PREF_FIRST_LUNCH = 'first_lunch';
   String PREF_FIRST_LOGIN = 'first_login';
+  String PREF_LOGIN_INFO = 'login_info';
   String PREF_TOKEN = 'token';
   String PREF_TOKENN = 'tokenn';
   String PREF_APP_LANG = 'app_lang';
@@ -21,6 +23,40 @@ class SharedPrefrenceRepostory {
   String PREF_ADD_LIST = 'address_list';
   static String PREF_USER_INFO = 'user_info';
   String PREF_USER_NAME = 'user_name';
+  String PREF_SUB_ORDER = 'sub_order';
+
+  void setOrderInfo(OrderPayModel order) {
+    setPreference(
+        dataType: DataType.STRING,
+        key: PREF_SUB_ORDER,
+        value: OrderPayModel.encode(order));
+  }
+
+  OrderPayModel getOrderInfo() {
+    if (globalSharedPreference.containsKey(PREF_SUB_ORDER)) {
+      return OrderPayModel.decode(getPreferenc(key: PREF_SUB_ORDER));
+    } else {
+      return OrderPayModel();
+    }
+  }
+
+  void setLgginInfO(List<String> value) {
+    setPreference(
+        dataType: DataType.STRINGLIST, key: PREF_LOGIN_INFO, value: value);
+  }
+
+  List<String> getLoggininfo() {
+    if (globalSharedPreference.containsKey(PREF_LOGIN_INFO)) {
+      List<Object?> list = getPreferenc(key: PREF_LOGIN_INFO);
+      List<String> res = [];
+      list.forEach((element) {
+        res.add(element.toString());
+      });
+      return res;
+    } else
+      return [];
+  }
+
   AddressGetModel? selectedAddress;
 
   AddressGetModel? get selectedAddressg => selectedAddress;

@@ -35,7 +35,7 @@ class _PolicyViewState extends State<PolicyView> {
                     Text(
                       policyController.policyInfo.value,
                       style: TextStyle(
-                          fontSize: screenWidth(21),
+                          fontSize: screenWidth(28),
                           color: AppColors.blacktext),
                     )
                   ],

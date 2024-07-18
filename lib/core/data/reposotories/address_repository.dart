@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_templete/core/data/models/address_get_model.dart';
-import 'package:flutter_templete/core/data/models/address_model.dart';
 import 'package:flutter_templete/core/data/models/common_response.dart';
 import 'package:flutter_templete/core/data/network/endpoints/address_endpoints.dart';
 import 'package:flutter_templete/core/data/network/network_config.dart';
 import 'package:flutter_templete/core/enums/request_type.dart';
+import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/core/utils/network_util.dart';
 
 class AddressRepository {
@@ -26,8 +26,13 @@ class AddressRepository {
           "name": name,
           "address_line": address_line,
         },
-        headers:
-            NetworkConfig.getHeaders(needAuth: true, type: RequestType.POST),
+        headers: NetworkConfig.getHeaders(
+          needAuth: false,
+          type: RequestType.POST,
+          extraHeaders: {
+            "Authorization": "Bearer ${storage.getTokenInfo()!.token}"
+          },
+        ),
       ).then((response) {
         CommonResponse<dynamic> commonResponse =
             CommonResponse.fromJson(response);
@@ -48,11 +53,14 @@ class AddressRepository {
       final response = await NetworkUtil.sendRequest(
         type: RequestType.GET,
         url: AddressEndpoints.getAllAdress,
-        headers:
-            NetworkConfig.getHeaders(needAuth: true, type: RequestType.GET),
+        headers: NetworkConfig.getHeaders(
+          needAuth: false,
+          type: RequestType.GET,
+          extraHeaders: {
+            "Authorization": "Bearer ${storage.getTokenInfo()!.token}"
+          },
+        ),
       );
-
-      // final dynamic responseData = response['body'];
 
       CommonResponse<dynamic> commonResponse =
           CommonResponse.fromJson(response);
@@ -80,8 +88,13 @@ class AddressRepository {
         type: RequestType.POST,
         url: AddressEndpoints.deleteAddress,
         body: {"id": id},
-        headers:
-            NetworkConfig.getHeaders(needAuth: true, type: RequestType.POST),
+        headers: NetworkConfig.getHeaders(
+          needAuth: false,
+          type: RequestType.POST,
+          extraHeaders: {
+            "Authorization": "Bearer ${storage.getTokenInfo()!.token}"
+          },
+        ),
       ).then((response) {
         CommonResponse<dynamic> commonResponse =
             CommonResponse.fromJson(response);

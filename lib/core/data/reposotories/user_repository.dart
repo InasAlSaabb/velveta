@@ -6,10 +6,9 @@ import 'package:flutter_templete/core/data/network/network_config.dart';
 import 'package:flutter_templete/core/enums/request_type.dart';
 import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/core/utils/network_util.dart';
-import 'package:http/http.dart';
 
 class UserRepository {
-  Future<Either<String, TokenInfo>> Login({
+  Future<Either<String, String>> Login({
     required String email,
     required String password,
   }) async {
@@ -26,10 +25,12 @@ class UserRepository {
         CommonResponse<Map<String, dynamic>> commonResponse =
             CommonResponse.fromJson(response);
         TokenInfo token = TokenInfo.fromJson(
-          commonResponse.getData ?? {},
+          commonResponse.getData,
         );
+
         if (commonResponse.getStatus) {
-          return Right(token);
+          storage.setTokenInfo(token);
+          return Right(commonResponse.getData['message']);
         } else {
           return Left(commonResponse.message ?? "");
         }
@@ -59,9 +60,6 @@ class UserRepository {
         headers: NetworkConfig.getHeaders(
           type: RequestType.POST,
           needAuth: false,
-          extraHeaders: {
-            // 'Host': 're-project-8pu1.onrender.com',
-          },
         ),
       ).then(
         (response) {

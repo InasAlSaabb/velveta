@@ -19,7 +19,6 @@ class PolicyRepository {
           CommonResponse.fromJson(response);
 
       if (commonResponse.getStatus) {
-        // log(response["response"]);
         return Right(commonResponse.getData!);
       } else {
         return Left(commonResponse.message ?? '');

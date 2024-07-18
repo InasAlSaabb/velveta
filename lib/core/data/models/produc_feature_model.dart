@@ -167,7 +167,7 @@ class ProductFearuresModel {
   String? name;
   String? material;
   String? description;
-  String? price;
+  int? price;
   List<Images>? images;
   List<Variations>? variations;
 
@@ -264,8 +264,8 @@ class Variations {
   int? variationGroupId;
   Attributes? attributes;
   AttributesId? attributesId;
-  String? price;
-  String? discount;
+  int? price;
+  int? discount;
   int? stockQuantity;
   String? image;
 

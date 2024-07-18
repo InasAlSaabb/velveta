@@ -4,7 +4,7 @@ class ProductsByIDModel {
   String? name;
   String? description;
   String? material;
-  String? price;
+  int? price;
   bool? isFavorited;
 
   ProductsByIDModel(

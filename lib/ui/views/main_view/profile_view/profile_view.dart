@@ -12,6 +12,7 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_row_profile.dar
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_text.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 import 'package:flutter_templete/ui/views/Login_view/login_view.dart';
+import 'package:flutter_templete/ui/views/about_us_view/about_us_view.dart';
 import 'package:flutter_templete/ui/views/add_address_view/add_address_view.dart';
 import 'package:flutter_templete/ui/views/change_location/change_location.dart';
 import 'package:flutter_templete/ui/views/change_location/change_location_controller.dart';
@@ -20,6 +21,7 @@ import 'package:flutter_templete/ui/views/edit_profile/edit_profile_view.dart';
 import 'package:flutter_templete/ui/views/landing_view/landing_view.dart';
 import 'package:flutter_templete/ui/views/main_view/home_view/home_view.dart';
 import 'package:flutter_templete/ui/views/main_view/profile_view/profile_view_controller.dart';
+import 'package:flutter_templete/ui/views/order_view/my_order_view.dart';
 import 'package:flutter_templete/ui/views/policy_view/policy_view.dart';
 import 'package:flutter_templete/ui/views/splash_screen/spalsh_screen_view.dart';
 import 'package:get/get.dart';
@@ -132,7 +134,7 @@ class _ProfileViewState extends State<ProfileView> {
                       screenHieght(35).ph,
                       InkWell(
                         onTap: () {
-                          // context.pushReplace(MyOrderView());
+                          context.pushReplace(MyOrderView());
                         },
                         child: CustomRowProfile(
                           text: tr("my_order"),
@@ -149,8 +151,13 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                       ),
                       screenHieght(50).ph,
-                      CustomRowProfile(
-                        text: tr("about_us"),
+                      InkWell(
+                        onTap: () {
+                          Get.to(AboutUsView());
+                        },
+                        child: CustomRowProfile(
+                          text: tr("about_us"),
+                        ),
                       ),
                       screenHieght(35).ph,
                       InkWell(
