@@ -5,4 +5,5 @@ class CartEndpoints {
   static String getcart = NetworkConfig.getFullApiRoute4('basket');
   static String editcart = NetworkConfig.getFullApiRoute4('basket');
   static String addAll = NetworkConfig.getFullApiRoute4('basketAddAll');
+  static String deleteFromCart = NetworkConfig.getFullApiRoute4('basket');
 }

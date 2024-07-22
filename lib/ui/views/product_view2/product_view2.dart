@@ -8,6 +8,7 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_circle.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_switch.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
+import 'package:flutter_templete/ui/views/main_view/cart_view/cart_controller.dart';
 import 'package:flutter_templete/ui/views/main_view/cart_view/cart_view.dart';
 import 'package:flutter_templete/ui/views/main_view/home_view/home_controller.dart';
 import 'package:flutter_templete/ui/views/product_details/product_controller.dart';
@@ -25,6 +26,11 @@ class ProductView2 extends StatefulWidget {
 
 class _ProductView2State extends State<ProductView2> {
   HomeController cc = Get.put(HomeController());
+  Cartcontroller ccc = Get.put(Cartcontroller());
+  void update() {
+    ccc.getCart();
+  }
+
   late ProductView2Controller controller;
   @override
   void initState() {
@@ -356,36 +362,156 @@ class _ProductView2State extends State<ProductView2> {
                           ]),
                           Positioned(
                             bottom: 0,
-                            child: Container(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth(20)),
-                                child: Row(children: [
-                                  CustomButton(
-                                      textColor: AppColors.mainWhiteVColor,
-                                      width: screenWidth(2),
-                                      text: tr('key_add_to_cart'),
-                                      onPressed: () {
-                                        Get.to(CartVieww());
-                                      }),
-                                  SizedBox(
-                                    width: screenWidth(6),
+                            child: ccc.cartProductList.length == 0
+                                ? Positioned(
+                                    bottom: 0,
+                                    child: ccc.cartProductList.length == 0
+                                        ? Container(
+                                            color: Colors.white,
+                                            child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        screenWidth(20)),
+                                                child: Row(children: [
+                                                  CustomButton(
+                                                      textColor: AppColors
+                                                          .mainWhiteVColor,
+                                                      width: screenWidth(2),
+                                                      text:
+                                                          tr('key_add_to_cart'),
+                                                      onPressed: () {
+                                                        controller.addToCart(
+                                                            id: controller.id,
+                                                            variation_id: controller
+                                                                .Productfeatureelist
+                                                                .value
+                                                                .variations![0]
+                                                                .variationGroupId!,
+                                                            quantity: controller
+                                                                .count.value,
+                                                            has_candel: 0);
+                                                        // Get.to(CartVieww());
+                                                        ccc.getCart();
+                                                      }),
+                                                  SizedBox(
+                                                    width: screenWidth(6),
+                                                  ),
+                                                  Obx(
+                                                    () => Text(
+                                                      controller
+                                                              .Productfeatureelist
+                                                              .value
+                                                              .price
+                                                              .toString() ??
+                                                          "0",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontFamily:
+                                                              'welcome'),
+                                                    ),
+                                                  )
+                                                ])))
+                                        : SizedBox(
+                                            height: screenHieght(40),
+                                            child: Container(
+                                              width: screenWidth(1),
+                                              height: screenHieght(40),
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.blacktext),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Text(
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontFamily: 'welcome',
+                                                          color: AppColors
+                                                              .mainWhiteVColor),
+                                                      '${ccc.cartProductList.length} item'),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.off(CartVieww());
+                                                    },
+                                                    child: Text(
+                                                      "View Cart",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontFamily: 'welcome',
+                                                          color: AppColors
+                                                              .mainWhiteVColor),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    controller
+                                                            .Productfeatureelist
+                                                            .value
+                                                            .price
+                                                            .toString() ??
+                                                        "0",
+                                                    style: TextStyle(
+                                                        color: AppColors
+                                                            .mainWhiteVColor,
+                                                        fontSize: 20,
+                                                        fontFamily: 'welcome'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                    width: screenWidth(1),
+                                    height: screenHieght(10),
+                                  )
+                                : SizedBox(
+                                    height: screenHieght(40),
+                                    child: Container(
+                                      width: screenWidth(1),
+                                      height: screenHieght(40),
+                                      decoration: BoxDecoration(
+                                          color: AppColors.blacktext),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontFamily: 'welcome',
+                                                  color: AppColors
+                                                      .mainWhiteVColor),
+                                              '${ccc.cartProductList.length} item'),
+                                          InkWell(
+                                            onTap: () {
+                                              Get.off(CartVieww());
+                                            },
+                                            child: Text(
+                                              "View Cart",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontFamily: 'welcome',
+                                                  color: AppColors
+                                                      .mainWhiteVColor),
+                                            ),
+                                          ),
+                                          Text(
+                                            controller.Productfeatureelist.value
+                                                    .price
+                                                    .toString() ??
+                                                "0",
+                                            style: TextStyle(
+                                                color:
+                                                    AppColors.mainWhiteVColor,
+                                                fontSize: 20,
+                                                fontFamily: 'welcome'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  Obx(() => Text(
-                                        controller
-                                            .Productfeatureelist.value.price
-                                            .toString(),
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: 'welcome'),
-                                      ))
-                                ]),
-                              ),
-                              color: Colors.white,
-                              width: screenWidth(1),
-                              height: screenHieght(10),
-                            ),
-                          )
+                            width: screenWidth(1),
+                            height: screenHieght(10),
+                          ),
                         ],
                       );
               },

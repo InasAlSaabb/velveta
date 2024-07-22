@@ -124,7 +124,7 @@ class FavoriteRepository {
           CommonResponse.fromJson(response);
 
       if (commonResponse.getStatus) {
-        return Right(commonResponse.data!);
+        return Right(commonResponse.getData['data']!);
       } else {
         return Left(commonResponse.message ?? '');
       }

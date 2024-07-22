@@ -50,24 +50,6 @@ class LoginController extends BaseController {
       throw UnsupportedError('Device type not supported');
     }
   }
-  // void getDeviceId() async {
-  //   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  //   RxString deviceId = ''.obs;
-  //   RxBool checked = false.obs;
-  //   if (Platform.isAndroid) {
-  //     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-  //     deviceId.value = androidInfo.androidId;
-  //   } else if (Platform.isIOS) {
-  //     IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-  //     deviceId.value = iosInfo.identifierForVendor!;
-  //   }
-  //   void rememeberMe() {
-  //     if (storage.getLogeedIn() != Null && deviceId != Null) {
-  //       username.text = storage.getLogeedIn()[0];
-  //       password.text = storage.getLogeedIn()[1];
-  //     }
-  //   }
-  // }
 
   void login() {
     runFullLoadingFutureFunction(
@@ -87,10 +69,9 @@ class LoginController extends BaseController {
               (r) {
                 CustomToast.showMessage(
                   messageType: MessageType.SUCCESS,
-                  message: "Succed",
+                  message: "You are Login Successfuly",
                 );
                 storage.setName(emailController.text);
-                // storage.setTokenInfo(r);
                 storage.setLgginInfO(
                     [emailController.text, passwordController.text]);
                 Get.to(MainView());

@@ -69,7 +69,7 @@ class MyOrderRepository {
               OrderPayModel.fromJson(commonResponse.getData['data']!));
           return Right(commonResponse.getData['messages']);
         } else {
-          return Left(commonResponse.message ?? '');
+          return Left('please choose location');
         }
       });
     } catch (e) {

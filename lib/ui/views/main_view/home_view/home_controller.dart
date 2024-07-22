@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter_templete/core/data/models/address_get_model.dart';
 import 'package:flutter_templete/core/data/models/category_model.dart';
-import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
-import 'package:flutter_templete/core/data/models/product_id_model.dart';
 import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
 import 'package:flutter_templete/core/data/models/sliderr_model.dart';
 import 'package:flutter_templete/core/data/reposotories/address_repository.dart';
@@ -14,7 +10,6 @@ import 'package:flutter_templete/core/data/reposotories/sliderr_repository.dart'
 import 'package:flutter_templete/core/enums/message_type.dart';
 import 'package:flutter_templete/core/enums/operation_type.dart';
 import 'package:flutter_templete/core/services/base_controller.dart';
-import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:get/get.dart';
 
@@ -66,10 +61,10 @@ class HomeController extends BaseController {
               },
               (r) {
                 // storage.setTokenInfo(r);
-                CustomToast.showMessage(
-                  messageType: MessageType.SUCCESS,
-                  message: r,
-                );
+                // CustomToast.showMessage(
+                //   messageType: MessageType.SUCCESS,
+                //   message: r,
+                // );
               },
             ),
           ),
@@ -84,8 +79,8 @@ class HomeController extends BaseController {
             CustomToast.showMessage(
                 message: l, messageType: MessageType.REJECTED);
           }, (r) {
-            CustomToast.showMessage(
-                message: "succed", messageType: MessageType.SUCCESS);
+            // CustomToast.showMessage(
+            //     message: "succed", messageType: MessageType.SUCCESS);
             addressList.value = r;
             getNameList(addressList);
           });
@@ -118,10 +113,10 @@ class HomeController extends BaseController {
             sliderList.clear();
             sliderList.value = r;
 
-            CustomToast.showMessage(
-              message: "succed",
-              messageType: MessageType.SUCCESS,
-            );
+            // CustomToast.showMessage(
+            //   message: "succed",
+            //   messageType: MessageType.SUCCESS,
+            // );
           },
         );
       },
@@ -144,10 +139,10 @@ class HomeController extends BaseController {
                 sliderrlist.clear();
                 sliderrlist.value = r;
 
-                CustomToast.showMessage(
-                  message: "succed",
-                  messageType: MessageType.SUCCESS,
-                );
+                // CustomToast.showMessage(
+                //   message: "succed",
+                //   messageType: MessageType.SUCCESS,
+                // );
               },
             );
           },
@@ -171,10 +166,10 @@ class HomeController extends BaseController {
               Productbyidlist.clear();
               Productbyidlist.value = r;
 
-              CustomToast.showMessage(
-                message: "succed",
-                messageType: MessageType.SUCCESS,
-              );
+              // CustomToast.showMessage(
+              //   message: "succed",
+              //   messageType: MessageType.SUCCESS,
+              // );
             },
           );
         },
@@ -197,37 +192,14 @@ class HomeController extends BaseController {
             (r) {
               Productbyidlist.clear();
               third.value = r;
-              CustomToast.showMessage(
-                message: "succed",
-                messageType: MessageType.SUCCESS,
-              );
+              // CustomToast.showMessage(
+              //   message: "succed",
+              //   messageType: MessageType.SUCCESS,
+              // );
             },
           );
         },
       ),
-    );
-  }
-
-  void add() {
-    runFullLoadingFutureFunction(
-      function: FavoriteRepository()
-          .addFavorite(product_id: 1, variation_id: 29)
-          .then(
-            (value) => value.fold(
-              (l) {
-                CustomToast.showMessage(
-                  messageType: MessageType.REJECTED,
-                  message: l,
-                );
-              },
-              (r) {
-                CustomToast.showMessage(
-                  messageType: MessageType.SUCCESS,
-                  message: r,
-                );
-              },
-            ),
-          ),
     );
   }
 }

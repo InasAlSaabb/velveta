@@ -8,6 +8,7 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_circle.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_item.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_switch.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
+import 'package:flutter_templete/ui/views/main_view/cart_view/cart_controller.dart';
 import 'package:flutter_templete/ui/views/main_view/cart_view/cart_view.dart';
 import 'package:flutter_templete/ui/views/product_details/product_controller.dart';
 import 'package:get/get.dart';
@@ -28,10 +29,17 @@ class _ProductViewState extends State<ProductView> {
     controller = Get.put(ProductController(
       id: widget.id,
     ));
+    update();
     super.initState();
   }
 
   bool isFavorite = false;
+
+  Cartcontroller cc = Get.put(Cartcontroller());
+  void update() {
+    cc.getCart();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -122,10 +130,7 @@ class _ProductViewState extends State<ProductView> {
                                                 ? AppColors.mainWhiteVColor
                                                 : AppColors.mainWhiteVColor,
                                           ),
-                                        )
-                                        //  SvgPicture.asset(
-                                        //     'assets/images/ic_favorite.svg'),
-                                        ),
+                                        )),
                                   ),
                                   Positioned(
                                       top: screenHieght(30),
@@ -341,13 +346,7 @@ class _ProductViewState extends State<ProductView> {
                                         width: screenWidth(80),
                                       ),
                                       Text(
-                                        controller
-                                                .Productfeaturelist
-                                                .value
-                                                .variations![controller.id!]
-                                                .attributes!
-                                                .color ??
-                                            "",
+                                        controller.selectedColorname.value,
                                         style: TextStyle(fontSize: 20),
                                       ),
                                     ],
@@ -377,6 +376,12 @@ class _ProductViewState extends State<ProductView> {
                                                             .colorHex,
                                                     onTap: () {
                                                       controller
+                                                              .selectedColorname
+                                                              .value =
+                                                          controller
+                                                              .getcolorr[index]
+                                                              .colorName!;
+                                                      controller
                                                               .selectedVPriceroup
                                                               .value =
                                                           controller
@@ -397,29 +402,6 @@ class _ProductViewState extends State<ProductView> {
                                                           .selectedVaritionGroup
                                                           .value);
                                                     },
-                                                    // onTap: () {
-                                                    //   controller.selectedVaritionGroup
-                                                    //           .value =
-                                                    //       controller
-                                                    //           .Productfeaturelist
-                                                    //           .value
-                                                    //           .variations![index]
-                                                    //           .variationGroupId!;
-                                                    // controller
-                                                    //         .selectedColor?.value =
-                                                    //     controller
-                                                    //         .Productfeaturelist
-                                                    //         .value
-                                                    //         .variations![index]
-                                                    //         .attributes!
-                                                    //         .hex!;
-                                                    // controller.selecteedym.value =
-                                                    //     controller
-                                                    //         .Productfeaturelist
-                                                    //         .value
-                                                    //         .variations![index]
-                                                    //         .image!;
-                                                    // },
                                                   ),
                                                   SizedBox(
                                                     width: screenWidth(40),
@@ -522,46 +504,106 @@ class _ProductViewState extends State<ProductView> {
                           ]),
                           Positioned(
                             bottom: 0,
-                            child: Container(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth(20)),
-                                child: Row(children: [
-                                  CustomButton(
-                                      textColor: AppColors.mainWhiteVColor,
-                                      width: screenWidth(2),
-                                      text: tr('key_add_to_cart'),
-                                      onPressed: () {
-                                        controller.addToCart(
-                                            id: controller.id,
-                                            variation_id: controller
-                                                .selectedVaritionGroup.value,
-                                            quantity: controller.count.value,
-                                            has_candel: 0);
-                                        // Get.to(CartVieww());
-                                      }),
-                                  SizedBox(
-                                    width: screenWidth(6),
+                            child: cc.cartProductList.length == 0
+                                ? Container(
+                                    color: Colors.white,
+                                    child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: screenWidth(20)),
+                                        child: Row(children: [
+                                          CustomButton(
+                                              textColor:
+                                                  AppColors.mainWhiteVColor,
+                                              width: screenWidth(2),
+                                              text: tr('key_add_to_cart'),
+                                              onPressed: () {
+                                                controller.addToCart(
+                                                    id: controller.id,
+                                                    variation_id: controller
+                                                        .selectedVaritionGroup
+                                                        .value,
+                                                    quantity:
+                                                        controller.count.value,
+                                                    has_candel: 0);
+                                                // Get.to(CartVieww());
+                                                cc.getCart();
+                                              }),
+                                          SizedBox(
+                                            width: screenWidth(6),
+                                          ),
+                                          Obx(
+                                            () => Text(
+                                              controller.selectedVPriceroup
+                                                          .value ==
+                                                      0
+                                                  ? controller
+                                                      .Productfeaturelist
+                                                      .value
+                                                      .price
+                                                      .toString()
+                                                  : controller
+                                                      .selectedVPriceroup.value
+                                                      .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontFamily: 'welcome'),
+                                            ),
+                                          )
+                                        ])))
+                                : SizedBox(
+                                    height: screenHieght(40),
+                                    child: Container(
+                                      width: screenWidth(1),
+                                      height: screenHieght(40),
+                                      decoration: BoxDecoration(
+                                          color: AppColors.blacktext),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontFamily: 'welcome',
+                                                  color: AppColors
+                                                      .mainWhiteVColor),
+                                              '${cc.cartProductList.length} item'),
+                                          InkWell(
+                                            onTap: () {
+                                              Get.off(CartVieww());
+                                            },
+                                            child: Text(
+                                              "View Cart",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontFamily: 'welcome',
+                                                  color: AppColors
+                                                      .mainWhiteVColor),
+                                            ),
+                                          ),
+                                          Text(
+                                            controller.selectedVPriceroup
+                                                        .value ==
+                                                    0
+                                                ? controller.Productfeaturelist
+                                                    .value.price
+                                                    .toString()
+                                                : controller
+                                                    .selectedVPriceroup.value
+                                                    .toString(),
+                                            style: TextStyle(
+                                                color:
+                                                    AppColors.mainWhiteVColor,
+                                                fontSize: 20,
+                                                fontFamily: 'welcome'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  Obx(() => Text(
-                                        controller.selectedVPriceroup.value == 0
-                                            ? controller
-                                                .Productfeaturelist.value.price
-                                                .toString()
-                                            : controller
-                                                .selectedVPriceroup.value
-                                                .toString(),
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: 'welcome'),
-                                      ))
-                                ]),
-                              ),
-                              color: Colors.white,
-                              width: screenWidth(1),
-                              height: screenHieght(10),
-                            ),
-                          )
+                            width: screenWidth(1),
+                            height: screenHieght(10),
+                          ),
                         ],
                       );
               },

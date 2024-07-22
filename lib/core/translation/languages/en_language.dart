@@ -58,7 +58,7 @@ class ENLanguage {
         "key_profile": 'Profile ',
         "key_to_make_your": 'To make your customer order ',
         "key_call_us": 'Description',
-        "key_my_cart": 'My cart',
+        "key_my_cart": 'My Cart',
         "key_continuew_to_checkout": 'Continue To Checkout',
         "key_checkout": 'checkout',
         "key_pay": 'Pay',

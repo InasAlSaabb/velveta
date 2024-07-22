@@ -22,6 +22,21 @@ class CartVieww extends StatefulWidget {
 class _CartViewwState extends State<CartVieww> {
   Cartcontroller controller = Get.put(Cartcontroller());
   @override
+  void initState() {
+    super.initState();
+    update();
+    updateInfo();
+  }
+
+  void update() {
+    controller.getCart();
+  }
+
+  void updateInfo() {
+    controller.getCartInfo();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -33,7 +48,7 @@ class _CartViewwState extends State<CartVieww> {
                   ? SpinKitCircle(
                       color: AppColors.mainGreyColor,
                     )
-                  : Column(children: [
+                  : ListView(children: [
                       SizedBox(
                         height: screenHieght(30),
                       ),
@@ -63,27 +78,55 @@ class _CartViewwState extends State<CartVieww> {
                         ],
                       ),
                       SizedBox(
-                        height: screenHieght(7),
+                        height: screenHieght(1.5),
                         child: ListView.builder(
+                            physics: ScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             itemCount: controller.cartProductList.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return CustomCArtPRoduct(
-                                imagename:
-                                    controller.cartProductList[index].mainImage,
-                                color: controller
-                                    .cartProductList[index].variation!.color,
-                                price: controller.cartProductList[index].price
-                                    .toString(),
-                                productName:
-                                    controller.cartProductList[index].name,
-                                shape: controller
-                                    .cartProductList[index].variation!.boxShape,
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: screenHieght(70)),
+                                child: CustomCArtPRoduct(
+                                  counterrcontroller:
+                                      controller.counterController,
+                                  counter: controller
+                                      .cartProductList[index].quantity
+                                      .toString(),
+                                  onedit: () {
+                                    controller.editCart(
+                                        //?
+                                        id: controller
+                                            .cartProductList[index].id,
+                                        quantity: int.parse(
+                                            controller.counterController.text));
+                                  },
+                                  ondelete: () {
+                                    controller.deleteFromCart(
+                                      item_id:
+                                          controller.cartProductList[index].id,
+                                    );
+                                  },
+                                  imagename: controller
+                                      .cartProductList[index].mainImage,
+                                  color: controller.cartProductList[index]
+                                          .variation!.color ??
+                                      "no color",
+                                  price: controller.cartProductList[index].price
+                                      .toString(),
+                                  productName:
+                                      controller.cartProductList[index].name,
+                                  shape: controller.cartProductList[index]
+                                          .variation!.boxShape ??
+                                      "no shape",
+                                ),
                               );
                             }),
                       ),
-                      Spacer(),
+                      SizedBox(
+                        height: screenHieght(30),
+                      ),
                       Container(
                         height: screenHieght(5),
                         width: screenWidth(1),

@@ -110,9 +110,7 @@ class CartRepository {
   }
 
   Future<Either<String, String>> editCart(
-      {required int item_id,
-      required int variation_id,
-      required int quantity}) async {
+      {required int item_id, required int quantity}) async {
     try {
       final response = await NetworkUtil.sendRequest(
           type: RequestType.PUT,
@@ -126,7 +124,6 @@ class CartRepository {
           ),
           params: {
             "item_id": item_id.toString(),
-            "variation_id": variation_id.toString(),
             "quantity": quantity.toString(),
           });
 
@@ -134,7 +131,38 @@ class CartRepository {
           CommonResponse.fromJson(response);
 
       if (commonResponse.getStatus) {
-        return Right(commonResponse.data!);
+        return Right(commonResponse.getData['data']!);
+      } else {
+        return Left(commonResponse.message ?? '');
+      }
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, String>> deleteItem({
+    required int item_id,
+  }) async {
+    try {
+      final response = await NetworkUtil.sendRequest(
+          type: RequestType.DELETE,
+          url: CartEndpoints.deleteFromCart,
+          headers: NetworkConfig.getHeaders(
+            needAuth: false,
+            type: RequestType.DELETE,
+            extraHeaders: {
+              "Authorization": "Bearer ${storage.getTokenInfo()!.token}"
+            },
+          ),
+          params: {
+            "item_id": item_id.toString(),
+          });
+
+      CommonResponse<dynamic> commonResponse =
+          CommonResponse.fromJson(response);
+
+      if (commonResponse.getStatus) {
+        return Right(commonResponse.getData['data']!);
       } else {
         return Left(commonResponse.message ?? '');
       }

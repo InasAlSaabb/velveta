@@ -104,12 +104,12 @@ class _CustomFavoriteContainerState extends State<CustomFavoriteContainer> {
                 ],
               ),
               CustomText(
-                text: "${tr("shape")}: ${widget.shape!}",
+                text: "${tr("shape")} ${widget.shape!}",
                 colortext: AppColors.mainBlackVColor,
                 fonttext: screenWidth(27),
               ),
               CustomText(
-                text: "${tr("color")}: ${widget.color!}",
+                text: "${tr("color")} ${widget.color!}",
                 colortext: AppColors.mainBlackVColor,
                 fonttext: screenWidth(27),
               ),

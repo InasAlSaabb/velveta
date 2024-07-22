@@ -14,6 +14,7 @@ import 'package:flutter_templete/core/services/base_controller.dart';
 import 'package:flutter_templete/core/utils/general_utils.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 
 class ProductController extends BaseController {
   int? id;
@@ -24,11 +25,10 @@ class ProductController extends BaseController {
   void onInit() {
     getProductsFeaturesByID(id: id!);
 
-    // selecteedym.value = Productfeaturelist.value.mainImage!;
-
     super.onInit();
   }
 
+  RxString selectedColorname = "Red".obs;
   RxBool isFavorite = false.obs;
   RxString selecteedym = "".obs;
   RxInt selectedshape = 0.obs;
@@ -174,45 +174,6 @@ class ProductController extends BaseController {
           ),
     );
   }
-
-  void editCart(
-      int id, int variation_id, int quantity, ProductFearuresModel model) {
-    runFullLoadingFutureFunction(
-      function: CartRepository()
-          .editCart(item_id: id, variation_id: variation_id, quantity: quantity)
-          .then(
-            (value) => value.fold(
-              (l) {
-                CustomToast.showMessage(
-                  messageType: MessageType.REJECTED,
-                  message: l,
-                );
-              },
-              (r) {
-                // storage.setTokenInfo(r);
-                CustomToast.showMessage(
-                  messageType: MessageType.SUCCESS,
-                  message: r,
-                );
-              },
-            ),
-          ),
-    );
-  }
-
-  // double calcTotal() {
-  //   return (count.value * int.parse(Productfeaturelist.value.price!))
-  //       .toDouble();
-  // }
-
-  // void addToCart() {
-  //   cartService.addToCart(
-  //       model: Productfeaturelist.value,
-  //       count: count.value,
-  //       afterAdd: () {
-  //         // Get.to(CartView());
-  //       });
-  // }
 
   Future<void> getProduct() async {
     runLoadingFutureFunction(

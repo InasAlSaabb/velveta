@@ -39,7 +39,7 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         side: borderColor != null
             ? BorderSide(
-                width: 2.0,
+                width: 1.0,
                 color: borderColor!,
               )
             : null,

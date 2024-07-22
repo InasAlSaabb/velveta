@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_templete/core/data/reposotories/Payment_reposirory.dart';
 import 'package:flutter_templete/core/enums/message_type.dart';
 import 'package:flutter_templete/core/services/base_controller.dart';
@@ -28,8 +29,8 @@ class TestPayController extends BaseController {
                   messageType: MessageType.SUCCESS,
                   message: r,
                 );
+                sendFeedBack2(widget: Text("Hi"));
               },
-              // sendFeedBack2(widget: );
             ),
           ),
     );

@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_templete/core/data/models/cart_all_model.dart';
 import 'package:flutter_templete/core/data/models/cartproductmodel.dart';
 import 'package:flutter_templete/core/data/reposotories/cart_repository.dart';
@@ -11,7 +12,8 @@ import 'package:get/get.dart';
 class Cartcontroller extends BaseController {
   RxList<CartProductModel> cartProductList = <CartProductModel>[].obs;
   Rx<CartAllModel> cartInfo = CartAllModel().obs;
-
+  TextEditingController counterController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool get isLoading => requestStatus.value == RequestStatus.LOADING;
 
   @override
@@ -27,7 +29,8 @@ class Cartcontroller extends BaseController {
         function: CartRepository().getCartProducts().then((value) {
           value.fold((l) {
             CustomToast.showMessage(
-                message: l, messageType: MessageType.REJECTED);
+                message: "please add to cart first",
+                messageType: MessageType.REJECTED);
           }, (r) {
             CustomToast.showMessage(
                 message: "succed", messageType: MessageType.SUCCESS);
@@ -42,12 +45,75 @@ class Cartcontroller extends BaseController {
         function: CartRepository().getCartInfo().then((value) {
           value.fold((l) {
             CustomToast.showMessage(
-                message: l, messageType: MessageType.REJECTED);
+                message: "please add to cart first",
+                messageType: MessageType.REJECTED);
           }, (r) {
             CustomToast.showMessage(
                 message: "succed", messageType: MessageType.SUCCESS);
             cartInfo.value = r;
           });
         }));
+  }
+
+  void editCart({
+    required id,
+    required int quantity,
+  }) {
+    runFullLoadingFutureFunction(
+      function: CartRepository()
+          .editCart(
+            item_id: id,
+            quantity: quantity,
+          )
+          .then(
+            (value) => value.fold(
+              (l) {
+                CustomToast.showMessage(
+                  messageType: MessageType.REJECTED,
+                  message: l,
+                );
+              },
+              (r) {
+                // storage.setTokenInfo(r);
+                CustomToast.showMessage(
+                  messageType: MessageType.SUCCESS,
+                  message: r,
+                );
+                getCart();
+                getCartInfo();
+              },
+            ),
+          ),
+    );
+  }
+
+  void deleteFromCart({
+    required item_id,
+  }) {
+    runFullLoadingFutureFunction(
+      function: CartRepository()
+          .deleteItem(
+            item_id: item_id,
+          )
+          .then(
+            (value) => value.fold(
+              (l) {
+                CustomToast.showMessage(
+                  messageType: MessageType.REJECTED,
+                  message: l,
+                );
+              },
+              (r) {
+                // storage.setTokenInfo(r);
+                CustomToast.showMessage(
+                  messageType: MessageType.SUCCESS,
+                  message: r,
+                );
+                getCart();
+                getCartInfo();
+              },
+            ),
+          ),
+    );
   }
 }

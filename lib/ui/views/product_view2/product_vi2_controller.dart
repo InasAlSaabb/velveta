@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templete/core/data/models/produc_feature_model.dart';
 import 'package:flutter_templete/core/data/models/products_by_id_model.dart';
+import 'package:flutter_templete/core/data/reposotories/cart_repository.dart';
 import 'package:flutter_templete/core/data/reposotories/favorite_repository.dart';
 import 'package:flutter_templete/core/data/reposotories/products_repository.dart';
 import 'package:flutter_templete/core/enums/message_type.dart';
@@ -19,7 +20,6 @@ class ProductView2Controller extends BaseController {
   @override
   void onInit() {
     getProductsFeaturesByID(id: id!);
-    // selecteedym.value = Productfeaturelist.value.mainImage!;
 
     super.onInit();
   }
@@ -54,6 +54,38 @@ class ProductView2Controller extends BaseController {
     );
   }
 
+  void addToCart(
+      {required id,
+      required int variation_id,
+      required int quantity,
+      required int has_candel}) {
+    runFullLoadingFutureFunction(
+      function: CartRepository()
+          .addToCart(
+              product_id: id,
+              variation_id: variation_id,
+              quantity: quantity,
+              has_candel: has_candel)
+          .then(
+            (value) => value.fold(
+              (l) {
+                CustomToast.showMessage(
+                  messageType: MessageType.REJECTED,
+                  message: l,
+                );
+              },
+              (r) {
+                // storage.setTokenInfo(r);
+                CustomToast.showMessage(
+                  messageType: MessageType.SUCCESS,
+                  message: r,
+                );
+              },
+            ),
+          ),
+    );
+  }
+
   void addtofav({required int product_id, required int variation_id}) {
     runFullLoadingFutureFunction(
       function: FavoriteRepository()
@@ -84,20 +116,5 @@ class ProductView2Controller extends BaseController {
     } else {
       if (count > 1) count--;
     }
-  }
-
-  // double calcTotal() {
-  //   return (count.value * product.price!);
-  // }
-
-  void addToCart() {
-    // cartService.addToCart(
-    //     product: product,
-    //     count: count.value,
-    //     afterAdd: () {
-    //       Get.find<HomeController>().cartCount.value += count.value;
-    //       CustomToast.showMessage(message: "addd succesfully");
-    //       // Get.to(CartView());
-    //     });
   }
 }

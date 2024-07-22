@@ -8,6 +8,8 @@ import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_images.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_pop.dart';
 import 'package:flutter_templete/ui/views/Login_view/login_view.dart';
+import 'package:flutter_templete/ui/views/main_view/home_view/home_view.dart';
+import 'package:flutter_templete/ui/views/order_view/my_order_view.dart';
 import 'package:get/get.dart';
 
 double screenWidth(double percent) {
@@ -107,7 +109,7 @@ void sendFeedBack2({
       customBlurChildType: CustomBlurChildType.DIALOUG,
       child: Container(
           width: screenWidth(1.1),
-          height: screenHieght(2.8),
+          height: screenHieght(2),
           decoration: BoxDecoration(
             color: AppColors.mainWhiteVColor,
             boxShadow: [
@@ -144,10 +146,27 @@ void sendFeedBack2({
                 SizedBox(
                   height: screenHieght(35),
                 ),
+                Material(
+                    color: AppColors.mainWhiteVColor,
+                    child: Column(
+                      children: [
+                        Text(
+                          'PAYMENT COMPLETED',
+                          style: TextStyle(fontFamily: 'Welcome', fontSize: 30),
+                        ),
+                        Text(
+                          'THANK YOU FOR PURCHASE FROM OUR STORE',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    )),
+                SizedBox(
+                  height: screenHieght(35),
+                ),
                 CustomButton(
                   textColor: AppColors.mainWhiteVColor,
                   onPressed: () {
-                    Get.to(LoginView());
+                    Get.off(MyOrderView());
                   },
                   backgroundColor: AppColors.mainBlackVColor,
                   text: "MY ORDER",
@@ -159,7 +178,7 @@ void sendFeedBack2({
                   borderColor: AppColors.mainBlackVColor,
                   textColor: AppColors.mainBlackVColor,
                   onPressed: () {
-                    Get.to(LoginView());
+                    Get.offAll(HomeView());
                   },
                   backgroundColor: AppColors.mainWhiteVColor,
                   text: "Back Home",

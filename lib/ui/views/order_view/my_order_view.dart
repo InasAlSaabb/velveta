@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/core/translation/app_translation.dart';
 import 'package:flutter_templete/main.dart';
@@ -56,36 +57,40 @@ class _MyOrderViewState extends State<MyOrderView> {
             ),
             screenHieght(18).ph,
             Obx(
-              () => ListView.builder(
-                  physics: ScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: controller.OrderList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: screenHieght(70)),
-                        child: Column(children: [
-                          InkWell(
-                            onTap: () {
-                              Get.to(MyOrderDetailsView(
-                                  model: controller.OrderList[index]));
-                            },
-                            child: CustomMyOrderContainer(
-                              date: getFirstWords(
-                                  controller.OrderList[index].date!),
-                              time: getTwoWords(
-                                  controller.OrderList[index].date!),
-                              price:
-                                  controller.OrderList[index].price.toString(),
-                              stateButton:
-                                  controller.OrderList[index].orderStatus,
-                              id: controller.OrderList[index].orderId
-                                  .toString(),
-                              imagename: controller.OrderList[index].image,
-                            ),
-                          )
-                        ]));
-                  }),
+              () => controller.isLoading
+                  ? SpinKitCircle(
+                      color: AppColors.mainGreyColor,
+                    )
+                  : ListView.builder(
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: controller.OrderList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: screenHieght(70)),
+                            child: Column(children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.to(MyOrderDetailsView(
+                                      model: controller.OrderList[index]));
+                                },
+                                child: CustomMyOrderContainer(
+                                  date: getFirstWords(
+                                      controller.OrderList[index].date!),
+                                  time: getTwoWords(
+                                      controller.OrderList[index].date!),
+                                  price: controller.OrderList[index].price
+                                      .toString(),
+                                  stateButton:
+                                      controller.OrderList[index].orderStatus,
+                                  id: controller.OrderList[index].orderId
+                                      .toString(),
+                                  imagename: controller.OrderList[index].image,
+                                ),
+                              )
+                            ]));
+                      }),
             )
           ],
         ),

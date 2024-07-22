@@ -87,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
                                   dropdownColor: AppColors.mainWhiteVColor,
                                   value:
                                       isSelectedNameValid ? selectedName : null,
-                                  hint: const Text('Select Location'),
+                                  hint: Text('Select Location'),
                                   items: nameList.map(
                                     (name) {
                                       return DropdownMenuItem<String>(
@@ -180,13 +180,13 @@ class _HomeViewState extends State<HomeView> {
                                             onTap: () {
                                               controller.selectedIndexx.value ==
                                                       0
-                                                  ? Get.to(ProductView(
+                                                  ? Get.off(ProductView(
                                                       id: controller
                                                           .Productbyidlist[
                                                               index]
                                                           .id!,
                                                     ))
-                                                  : Get.to(ProductView2(
+                                                  : Get.off(ProductView2(
                                                       id: controller
                                                           .Productbyidlist[
                                                               index]

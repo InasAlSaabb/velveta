@@ -20,6 +20,12 @@ class FavoriteView extends StatefulWidget {
 class _FavoriteViewState extends State<FavoriteView> {
   FavoriteViewController controller = Get.put(FavoriteViewController());
 
+  @override
+  void initState() {
+    super.initState();
+    update();
+  }
+
   void update() {
     controller.getFavorites();
   }
@@ -27,22 +33,22 @@ class _FavoriteViewState extends State<FavoriteView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.mainWhiteVColor,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth(40)),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              screenHieght(30).ph,
-              CustomBeginMain(text: tr("favorite")),
-              screenHieght(30).ph,
-              Obx(
-                () => controller.isLoading
-                    ? SpinKitCircle(
-                        color: AppColors.mainGreyColor,
-                      )
-                    : ListView.builder(
+        child: Scaffold(
+      backgroundColor: AppColors.mainWhiteVColor,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: screenWidth(40)),
+        child: Obx(() {
+          return controller.isLoading
+              ? SpinKitCircle(
+                  color: AppColors.mainGreyColor,
+                )
+              : ListView(
+                  shrinkWrap: true,
+                  children: [
+                    screenHieght(30).ph,
+                    CustomBeginMain(text: tr("favorite")),
+                    screenHieght(30).ph,
+                    ListView.builder(
                         physics: ScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
@@ -81,25 +87,24 @@ class _FavoriteViewState extends State<FavoriteView> {
                                 )
                               ]));
                         }),
-              ),
-              screenWidth(1.2).ph,
-              CBG(
-                isSide: false,
-                onPressed: () {
-                  controller.AddAll();
-                },
-                width: screenWidth(1),
-                hieght: screenHieght(15),
-                text: tr("add_all_to_cart"),
-                background: AppColors.blacktext,
-                colorText: AppColors.whitecolor,
-                shape: BeveledRectangleBorder(),
-                fontText: screenWidth(21),
-              ),
-            ],
-          ),
-        ),
+                    screenWidth(1.2).ph,
+                    CBG(
+                      isSide: false,
+                      onPressed: () {
+                        controller.AddAll();
+                      },
+                      width: screenWidth(1),
+                      hieght: screenHieght(15),
+                      text: tr("add_all_to_cart"),
+                      background: AppColors.blacktext,
+                      colorText: AppColors.whitecolor,
+                      shape: BeveledRectangleBorder(),
+                      fontText: screenWidth(21),
+                    ),
+                  ],
+                );
+        }),
       ),
-    );
+    ));
   }
 }
