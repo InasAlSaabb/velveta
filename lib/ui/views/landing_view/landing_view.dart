@@ -5,6 +5,7 @@ import 'package:flutter_templete/ui/shared/colors.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_button.dart';
 import 'package:flutter_templete/ui/shared/utils.dart';
 import 'package:flutter_templete/ui/views/Login_view/login_view.dart';
+import 'package:flutter_templete/ui/views/main_view/main_view.dart';
 import 'package:flutter_templete/ui/views/signup_view/signup_view.dart';
 import 'package:get/get.dart';
 
@@ -140,11 +141,16 @@ class _LandingViewState extends State<LandingView> {
                     SizedBox(
                       height: screenHieght(30),
                     ),
-                    Text(
-                        tr(
-                          'key_ccontinue_as_a_vesitor',
-                        ),
-                        style: TextStyle(fontSize: 18)),
+                    InkWell(
+                      onTap: () {
+                        Get.to(MainView());
+                      },
+                      child: Text(
+                          tr(
+                            'key_ccontinue_as_a_vesitor',
+                          ),
+                          style: TextStyle(fontSize: 18)),
+                    ),
                   ],
                 ),
               ],

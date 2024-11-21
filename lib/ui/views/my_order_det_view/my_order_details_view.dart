@@ -57,203 +57,210 @@ class _MyOrderDetailsViewState extends State<MyOrderDetailsView> {
         body: Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth(30)),
             child: Obx(
-              () => Column(
-                children: [
-                  screenHieght(30).ph,
-                  CustomBeginMain(text: "My Order"),
-                  screenHieght(30).ph,
-                  Row(
-                    children: [
-                      CustomText(
-                        text: "#0${widget.model.orderId!}",
-                        colortext: AppColors.blacktext,
-                      ),
-                      SizedBox(
-                        width: screenWidth(30),
-                      ),
-                      CBG(
-                          isSide: true,
-                          colorBorder: AppColors.greydescriptionList,
-                          widthBorder: 0.5,
-                          onPressed: () {},
-                          width: screenWidth(3.7),
-                          hieght: screenHieght(27),
-                          shape: BeveledRectangleBorder(),
-                          text:
-                              "${controller.orderByIdModel.value.orderStatus}",
-                          background: AppColors.whitecolor,
-                          colorText: AppColors.blacktext),
-                    ],
-                  ),
-                  screenHieght(55).ph,
-                  Row(
-                    children: [
-                      CustomText(
-                        text: "Location :",
-                        colortext: AppColors.blacktext,
-                        fonttext: screenWidth(27),
-                      ),
-                      CustomText(
-                        text: "${controller.orderByIdModel.value.location}",
-                        colortext: AppColors.greydescriptionList,
-                        fonttext: screenWidth(27),
-                      )
-                    ],
-                  ),
-                  screenHieght(60).ph,
-                  Row(
-                    children: [
-                      CustomText(
-                        text: "Date :",
-                        colortext: AppColors.blacktext,
-                        fonttext: screenWidth(27),
-                      ),
-                      CustomText(
-                        text:
-                            "${getFirstWords(controller.orderByIdModel.value.date!)}",
-                        colortext: AppColors.greydescriptionList,
-                        fonttext: screenWidth(27),
-                      )
-                    ],
-                  ),
-                  screenHieght(60).ph,
-                  Row(
-                    children: [
-                      CustomText(
-                        text: "Time :",
-                        colortext: AppColors.blacktext,
-                        fonttext: screenWidth(27),
-                      ),
-                      CustomText(
-                        text:
-                            "${getTwoWords(controller.orderByIdModel.value.date!)}",
-                        colortext: AppColors.greydescriptionList,
-                        fonttext: screenWidth(27),
-                      )
-                    ],
-                  ),
-                  screenHieght(60).ph,
-                  SizedBox(
-                      width: screenWidth(1), child: CustomText(text: "Items:")),
-                  screenHieght(55).ph,
-                  Obx(
-                    () => controller.orderListById.length == 0
-                        ? SpinKitCircle(
-                            color: AppColors.blacktext,
-                          )
-                        : ListView.builder(
-                            physics: ScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: controller.orderListById.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: screenHieght(70)),
-                                  child: Column(children: [
-                                    InkWell(
-                                      onTap: () {},
-                                      child: CustpmDetailsCotainer(
-                                        name: controller
-                                            .orderListById[index].name,
-                                        color: controller.orderListById[index]
-                                            .attributes!.color,
-                                        shape: controller.orderListById[index]
-                                                .attributes!.boxShape ??
-                                            "you don't choose shape",
-                                        image: controller
-                                            .orderListById[index].mainImage,
-                                        price: controller.orderListById[index]
-                                                    .discountPrice ==
-                                                0
-                                            ? controller
-                                                .orderListById[index].price
-                                                .toString()
-                                            : controller.orderListById[index]
-                                                .discountPrice
-                                                .toString(),
-                                      ),
-                                    )
-                                  ]));
-                            }),
-                  ),
-                  screenHieght(50).ph,
-                  Container(
-                    width: screenWidth(1),
-                    height: screenHieght(4),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.greyDotsIndicator)),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth(40),
-                          vertical: screenHieght(30)),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomText(
-                                text: "Subtotal",
-                                colortext: AppColors.blacktext,
-                              ),
-                              CustomText(
+              () => controller.isLoading
+                  ? SpinKitCircle(
+                      color: AppColors.mainBlueColor,
+                    )
+                  : Column(
+                      children: [
+                        screenHieght(30).ph,
+                        CustomBeginMain(text: "My Order"),
+                        screenHieght(30).ph,
+                        Row(
+                          children: [
+                            CustomText(
+                              text: "#0${widget.model.orderId!}",
+                              colortext: AppColors.blacktext,
+                            ),
+                            SizedBox(
+                              width: screenWidth(30),
+                            ),
+                            CBG(
+                                isSide: true,
+                                colorBorder: AppColors.greydescriptionList,
+                                widthBorder: 0.5,
+                                onPressed: () {},
+                                width: screenWidth(3.7),
+                                hieght: screenHieght(27),
+                                shape: BeveledRectangleBorder(),
                                 text:
-                                    "${controller.orderByIdModel.value.price}\$",
-                                colortext: AppColors.blacktext,
-                              )
-                            ],
-                          ),
-                          screenHieght(50).ph,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomText(
-                                text: "Shipping",
-                                colortext: AppColors.blacktext,
-                              ),
-                              CustomText(
-                                text:
-                                    "${controller.orderByIdModel.value.shipping}\$",
-                                colortext: AppColors.greyDotsIndicator,
-                              )
-                            ],
-                          ),
-                          screenHieght(50).ph,
-                          Container(
+                                    "${controller.orderByIdModel.value.orderStatus}",
+                                background: AppColors.whitecolor,
+                                colorText: AppColors.blacktext),
+                          ],
+                        ),
+                        screenHieght(55).ph,
+                        Row(
+                          children: [
+                            CustomText(
+                              text: "Location :",
+                              colortext: AppColors.blacktext,
+                              fonttext: screenWidth(27),
+                            ),
+                            CustomText(
+                              text:
+                                  "${controller.orderByIdModel.value.location}",
+                              colortext: AppColors.greydescriptionList,
+                              fonttext: screenWidth(27),
+                            )
+                          ],
+                        ),
+                        screenHieght(60).ph,
+                        Row(
+                          children: [
+                            CustomText(
+                              text: "Date :",
+                              colortext: AppColors.blacktext,
+                              fonttext: screenWidth(27),
+                            ),
+                            CustomText(
+                              text:
+                                  "${getFirstWords(controller.orderByIdModel.value.date!)}",
+                              colortext: AppColors.greydescriptionList,
+                              fonttext: screenWidth(27),
+                            )
+                          ],
+                        ),
+                        screenHieght(60).ph,
+                        Row(
+                          children: [
+                            CustomText(
+                              text: "Time :",
+                              colortext: AppColors.blacktext,
+                              fonttext: screenWidth(27),
+                            ),
+                            CustomText(
+                              text:
+                                  "${getTwoWords(controller.orderByIdModel.value.date!)}",
+                              colortext: AppColors.greydescriptionList,
+                              fonttext: screenWidth(27),
+                            )
+                          ],
+                        ),
+                        screenHieght(60).ph,
+                        SizedBox(
                             width: screenWidth(1),
-                            height: screenHieght(400),
-                            color: AppColors.blacktext,
+                            child: CustomText(text: "Items:")),
+                        screenHieght(55).ph,
+                        Obx(
+                          () => ListView.builder(
+                              physics: ScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: controller.orderListById.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: screenHieght(70)),
+                                    child: Column(children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: CustpmDetailsCotainer(
+                                          name: controller
+                                              .orderListById[index].name,
+                                          color: controller.orderListById[index]
+                                              .attributes!.color,
+                                          shape: controller.orderListById[index]
+                                                  .attributes!.boxShape ??
+                                              "you don't choose shape",
+                                          image: controller
+                                              .orderListById[index].mainImage,
+                                          price: controller.orderListById[index]
+                                                      .discountPrice ==
+                                                  0
+                                              ? controller
+                                                  .orderListById[index].price
+                                                  .toString()
+                                              : controller.orderListById[index]
+                                                  .discountPrice
+                                                  .toString(),
+                                        ),
+                                      )
+                                    ]));
+                              }),
+                        ),
+                        screenHieght(50).ph,
+                        Container(
+                          width: screenWidth(1),
+                          height: screenHieght(4),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: AppColors.greyDotsIndicator)),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth(40),
+                                vertical: screenHieght(30)),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: "Subtotal",
+                                      colortext: AppColors.blacktext,
+                                    ),
+                                    CustomText(
+                                      text:
+                                          "${controller.orderByIdModel.value.price}\$",
+                                      colortext: AppColors.blacktext,
+                                    )
+                                  ],
+                                ),
+                                screenHieght(50).ph,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: "Shipping",
+                                      colortext: AppColors.blacktext,
+                                    ),
+                                    CustomText(
+                                      text:
+                                          "${controller.orderByIdModel.value.shipping}\$",
+                                      colortext: AppColors.greyDotsIndicator,
+                                    )
+                                  ],
+                                ),
+                                screenHieght(50).ph,
+                                Container(
+                                  width: screenWidth(1),
+                                  height: screenHieght(400),
+                                  color: AppColors.blacktext,
+                                ),
+                                screenHieght(30).ph,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: "Total",
+                                      colortext: AppColors.blacktext,
+                                    ),
+                                    CustomText(
+                                        text:
+                                            "${controller.orderByIdModel.value.totalPrice}\$")
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                          screenHieght(30).ph,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomText(
-                                text: "Total",
-                                colortext: AppColors.blacktext,
-                              ),
-                              CustomText(
-                                  text:
-                                      "${controller.orderByIdModel.value.totalPrice}\$")
-                            ],
-                          )
-                        ],
-                      ),
+                        ),
+                        screenHieght(30).ph,
+                        CBG(
+                            isSide: false,
+                            onPressed: () {
+                              controller.reOrder(
+                                  order_id: widget.model.orderId!);
+                            },
+                            width: screenWidth(1),
+                            hieght: screenHieght(15),
+                            shape: BeveledRectangleBorder(),
+                            text: tr("re_order"),
+                            background: AppColors.blacktext,
+                            colorText: AppColors.whitecolor),
+                      ],
                     ),
-                  ),
-                  screenHieght(30).ph,
-                  CBG(
-                      isSide: false,
-                      onPressed: () {
-                        controller.reOrder(order_id: widget.model.orderId!);
-                      },
-                      width: screenWidth(1),
-                      hieght: screenHieght(15),
-                      shape: BeveledRectangleBorder(),
-                      text: tr("re_order"),
-                      background: AppColors.blacktext,
-                      colorText: AppColors.whitecolor),
-                ],
-              ),
             )),
       ),
     );

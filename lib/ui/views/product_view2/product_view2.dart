@@ -91,8 +91,7 @@ class _ProductView2State extends State<ProductView2> {
                                                       controller
                                                           .Productfeatureelist
                                                           .value
-                                                          .images![index]
-                                                          .path!;
+                                                          .images![index];
                                                 },
                                                 child: CachedNetworkImage(
                                                   width: screenWidth(7),
@@ -100,8 +99,7 @@ class _ProductView2State extends State<ProductView2> {
                                                   imageUrl: controller
                                                           .Productfeatureelist
                                                           .value
-                                                          .images![index]
-                                                          .path ??
+                                                          .images![index] ??
                                                       " ",
                                                 ),
                                               );

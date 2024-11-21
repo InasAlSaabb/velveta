@@ -11,5 +11,8 @@ enum OperationType {
   FAVORITE,
   PRODUCTS_VIEW,
   PROFILE,
-  CARTINFO
+  CARTINFO,
+  AAA,
+  BBB,
+  CCC
 }

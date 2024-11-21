@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_templete/app/my_app.dart';
 import 'package:flutter_templete/core/data/models/apis/token_info.dart';
@@ -40,6 +41,17 @@ class _ProfileViewState extends State<ProfileView> {
   String selectedLanguage = 'English';
   RxBool isblur = false.obs;
   ProfileViewController controller = Get.put(ProfileViewController());
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // update();
+  // }
+
+  // void update() {
+  //   controller.getProfileInfo();
+  //   controller.getSocialFac();
+  //   controller.getSocialInsta();
+  // }
 
   @override
   Widget build(BuildContext context) {

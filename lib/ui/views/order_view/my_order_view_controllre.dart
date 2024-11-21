@@ -21,10 +21,11 @@ class MyOrderViewController extends BaseController {
         function: MyOrderRepository().getOrder().then((value) {
           value.fold((l) {
             CustomToast.showMessage(
-                message: l, messageType: MessageType.REJECTED);
+                message: "add to you order first",
+                messageType: MessageType.REJECTED);
           }, (r) {
-            CustomToast.showMessage(
-                message: "succed", messageType: MessageType.SUCCESS);
+            // CustomToast.showMessage(
+            //     message: "succed", messageType: MessageType.SUCCESS);
             OrderList.value = r;
           });
         }));

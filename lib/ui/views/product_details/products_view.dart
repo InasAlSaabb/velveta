@@ -68,41 +68,44 @@ class _ProductViewState extends State<ProductView> {
                                   Obx(() {
                                     return Positioned(
                                       top: screenHieght(3.4),
-                                      left: screenWidth(2.9),
-                                      right: screenWidth(8),
-                                      child: SizedBox(
-                                        height: screenHieght(25),
-                                        child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            shrinkWrap: true,
-                                            itemCount: controller
-                                                .Productfeaturelist
-                                                .value
-                                                .images!
-                                                .length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return InkWell(
-                                                onTap: () {
-                                                  controller.selecteedym.value =
-                                                      controller
-                                                          .Productfeaturelist
-                                                          .value
-                                                          .images![index]
-                                                          .path!;
-                                                },
-                                                child: CachedNetworkImage(
-                                                  width: screenWidth(7),
-                                                  height: screenHieght(20),
-                                                  imageUrl: controller
-                                                          .Productfeaturelist
-                                                          .value
-                                                          .images![index]
-                                                          .path ??
-                                                      " ",
-                                                ),
-                                              );
-                                            }),
+                                      left: 0,
+                                      right: 0,
+                                      child: Center(
+                                        child: SizedBox(
+                                          height: screenHieght(25),
+                                          child: ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              shrinkWrap: true,
+                                              itemCount: controller
+                                                  .Productfeaturelist
+                                                  .value
+                                                  .variations!
+                                                  .length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return InkWell(
+                                                  onTap: () {
+                                                    controller
+                                                            .selecteedym.value =
+                                                        controller
+                                                            .Productfeaturelist
+                                                            .value
+                                                            .variations![index]
+                                                            .image!;
+                                                  },
+                                                  child: CachedNetworkImage(
+                                                    width: screenWidth(7),
+                                                    height: screenHieght(20),
+                                                    imageUrl: controller
+                                                        .Productfeaturelist
+                                                        .value
+                                                        .variations![index]
+                                                        .image!,
+                                                  ),
+                                                );
+                                              }),
+                                        ),
                                       ),
                                     );
                                   }),
@@ -119,8 +122,7 @@ class _ProductViewState extends State<ProductView> {
                                             controller.add(
                                                 product_id: controller.id!,
                                                 variation_id: controller
-                                                    .selectedVaritionGroup
-                                                    .value);
+                                                    .selectedVargroup.value);
                                           },
                                           icon: Icon(
                                             controller.isFavorite.value
@@ -164,14 +166,6 @@ class _ProductViewState extends State<ProductView> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            controller.Productfeaturelist.value
-                                                    .name ??
-                                                "",
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                            ),
-                                          ),
                                           Row(
                                             children: [
                                               Text(
@@ -180,14 +174,54 @@ class _ProductViewState extends State<ProductView> {
                                                     color: Colors.grey,
                                                     fontSize: 16),
                                               ),
-                                              Text(
-                                                controller.Productfeaturelist
-                                                        .value.material ??
-                                                    "",
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 16),
-                                              ),
+                                              SizedBox(width: screenWidth(20)),
+                                              DropdownButton<int>(
+                                                value: controller
+                                                    .selectedMaterialIndex
+                                                    .value,
+                                                items: List.generate(
+                                                  controller
+                                                      .mattt
+                                                      .value
+                                                      .attributesGrouped!["4"]!
+                                                      .length,
+                                                  (index) =>
+                                                      DropdownMenuItem<int>(
+                                                    value: index,
+                                                    child: Text(
+                                                      controller
+                                                              .mattt
+                                                              .value
+                                                              .attributesGrouped![
+                                                                  "4"]![index]
+                                                              .name ??
+                                                          '',
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                  ),
+                                                ),
+                                                onChanged: (int? newIndex) {
+                                                  if (newIndex != null) {
+                                                    String materialId =
+                                                        controller
+                                                            .mattt
+                                                            .value
+                                                            .attributesGrouped![
+                                                                "4"]![newIndex]
+                                                            .id
+                                                            .toString();
+                                                    controller.materilaidd
+                                                        .value = materialId;
+                                                    controller
+                                                        .selectedMaterialIndex
+                                                        .value = newIndex;
+                                                    controller.getshapeformat(
+                                                        id: controller.id!,
+                                                        mat: materialId);
+                                                  }
+                                                },
+                                              )
                                             ],
                                           ),
                                         ],
@@ -277,57 +311,47 @@ class _ProductViewState extends State<ProductView> {
                                     child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
-                                        itemCount: controller.Productfeaturelist
-                                            .value.variations?.length,
+                                        itemCount: controller.getshape.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return SizedBox(
-                                            width: screenHieght(8),
-                                            child: InkWell(
-                                              onTap: () {
-                                                controller.selectedIndexcolor
-                                                    .value = index;
-                                                controller.selectedshape.value =
-                                                    controller
-                                                        .Productfeaturelist
-                                                        .value
-                                                        .variations![index]
-                                                        .attributesId!
-                                                        .i2!;
-                                                controller.getcolor(
-                                                    id: controller.id!,
-                                                    shape: controller
-                                                        .selectedshape.value
-                                                        .toString());
-
-                                                controller.selectedVaritionGroup
-                                                        .value =
-                                                    controller
-                                                        .Productfeaturelist
-                                                        .value
-                                                        .variations![index]
-                                                        .variationGroupId!;
-                                              },
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: index ==
-                                                                controller
-                                                                    .selectedIndexcolor
-                                                                    .value
-                                                            ? AppColors
-                                                                .blacktext
-                                                            : AppColors
-                                                                .mainWhiteVColor)),
-                                                child: Text(
-                                                  controller
-                                                      .Productfeaturelist
-                                                      .value
-                                                      .variations![index]
-                                                      .attributes!
-                                                      .boxShape!,
-                                                  style:
-                                                      TextStyle(fontSize: 20),
+                                            width: screenWidth(4),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: controller
+                                                                  .selectedshape
+                                                                  .value ==
+                                                              controller
+                                                                  .getshape[
+                                                                      index]
+                                                                  .id
+                                                          ? AppColors.blacktext
+                                                          : AppColors
+                                                              .mainWhiteVColor)),
+                                              child: Center(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    controller.selectedshape
+                                                            .value =
+                                                        controller
+                                                            .getshape[index]
+                                                            .id!;
+                                                    controller.getcolor(
+                                                        id: controller.id!,
+                                                        mat: controller
+                                                            .materilaidd.value,
+                                                        shape: controller
+                                                            .selectedshape
+                                                            .value);
+                                                  },
+                                                  child: Text(
+                                                    controller.getshape[index]
+                                                            .name ??
+                                                        " ",
+                                                    style:
+                                                        TextStyle(fontSize: 20),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -345,10 +369,10 @@ class _ProductViewState extends State<ProductView> {
                                       SizedBox(
                                         width: screenWidth(80),
                                       ),
-                                      Text(
-                                        controller.selectedColorname.value,
-                                        style: TextStyle(fontSize: 20),
-                                      ),
+                                      Obx(() => Text(
+                                            controller.selectedColorname.value,
+                                            style: TextStyle(fontSize: 20),
+                                          ))
                                     ],
                                   ),
                                   SizedBox(
@@ -362,51 +386,55 @@ class _ProductViewState extends State<ProductView> {
                                       itemBuilder: (context, index) {
                                         return controller.getcolorr.isEmpty
                                             ? Text('choose shape first')
-                                            : Row(
-                                                children: [
-                                                  ColorItem(
-                                                    color: controller
-                                                        .getcolorr[index]
-                                                        .colorHex!,
-                                                    isSelected: controller
-                                                            .selectedColor
-                                                            ?.value ==
-                                                        controller
-                                                            .getcolorr[index]
-                                                            .colorHex,
-                                                    onTap: () {
+                                            : InkWell(
+                                                onTap: () {
+                                                  controller.selectedColorname
+                                                          .value =
                                                       controller
-                                                              .selectedColorname
-                                                              .value =
-                                                          controller
-                                                              .getcolorr[index]
-                                                              .colorName!;
-                                                      controller
-                                                              .selectedVPriceroup
-                                                              .value =
-                                                          controller
-                                                              .getcolorr[index]
-                                                              .price!;
-                                                      controller
-                                                              .selectedVaritionGroup
-                                                              .value =
-                                                          controller
-                                                              .getcolorr[index]
-                                                              .varaitionId!;
-                                                      controller.selecteedym
-                                                              .value =
-                                                          controller
-                                                              .getcolorr[index]
-                                                              .image!;
-                                                      print(controller
-                                                          .selectedVaritionGroup
-                                                          .value);
-                                                    },
+                                                          .getcolorr[index]
+                                                          .name!;
+                                                  controller.selectedIndexcolor
+                                                      .value = index;
+                                                  controller.getVariation(
+                                                      id: controller.id!,
+                                                      color_id: controller
+                                                          .getcolorr[index].id!,
+                                                      material_id: controller
+                                                          .materilaidd.value,
+                                                      shape_id: controller
+                                                          .selectedshape.value);
+                                                },
+                                                child: Container(
+                                                  width: screenWidth(15),
+                                                  height: screenWidth(15),
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 5),
+                                                  decoration: BoxDecoration(
+                                                    color: Color(int.parse(
+                                                        '0xFF${controller.getcolorr[index].hex!.substring(1)}')),
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color: controller
+                                                                  .selectedIndexcolor
+                                                                  .value ==
+                                                              index
+                                                          ? const Color
+                                                              .fromARGB(
+                                                              255, 2, 2, 2)
+                                                          : Colors.transparent,
+                                                      width: 2,
+                                                    ),
                                                   ),
-                                                  SizedBox(
-                                                    width: screenWidth(40),
-                                                  )
-                                                ],
+                                                  child: controller
+                                                              .selectedIndexcolor
+                                                              .value ==
+                                                          index
+                                                      ? Icon(Icons.check,
+                                                          color: Color.fromARGB(
+                                                              255, 0, 0, 0),
+                                                          size: 15)
+                                                      : null,
+                                                ),
                                               );
                                       },
                                     ),
@@ -472,7 +500,8 @@ class _ProductViewState extends State<ProductView> {
                                       Expanded(
                                         child: Text(
                                           controller.Productfeaturelist.value
-                                              .description!,
+                                                  .description ??
+                                              "",
                                           overflow: TextOverflow.clip,
                                         ),
                                       )
@@ -490,7 +519,8 @@ class _ProductViewState extends State<ProductView> {
                                       Expanded(
                                         child: Text(
                                           controller.Productfeaturelist.value
-                                              .description!,
+                                                  .description ??
+                                              "",
                                         ),
                                       )
                                     ],
@@ -520,8 +550,7 @@ class _ProductViewState extends State<ProductView> {
                                                 controller.addToCart(
                                                     id: controller.id,
                                                     variation_id: controller
-                                                        .selectedVaritionGroup
-                                                        .value,
+                                                        .selectedVargroup.value,
                                                     quantity:
                                                         controller.count.value,
                                                     has_candel: 0);

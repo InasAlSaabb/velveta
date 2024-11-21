@@ -26,8 +26,8 @@ class EditProfileViewController extends BaseController {
             CustomToast.showMessage(
                 message: l, messageType: MessageType.REJECTED);
           }, (r) {
-            CustomToast.showMessage(
-                message: r, messageType: MessageType.SUCCESS);
+            // CustomToast.showMessage(
+            //     message: r, messageType: MessageType.SUCCESS);
 
             print(r);
           });
@@ -49,8 +49,8 @@ class EditProfileViewController extends BaseController {
             CustomToast.showMessage(
                 message: l, messageType: MessageType.REJECTED);
           }, (r) {
-            CustomToast.showMessage(
-                message: r, messageType: MessageType.SUCCESS);
+            // CustomToast.showMessage(
+            //     message: r, messageType: MessageType.SUCCESS);
 
             print(r);
           });

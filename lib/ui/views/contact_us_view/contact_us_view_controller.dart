@@ -36,10 +36,10 @@ class ContactUsViewController extends BaseController {
                 );
               },
               (r) {
-                CustomToast.showMessage(
-                  messageType: MessageType.SUCCESS,
-                  message: "${r.toString()}",
-                );
+                // CustomToast.showMessage(
+                //   messageType: MessageType.SUCCESS,
+                //   message: "${r.toString()}",
+                // );
               },
             ),
           ),
@@ -54,8 +54,8 @@ class ContactUsViewController extends BaseController {
             CustomToast.showMessage(
                 message: l, messageType: MessageType.REJECTED);
           }, (r) {
-            CustomToast.showMessage(
-                message: "succed", messageType: MessageType.SUCCESS);
+            // CustomToast.showMessage(
+            //     message: "succed", messageType: MessageType.SUCCESS);
             contact.value = r;
             print(r);
           });

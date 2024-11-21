@@ -25,8 +25,8 @@ class PolicyViewController extends BaseController {
             CustomToast.showMessage(
                 message: l, messageType: MessageType.REJECTED);
           }, (r) {
-            CustomToast.showMessage(
-                message: "succed", messageType: MessageType.SUCCESS);
+            // CustomToast.showMessage(
+            //     message: "succed", messageType: MessageType.SUCCESS);
             policyInfo.value = r;
           });
         }));

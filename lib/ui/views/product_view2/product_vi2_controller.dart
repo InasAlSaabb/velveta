@@ -43,10 +43,10 @@ class ProductView2Controller extends BaseController {
             (r) {
               Productfeatureelist.value = r;
               selecteeedym.value = Productfeatureelist.value.mainImage!;
-              CustomToast.showMessage(
-                message: "succed",
-                messageType: MessageType.SUCCESS,
-              );
+              // CustomToast.showMessage(
+              //   message: "succed",
+              //   messageType: MessageType.SUCCESS,
+              // );
             },
           );
         },

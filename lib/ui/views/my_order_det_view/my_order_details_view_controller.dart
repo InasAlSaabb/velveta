@@ -4,6 +4,7 @@ import 'package:flutter_templete/core/data/models/order_by_id_model.dart';
 import 'package:flutter_templete/core/data/reposotories/my_order_repository.dart';
 import 'package:flutter_templete/core/enums/message_type.dart';
 import 'package:flutter_templete/core/enums/operation_type.dart';
+import 'package:flutter_templete/core/enums/request_status.dart';
 import 'package:flutter_templete/core/services/base_controller.dart';
 import 'package:flutter_templete/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ class OrderDetailsViewController extends BaseController {
     super.onInit();
   }
 
+  bool get isLoading => requestStatus.value == RequestStatus.LOADING;
   RxList<OrderByIdModel> orderListById = <OrderByIdModel>[].obs;
   Rx<OrderByIdAllInfoModel> orderByIdModel = OrderByIdAllInfoModel().obs;
   Future<void> getOrdersById({required int order_id}) async {

@@ -32,8 +32,8 @@ class Cartcontroller extends BaseController {
                 message: "please add to cart first",
                 messageType: MessageType.REJECTED);
           }, (r) {
-            CustomToast.showMessage(
-                message: "succed", messageType: MessageType.SUCCESS);
+            // CustomToast.showMessage(
+            //     message: "succed", messageType: MessageType.SUCCESS);
             cartProductList.value = r;
           });
         }));
@@ -48,8 +48,8 @@ class Cartcontroller extends BaseController {
                 message: "please add to cart first",
                 messageType: MessageType.REJECTED);
           }, (r) {
-            CustomToast.showMessage(
-                message: "succed", messageType: MessageType.SUCCESS);
+            // CustomToast.showMessage(
+            //     message: "succed", messageType: MessageType.SUCCESS);
             cartInfo.value = r;
           });
         }));
@@ -75,10 +75,10 @@ class Cartcontroller extends BaseController {
               },
               (r) {
                 // storage.setTokenInfo(r);
-                CustomToast.showMessage(
-                  messageType: MessageType.SUCCESS,
-                  message: r,
-                );
+                // CustomToast.showMessage(
+                //   messageType: MessageType.SUCCESS,
+                //   message: r,
+                // );
                 getCart();
                 getCartInfo();
               },
@@ -105,10 +105,10 @@ class Cartcontroller extends BaseController {
               },
               (r) {
                 // storage.setTokenInfo(r);
-                CustomToast.showMessage(
-                  messageType: MessageType.SUCCESS,
-                  message: r,
-                );
+                // CustomToast.showMessage(
+                //   messageType: MessageType.SUCCESS,
+                //   message: r,
+                // );
                 getCart();
                 getCartInfo();
               },
